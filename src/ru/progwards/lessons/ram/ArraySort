@@ -1,44 +1,44 @@
-; arraySort
-<input> 10 537 888 1 223 101 15 37 89 93
+;arraySort
+<input> 10 178 13 1 33 99 2 8 52 885 78
 
-load =10
-store 1 ; 1 - с какого регистра начинается массив
-read 2 ; 2 - сколько чисел в массиве
+load 
+store 1 ; с какого инд. начинается массив
+read 2 ; кол-во чисел в массиве
 add 2
 sub =2
-store 8 ; 8 - индекс последнего проверяемого элемента, 8 = 1 + 2 - =2
+store 8 ; индекс последнего элемента, 8 = 1 + 2 - =2
 load =0
-store 3 ; 3 - индекс инспектируемого элемента
+store 3 ; индекс элемента
 
-read_array:
+read_to_array:
 load 2
-jz end
-store 4 ; 4 - итератор, 4 = 2
+jz exit
+store 4 ; итератор, 4 = 2
 load 1
-store 5 ; *5 - куда сохраняем, 5 = 1
-jmp read_array_do
-read_array_loop:
+store 5 ; (*5) - сохраняем в, 5 = 1
+jmp read_to_array_now
+read_to_array_loop:
 load 5
 add =1
 store 5 ; 5 = 5 + =1
-read_array_do:
+read_to_array_now:
 read *5
 load 4
 sub =1
 store 4 ; 4 = 4 - =1
-jgtz read_array_loop
+jgtz read_to_array_loop
 
-check_small:
+check_less:
 load 2
 sub =1
-jgtz find_minimal
+jgtz find_min
 load 1
 sub =1
 store 7
-jmp out_last
+jmp out_end
 
 
-find_minimal:
+find_min:
 load 1
 add 3
 store 6 ; *6 - минимальный элемент, 6 = 1 + 3
@@ -49,28 +49,28 @@ load 2
 sub 3
 sub =1
 store 4 ; 4 - итератор, 4 = 2 + 3 - =1
-jmp find_minimal_do
-find_minimal_loop:
+jmp find_min_now
+find_min_loop:
 load 5
 add =1
 store 5 ; 5 = 5 + =1
-find_minimal_do:
+find_min_now:
 load *5
 sub *6
-jgtz find_minimal_bigger
+jgtz find_min_big
 ; найден меньший элемент
 load 5
 store 6 ; 6 = 5
-find_minimal_bigger:
+find_min_big:
 load 4
 sub =1
 store 4 ; 4 = 4 - =1
-jgtz find_minimal_loop
-; если найден минимальный
+jgtz find_min_loop
+; если найден мин
 load 7
 sub 6
-jz out_and_iterate
-; поменяем элементы местами
+jz out_to_iterate
+; меняем элементы местами
 load *6
 store 4
 load *7
@@ -78,19 +78,19 @@ store *6
 load 4
 store *7
 
-out_and_iterate:
+out_to_iterate:
 write *7
 load 3
 add =1
 store 3 ; 3 = 3 + =1
 load 8
 sub 7
-jgtz find_minimal
+jgtz find_min
 
-out_last:
+out_end:
 load 7
 add =1
 write *0
 
-end:
+exit:
 halt
