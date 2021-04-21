@@ -1,4 +1,5 @@
-package ru.progwards.lessons.ram;
+package ru.progwards.java2.lessons.less1;
+
 public class Test {
     public static void main(String... args) {
         Calculator c = new Calculator();

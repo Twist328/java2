@@ -1,4 +1,4 @@
-package ru.progwards.lessons.ram;
+package ru.progwards.java2.lessons.less1;
 
 public class HelloWorld {
     public static void main(String[] args) {
