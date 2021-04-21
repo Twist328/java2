@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\src\ru\progwards\java2\lessons\less1\HelloWorld.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\ru\progwards\java2\lessons\less2\Test1.java">
           <value>
             <Attribute>
