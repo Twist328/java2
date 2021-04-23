@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.less2;
+package ru.progwards.java2.lessons.recursion;
 
 
     public class Test3 {

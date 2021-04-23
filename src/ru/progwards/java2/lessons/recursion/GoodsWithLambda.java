@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.less2;
+package ru.progwards.java2.lessons.recursion;
 
 import java.time.Instant;
 import java.util.Comparator;
