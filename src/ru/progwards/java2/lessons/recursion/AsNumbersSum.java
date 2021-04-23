@@ -12,7 +12,7 @@ public class AsNumbersSum {
 
     public static String showAllThePoss(int a, int b, String c) {
         return
-                (a <= 0 ? "" :       // выход из рекурсии
+                (a <= 0 ? "" :       // условие выхода из рекурсии
                         (b > a                                                         //  второе число больше
                                 ? showAllThePoss(a, b - a, c + a + SUMM)        // все варианты второго числа
                                 : EQUAll + c + a + SUMM + b                          // вариант в настоящем времени
