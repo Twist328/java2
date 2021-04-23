@@ -10,7 +10,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\ru\progwards\java2\lessons\less1\Test.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\ru\progwards\java2\lessons\less2\Test1.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\ru\progwards\java2\lessons\less2\Test3.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />
