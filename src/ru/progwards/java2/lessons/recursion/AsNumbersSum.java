@@ -24,6 +24,8 @@ public class AsNumbersSum {
     public static String putItAllSum(int number) {
         return number + showAllThePoss(number-1, 1, "");
     }
+
+
     public static void main(String[] args) {
         System.out.println(putItAllSum(-1));
         System.out.println(putItAllSum(0));
