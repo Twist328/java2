@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.less1;
+package ru.progwards.java2.lessons.ram;
 
 public class Test {
     static int sumSequence(int n) {
