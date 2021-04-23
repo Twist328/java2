@@ -13,12 +13,12 @@ public class AsNumbersSum {
     public static String showAllThePoss(int a, int b, String c) {
         return
                 (a <= 0 ? "" :       // выход из рекурсии
-                        (b > a                                                    //  второе число больше
+                        (b > a                                                         //  второе число больше
                                 ? showAllThePoss(a, b - a, c + a + SUMM)        // все варианты второго числа
-                                : EQUAll + c + a + SUMM + b                        // вариант в настоящем времени
-                                + showAllThePoss(b - 1, 1, c + a + SUMM)       // плюс все возможности
+                                : EQUAll + c + a + SUMM + b                          // вариант в настоящем времени
+                                + showAllThePoss(b - 1, 1, c + a + SUMM)   // плюс все возможности
                         )
-                                + showAllThePoss(a - 1, b + 1, c)               // + ещё варианты, со вторым числом
+                                + showAllThePoss(a - 1, b + 1, c)           // + ещё варианты, со вторым числом
                 );
     }
     public static String putItAllSum(int number) {
@@ -31,6 +31,7 @@ public class AsNumbersSum {
         System.out.println(putItAllSum(2));
         System.out.println(putItAllSum(3));
         System.out.println(putItAllSum(4));
+        System.out.println(putItAllSum(5));
     }
 
 }
