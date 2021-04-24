@@ -1,9 +1,8 @@
-package ru.progwards.java2.lessons.recursion;
+package ru.progwards.java2.lessons.recursion.less2;
 
 import java.util.function.Function;
 
-public class LambdaWithFunction {  // ф. интерфейс Function (R apply(T t)) единственный абстрактный метод
-    ////… другие default и static методы
+public class LambdaWithFunction1 {  //Пример композиции Function
     public static void main(String[] args) {
         Function<Double, Double> square = x -> x * x;
         System.out.println(square.apply(5.0));

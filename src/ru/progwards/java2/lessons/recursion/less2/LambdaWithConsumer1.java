@@ -1,4 +1,6 @@
-package ru.progwards.java2.lessons.recursion;
+package ru.progwards.java2.lessons.recursion.less2;
+
+import ru.progwards.java2.lessons.recursion.less2.Book;
 
 import java.util.function.Consumer;
 
