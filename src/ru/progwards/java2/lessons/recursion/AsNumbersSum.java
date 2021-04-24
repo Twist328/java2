@@ -27,12 +27,7 @@ public class AsNumbersSum {
 
 
     public static void main(String[] args) {
-        System.out.println(putItAllSum(-1));
-        System.out.println(putItAllSum(0));
-        System.out.println(putItAllSum(1));
-        System.out.println(putItAllSum(2));
-        System.out.println(putItAllSum(3));
-        System.out.println(putItAllSum(4));
+
         System.out.println(putItAllSum(5));
     }
 
