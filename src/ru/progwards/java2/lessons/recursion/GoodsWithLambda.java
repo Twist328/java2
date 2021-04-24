@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class Goods { //товар
+class Goods { //товары
     String name; // наименование
-    String number; // артикул
+    String number; // артикул по накладным
     int available; // количество на складе
     double price; // цена
-    Instant expired; // срок годности
+    Instant date_expired; // срок годности
 
     @Override
     public String toString() {
@@ -20,8 +20,48 @@ class Goods { //товар
                 ", number='" + number + '\'' +
                 ", available=" + available +
                 ", price=" + price +
-                ", expired=" + expired +
+                ", expired=" + date_expired +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Instant getExpired() {
+        return date_expired;
+    }
+
+    public void setExpired(Instant expired) {
+        this.date_expired = expired;
     }
 }
 
@@ -83,8 +123,8 @@ public class GoodsWithLambda {
     // вернуть список, с товаром, который будет просрочен после указанной даты, отсортированный по дате годности
     List<Goods> expiredAfter(Instant date) {
         return list.stream()
-                .sorted(Comparator.comparing(a -> a.expired))
-                .takeWhile(a -> a.expired.compareTo(date) <= 0)
+                .sorted(Comparator.comparing(a -> a.date_expired))
+                .takeWhile(a -> a.date_expired.compareTo(date) <= 0)
                 .collect(Collectors.toList());
     }
 
@@ -98,7 +138,7 @@ public class GoodsWithLambda {
 
     // вернуть список, с товаром, количество на складе которого больше count1 и меньше count2
     List<Goods> countBetween(int count1, int count2) {
-        //return list.stream().sorted(Comparator.comparingInt(a->a.available)).takeWhile(a -> a.available < count2).dropWhile(a -> a.available < count1).collect(Collectors.toList());
+
         return list.stream()
                 .sorted(Comparator.comparingInt(a -> a.available))
                 .filter(a -> count1 < a.available && a.available < count2)
@@ -107,27 +147,27 @@ public class GoodsWithLambda {
 
     public static void main(String[] args) {
         Goods good1 = new Goods();
-        good1.available = 31;
-        good1.name = "Банан";
-        good1.expired = Instant.now().minusMillis(1000);
-        good1.price = 56;
-        good1.number = "BANANA";
+        good1.available = 27;
+        good1.name = "Манго";
+        good1.date_expired = Instant.now().minusMillis(1000);
+        good1.price = 150;
+        good1.number = "MANGO";
         Goods good2 = new Goods();
-        good2.available = 6;
-        good2.name = "Ананас";
-        good2.expired = Instant.now().plusMillis(1000);
-        good2.price = 56;
-        good2.number = "PINEAPPLE";
+        good2.available = 450;
+        good2.name = "Мандарины";
+        good2.date_expired = Instant.now().plusMillis(1000);
+        good2.price = 150;
+        good2.number = "TANGERINES";
 
-        GoodsWithLambda l = new GoodsWithLambda(List.of(good1, good2));
+        GoodsWithLambda list = new GoodsWithLambda(List.of(good1, good2));
 
-        System.out.println("sortByAvailabilityAndNumber = "+l.sortByAvailabilityAndNumber());
-        System.out.println("sortByName = "+l.sortByName());
-        System.out.println("sortByNumber = "+l.sortByNumber());
-        System.out.println("sortByPartNumber = "+l.sortByPartNumber());
-        System.out.println("expiredAfter = "+l.expiredAfter(Instant.now()));
-        System.out.println("countLess = "+l.countLess(10));
-        System.out.println("countBetween = "+l.countBetween(10, 100));
+        System.out.println("sortByAvailabilityAndNumber = "+list.sortByAvailabilityAndNumber());
+        System.out.println("sortByName = "+list.sortByName());
+        System.out.println("sortByNumber = "+list.sortByNumber());
+        System.out.println("sortByPartNumber = "+list.sortByPartNumber());
+        System.out.println("expiredAfter = "+list.expiredAfter(Instant.now()));
+        System.out.println("countLess = "+list.countLess(100));
+        System.out.println("countBetween = "+list.countBetween(100, 1000));
     }
 
 }
