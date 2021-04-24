@@ -15,7 +15,7 @@ class Goods { //товары
 
     @Override
     public String toString() {
-        return "\nGoods{" +
+        return "Goods{" +
                 "name='" + name + '\'' +
                 ", number='" + number + '\'' +
                 ", available=" + available +
