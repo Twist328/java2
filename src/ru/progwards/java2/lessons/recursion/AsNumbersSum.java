@@ -28,7 +28,7 @@ public class AsNumbersSum {
 
     public static void main(String[] args) {
 
-        System.out.println(putItAllSum(5));
+        System.out.println(putItAllSum(9));
     }
 
 }
