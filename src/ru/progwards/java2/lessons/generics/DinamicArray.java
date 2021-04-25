@@ -1,38 +1,37 @@
 package ru.progwards.java2.lessons.generics;
 
-import java.util.ArrayList;
-
 public class DinamicArray<T> {
 
-    ArrayList<T[]> data;
+
     int blocksize;
-    int[] array;
+    T[] array;
     int size;
 
-    public DinamicArray(int blocksize) {
-        data = new ArrayList<T[]>();
-        T array = (T) new int[blocksize];
-        data.add((T[]) array);
+    public DinamicArray(int initsize,int blocksize) {
+        array = (T[])new Object[initsize];
         this.blocksize = blocksize;
         size = 0;
     }
 
     public void add(T item) {
         if (size >= array.length) {
-            T array = (T) new int[blocksize];
-            data.add((T[]) array);
-            size = 0;
+            T[] newArray = (T[])new Object[array.length + blocksize];
+            copyData(array, newArray);
+            array = newArray;
         }
-       array[size++] = (int) item;
+        array[size++] = (T) item;
+    }
+
+    void copyData(T[] src, T[] dst) {
+        for(int i=0; i<src.length; i++)
+            dst[i] = src[i];
     }
 
     public T get(int index) {
-        int index1 = index / blocksize;
-        int index2 = index % blocksize;
-        return (T) data.get(index1)[index2];
+        return array[index];
     }
 
     public int size() {
-        return data.size() * blocksize - (blocksize - size);
+        return size;
     }
 }
