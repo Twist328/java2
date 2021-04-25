@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class ArraySort {
+
    /* Реализовать статический метод с именем sort, сортирующий произвольный массив обобщающих типов, по алгоритму из первого урока:
 
 
@@ -19,10 +20,14 @@ public class ArraySort {
     */
 
     public static void main(String[] args) {
-        // Double[] array = {2.1,100.35, 8.2, 8.88, 0.2, 3.14, 100.35};
+
+        // Double[]array = {2.1,100.35, 8.2, 8.88, 0.2, 3.14, 100.35};
         // Integer[]array={999,6666,775,44,3,35,2,1-78};
+
+
         BigDecimal[] array = {BigDecimal.valueOf(35.6), BigDecimal.valueOf(8222.888), BigDecimal.valueOf(92.392),
                 BigDecimal.valueOf(0), BigDecimal.valueOf(-4874.88)};
+
         sort(array);
         System.out.println(Arrays.toString(array));
     }
@@ -31,7 +36,7 @@ public class ArraySort {
 
         for (int i = array.length - 1; i >= 0; i--) {
             for (int j = 0; j < i; j++) {
-                if (array[j].compareTo(array[i]) == 1) {
+                if (array[j].compareTo(array[i]) == 1) { //значение функции ==-1 или <0 отсортирует элементы от большего к меньшему
                     T tmpValue = array[i];
                     array[i] = array[j];
                     array[j] = tmpValue;

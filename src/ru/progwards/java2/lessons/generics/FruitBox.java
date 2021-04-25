@@ -18,42 +18,52 @@ public class FruitBox {
 Коробки с яблоками и апельсинами тоже можно сравнивать.
 */
 
+
     List<Fruit> fruitList = new ArrayList<>();
 
-    // добавить один фрукт
-    public void add(Fruit fruit) {
-        if(fruitList.size()>0) {
-            // проверим тип
-            String etalonClass = fruitList.get(0).getClass().getName();
-            //System.out.println("etalonClass1="+etalonClass);
-            if (fruit.getClass().getName().compareTo(etalonClass) != 0)
+
+    public void add(Fruit fruit) {// добавить единицу фрукта
+
+        if (fruitList.size() > 0) {
+            String getToBox = fruitList.get(0).getClass().getName();// проверим соответствие сорта в ящике
+            System.out.println("getToBox1=" + getToBox);
+            if (fruit.getClass().getName().compareTo(getToBox) != 0)
                 throw new UnsupportedOperationException();
         }
         fruitList.add(fruit);
     }
-    // добавить фрукты из списка
-    public void add(List<Fruit> fruits) { // из формулировки не понятно, нужен метод для списка или для одного фрукта
-        Fruit etalon;
-        if(fruitList.size()>0) {
-            etalon = fruitList.get(0);
-        } else if(fruits.size()>0) {
-            etalon = fruits.get(0);
+    public List<Fruit> getFruitList() {
+        return fruitList;
+    }
+
+    public void setFruitList(List<Fruit> fruitList) {
+        this.fruitList = fruitList;
+    }
+
+    public void add(List<Fruit> fruits) {
+        Fruit sorts;
+        if (fruitList.size() > 0) {
+            sorts = fruitList.get(0);
+        } else if (fruits.size() > 0) {
+            sorts = fruits.get(0);
         } else return;
-        String etalonClass = etalon.getClass().getName();
-        //System.out.println("etalonClass2="+etalonClass);
-        for (Fruit fruit: fruits) {
-            if(fruit.getClass().getName().compareTo(etalonClass)==0)
+        String getToBox = sorts.getClass().getName();
+        System.out.println("getToBox2=" + getToBox);
+
+        for (Fruit fruit : fruits) {
+            if (fruit.getClass().getName().compareTo(getToBox) == 0)
                 fruitList.add(fruit);
         }
     }
+
     // пересыпать фрукты из текущей коробки в другую, переданную в качестве параметра.
     public void moveTo(FruitBox box) {
-        if(fruitList.size()==0) return;
-        if(box.fruitList.size()>0) {
-            // проверим тип
-            String etalonClass = box.fruitList.get(0).getClass().getName();
-            //System.out.println("etalonClass3="+etalonClass);
-            if (fruitList.get(0).getClass().getName().compareTo(etalonClass) != 0)
+        if (fruitList.size() == 0) return;
+        if (box.fruitList.size() > 0) {
+
+            String getToBox = box.fruitList.get(0).getClass().getName();// проверим сорт
+            System.out.println("getToBox3=" + getToBox);
+            if (fruitList.get(0).getClass().getName().compareTo(getToBox) != 0)
                 throw new UnsupportedOperationException();
         }
         box.fruitList.addAll(fruitList);
@@ -61,10 +71,10 @@ public class FruitBox {
     }
 
     // вес коробки
-    public float getWeight() {
-        float result = 0;
-        for (Fruit f:fruitList) {
-            result += f.getWeight();
+    public double getWeight() {
+        double result = 0;
+        for (Fruit w : fruitList) {
+            result += w.getWeight();
         }
         return result;
     }
@@ -75,26 +85,26 @@ public class FruitBox {
         Orange o1 = new Orange();
         Orange o2 = new Orange();
         FruitBox box1 = new FruitBox();
-        box1.add(List.of(a2,a1,a1,o2,a2,o1,o2));
+        box1.add(List.of(a2, a1, a1, o2, a2, o1, o2));
         FruitBox box2 = new FruitBox();
         box2.add(a2);
         FruitBox box3 = new FruitBox();
         box3.add(o1);
-        System.out.println("box1="+box1.getWeight());
-        System.out.println("box2="+box2.getWeight());
-        System.out.println("box3="+box3.getWeight());
+        System.out.println("box1=" + box1.getWeight());
+        System.out.println("box2=" + box2.getWeight());
+        System.out.println("box3=" + box3.getWeight());
 
         box1.moveTo(box2);
         System.out.println("box1.moveTo(box2)");
 
-        System.out.println("box1="+box1.getWeight());
-        System.out.println("box2="+box2.getWeight());
+        System.out.println("box1=" + box1.getWeight());
+        System.out.println("box2=" + box2.getWeight());
 
         box3.moveTo(box1);
         System.out.println("box3.moveTo(box1)");
 
-        System.out.println("box1="+box1.getWeight());
-        System.out.println("box3="+box3.getWeight());
+        System.out.println("box1=" + box1.getWeight());
+        System.out.println("box3=" + box3.getWeight());
 
         try {
             System.out.print("box1.moveTo(box2) - ");
@@ -103,27 +113,9 @@ public class FruitBox {
             System.out.println(e);
         }
 
-        System.out.println("box1="+box1.getWeight());
-        System.out.println("box2="+box2.getWeight());
+        System.out.println("box1=" + box1.getWeight());
+        System.out.println("box2=" + box2.getWeight());
     }
 }
 
-class Fruit {
-    private double weight = 1.0 ;
-    protected void setWeight(double weight) {
-        this.weight = weight;
-    }
-    public double getWeight() {
-        return weight;
-    }
-}
-class Apple extends Fruit {
-    Apple() {
-        setWeight(1.0);
-    }
-}
-class Orange extends Fruit {
-    Orange() {
-        setWeight(1.5);
-    }
-}
+

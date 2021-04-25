@@ -2,18 +2,19 @@ package ru.progwards.java2.lessons.generics;
 
 public class DinamicArray<T> {
 
-
     int blocksize;
     T[] array;
     int size;
 
     public DinamicArray(int initsize,int blocksize) {
+
         array = (T[])new Object[initsize];
         this.blocksize = blocksize;
         size = 0;
     }
 
     public void add(T item) {
+
         if (size >= array.length) {
             T[] newArray = (T[])new Object[array.length + blocksize];
             copyData(array, newArray);
@@ -23,6 +24,7 @@ public class DinamicArray<T> {
     }
 
     void copyData(T[] src, T[] dst) {
+
         for(int i=0; i<src.length; i++)
             dst[i] = src[i];
     }
