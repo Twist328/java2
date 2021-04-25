@@ -16,7 +16,7 @@ import java.util.Arrays;
     public static void main(String[] args) {
         HanoiTower tower = new HanoiTower(3, 0);
         tower.print();
-        tower.carry(0, 2);
+        tower.move(0, 2);
         //tower.print();
     }
 
@@ -45,7 +45,7 @@ import java.util.Arrays;
         return result;
     }
 
-    void onestep(int ring, int from, int to) {          // перенести кольцо
+    void onestep(int ring, int from, int to) {          // перенести нужное кольцо на нужный штырь
 
         if (TOPRING[from] != ring) {
             throw new RuntimeException("невозможно перенести кольцо  " + name(ring) + " с " +
@@ -63,7 +63,7 @@ import java.util.Arrays;
         if (traceOn) print();
     }
 
-    public void carry(int from, int to) {// переносит башню со штыря from на штырь to
+    public void move(int from, int to) {// переносит башню со штыря from на штырь to
 
         if (size == 0) {
             throw new RuntimeException("так не должно быть :(size=0)");
