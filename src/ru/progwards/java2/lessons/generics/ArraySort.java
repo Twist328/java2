@@ -10,14 +10,14 @@ public class ArraySort {
         System.out.println(Arrays.toString(array));
     }
 
-    public static <T extends Comparable> void sort(T... item) {
+    public static <T extends Comparable> void sort(T... array) {
 
-        for (int i = item.length - 1; i >= 0; i--) {
+        for (int i = array.length - 1; i >= 0; i--) {
             for (int j = 0; j < i; j++) {
-                if (item[j].compareTo(item[i]) > 0) {
-                    T tmpValue = item[i];
-                    item[i] = item[j];
-                    item[j] = tmpValue;
+                if (array[j].compareTo(array[i]) > 0) {
+                    T tmpValue = array[i];
+                    array[i] = array[j];
+                    array[j] = tmpValue;
                 }
             }
         }
