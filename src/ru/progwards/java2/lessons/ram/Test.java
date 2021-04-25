@@ -9,7 +9,7 @@ public class Test {
 
     public static void main(String[] args) {
         Calculator calc = new Calculator();
-        System.out.println("calc = " + Calculator.sum(10,15));// почему то не хватает 6
+        System.out.println(calc.sum(10,15));// почему то не хватает 6
         //System.out.println(sumSequence(2)); выдает ошибку
         System.out.println(sumSequence(1));
         System.out.println(sumSequence(3));
