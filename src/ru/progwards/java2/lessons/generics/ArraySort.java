@@ -1,5 +1,6 @@
 package ru.progwards.java2.lessons.generics;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class ArraySort {
@@ -18,7 +19,9 @@ public class ArraySort {
     */
 
     public static void main(String[] args) {
-        Double[] array = {2.1, 8.2, 0.2, 3.14};
+       // Double[] array = {2.1,100.35, 8.2, 8.88, 0.2, 3.14, 100.35};
+        //Integer[]array={999,6666,775,44,3,35,2,1-78};
+        BigDecimal[]array={BigDecimal.valueOf(35.6), BigDecimal.valueOf(8222.888), BigDecimal.valueOf(92.392), BigDecimal.valueOf(0),BigDecimal.valueOf(-4874.88)};
         sort(array);
         System.out.println(Arrays.toString(array));
     }
