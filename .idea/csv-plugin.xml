@@ -3,6 +3,34 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\src\ru\progwards\java2\lessons\generics\ATest.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\ru\progwards\java2\lessons\generics\DIntArray.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\ru\progwards\java2\lessons\generics\DinamicArray.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\ru\progwards\java2\lessons\generics\FruitBox.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\ru\progwards\java2\lessons\less1\HelloWorld.java">
           <value>
             <Attribute>
@@ -25,6 +53,13 @@
           </value>
         </entry>
         <entry key="\src\ru\progwards\java2\lessons\less2\Test3.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\ru\progwards\java2\lessons\less3\MyCamparableObject.java">
           <value>
             <Attribute>
               <option name="separator" value=";" />

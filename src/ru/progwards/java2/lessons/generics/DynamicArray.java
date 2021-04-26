@@ -1,12 +1,12 @@
 package ru.progwards.java2.lessons.generics;
 
-public class DinamicArray<T> {
+public class DynamicArray<T> {
 
     int blocksize;
     T[] array;
     int size;
 
-    public DinamicArray(int initsize,int blocksize) {
+    public DynamicArray(int initsize, int blocksize) {
 
         array = (T[])new Object[initsize];
         this.blocksize = blocksize;
