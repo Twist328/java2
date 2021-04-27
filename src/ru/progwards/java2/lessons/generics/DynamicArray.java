@@ -7,6 +7,7 @@ class DynamicArray<T> {
     private T[] array = (T[]) new Object[10];
     int blocksize = array.length;
     int size;
+    int index;
 
     public DynamicArray(int initsize, int blocksize) {
 
@@ -51,10 +52,16 @@ class DynamicArray<T> {
         return array[pos];
     }
 
+    public int size(T item) {
+        return size;
+    }
+
     public void print() {
         System.out.println(this.toString());
     }
-
+    public T get(int index) {
+        return array[index];
+    }
     public static void main(String[] args) {
         DynamicArray<Integer> a = new DynamicArray();
         a.print();
@@ -72,8 +79,10 @@ class DynamicArray<T> {
         a.insert(2, 3);
         a.print();
         a.remove(1);
+        a.size(a.size);
+        a.get(3);
         a.print();
-        System.out.println("a[2] = " + a.set(2));
+        System.out.println("a[2] = " + a.set(8));
     }
 
     @Override
@@ -82,6 +91,39 @@ class DynamicArray<T> {
                 "array=" + Arrays.toString(array) +
                 ", blocksize=" + blocksize +
                 ", size=" + size +
+                ", index=" + index +
                 '}';
+    }
+
+    public T[] getArray() {
+        return array;
+    }
+
+    public void setArray(T[] array) {
+        this.array = array;
+    }
+
+    public int getBlocksize() {
+        return blocksize;
+    }
+
+    public void setBlocksize(int blocksize) {
+        this.blocksize = blocksize;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }
