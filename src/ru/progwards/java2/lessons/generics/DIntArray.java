@@ -1,6 +1,6 @@
 package ru.progwards.java2.lessons.generics;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DIntArray { //Завел сюда для теста скорости работы массивов(и вообще работает ли с дженериком понять)
     int[] array = new int[1000];
@@ -23,6 +23,19 @@ public class DIntArray { //Завел сюда для теста скорост�
 
     public int size() {
         return array.length;
+    }
+
+    public static void main(String[] args) {
+        DIntArray arr=new DIntArray();
+        arr.add(1);
+        System.out.println(arr.toString());
+    }
+
+    @Override
+    public String toString() {
+        return "DIntArray{" +
+                "array=" + Arrays.toString(array) +
+                '}';
     }
 }
 
