@@ -1,5 +1,6 @@
 package ru.progwards.java2.lessons.generics;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 class DynamicArray<T> {
@@ -59,7 +60,11 @@ class DynamicArray<T> {
     public void print() {
         System.out.println(this.toString());
     }
+
     public T get(int index) {
+        if (!(array[index] == null)){
+        return null;
+        }
         return array[index];
     }
     public static void main(String[] args) {
