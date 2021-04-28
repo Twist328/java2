@@ -62,10 +62,14 @@ class DynamicArray<T> {
     }
 
     public T get(int index) {
-        if (!(array[index] == null)){
+      /*  if (!(array[index] == null)){
         return null;
+        }*/
+        if (index < array.length || index <= 0) {
+            return null;
+        } else {
+            return array[index];
         }
-        return array[index];
     }
     public static void main(String[] args) {
         DynamicArray<Integer> a = new DynamicArray();
