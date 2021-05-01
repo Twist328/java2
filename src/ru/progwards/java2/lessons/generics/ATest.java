@@ -16,8 +16,8 @@ public class ATest {
             a2.add(i);
         long stop = System.currentTimeMillis();
 
-//            for(int i=0; i<count1; i++)
-//                System.out.println(i+" "+a2.get(i)+" "+a1.get(i));
+          // for(int i=0; i<count1; i++)
+                //System.out.println(i+" "+a1.get(i)+" "+a2.get(i));
         System.out.println("DIntArray add time =" + (middle - start));
         System.out.println("DynamicArray add time =" + (stop - middle));
     }
