@@ -1,5 +1,6 @@
 package ru.progwards.java2.lessons.basetypes;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Spliterator;
 
@@ -191,10 +192,12 @@ public class BiDirList<T> implements Iterable<T> {
         a.remove(3);
         a.addLast(3);
         a.addFirst(21);
-        a.addFirst(20);
-        //a.at(2);
-        System.out.println(a.at(2).intValue());
+        a.addLast(20);
+
+        System.out.println(a.at(3).intValue());
+        //System.out.println(Arrays.asList(new BiDirList[]{a}));
         System.out.println("________________________________");
+
         for (Integer i : a) {
             System.out.println(i);
             //System.out.println(new BiDirList<>().addLast(biDirList1));
