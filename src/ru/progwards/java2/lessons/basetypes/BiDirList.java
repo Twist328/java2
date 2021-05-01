@@ -1,30 +1,19 @@
 package ru.progwards.java2.lessons.basetypes;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Spliterator;
+import java.util.*;
 
 public class BiDirList<T> implements Iterable<T> {
     /*
-                 Реализовать класс BiDirList - двунаправленный связный список
-Методы
-
+        Реализовать класс BiDirList - двунаправленный связный список
+Методы:
 1.1 public void addLast(T item) - добавить в конец списка
-
 1.2 public void addFirst(T item)- добавить в начало списка
-
 1.3 public void remove(T item) - удалить
-
 1.4 public T at(int i) - получить элемент по индексу
-
 1.5 public int size() - получить количество элементов
-
 1.6 public static<T> BiDirList<T> from(T[] array) - конструктор из массива
-
 1.7 public static<T> BiDirList<T> of(T...array) -  конструктор из массива
-
 1.8 public void toArray(T[] array) - скопировать в массив
-
 1.9 реализовать интерфейс Iterable<T>
      */
     public static class Element<T> {
@@ -128,8 +117,8 @@ public class BiDirList<T> implements Iterable<T> {
     }
 
 
-    public void toArray() {
-        T[] array = (T[]) new Object[size];//скопировать в массив
+    public void toArray(T[] array) {
+        array = (T[]) new Object[size];//скопировать в массив
         int i = 0;
         Element<T> element = firstEl;
         while (element != null) {
@@ -185,7 +174,7 @@ public class BiDirList<T> implements Iterable<T> {
     }
 
     public static void main(String[] args) {
-        BiDirList<Integer> a = new BiDirList();
+        BiDirList<Integer> a = new BiDirList<Integer>();
 
         a.addLast(3);
         a.addFirst(25);
@@ -194,7 +183,7 @@ public class BiDirList<T> implements Iterable<T> {
         a.addFirst(21);
         a.addLast(20);
 
-        System.out.println(a.at(3).intValue());
+        System.out.println("Поиск по индексу 3 = " + a.at(3));
         //System.out.println(Arrays.asList(new BiDirList[]{a}));
         System.out.println("________________________________");
 
