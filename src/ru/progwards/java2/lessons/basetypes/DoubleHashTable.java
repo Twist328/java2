@@ -7,7 +7,7 @@ import java.util.function.Function;
 public class DoubleHashTable  <K extends HashValue,V>
         extends Dictionary<K,V> {
 
-    // вспомогательный класс генерации простых чисел для определения размера хранилища
+
     static class Prime {
         static List<Integer> list;
         private static int check;
@@ -32,7 +32,7 @@ public class DoubleHashTable  <K extends HashValue,V>
         }
 
         static int get(int num) {
-            int fillTo = (int) Math.sqrt(num + Math.sqrt(num)); // до куда проверяем, интервал между простыми примерно равен корню из простого
+            int fillTo = (int) Math.sqrt(num + Math.sqrt(num)); // предел проверки
             fillArray(fillTo);
             boolean found = false;
             while (!found) {
@@ -49,8 +49,8 @@ public class DoubleHashTable  <K extends HashValue,V>
         }
     }
 
-    // запись для хранения одного элемента таблицы
-    static class Entry<K extends HashValue, V> {
+
+    static class Entry<K extends HashValue, V> {// запись для хранения одного элемента таблицы
 
         private V value;
         final private K key;
@@ -106,9 +106,7 @@ public class DoubleHashTable  <K extends HashValue,V>
         size = 0;
         Collplus = itemSize * collPercent / 100;
         f1 = (hash, size, collis) -> {
-            // тут в неявном виде делаем двойное хэширование: для сокращения операций с плавающей точкой
-            // объединил функцию по хэш и по коллизиям в одну операцию
-            // В пользовательской лямбде может быть как угодно. Это просто дефолтная.
+
             double d = 0.6180339887d * ((hash + collis * hash) & 0x7FFFFFFF); // золотое сечение =(sqrt(5)-1)/2
             int res = (int) ((d - Math.floor(d)) * size);
             //System.out.println("k="+k+" s="+s+" c="+c+"  result="+res);
@@ -121,12 +119,12 @@ public class DoubleHashTable  <K extends HashValue,V>
         else throw new IllegalStateException("Table is not empty");
     }
 
-    // получить количество элементов
-    public int size() { // from IntDictionary<K,V>
+
+    public int size() { // получить количество элементов
         return size;
     }
 
-    public boolean isEmpty() { // from IntDictionary<K,V>
+    public boolean isEmpty() {
         return size == 0;
     }
 
@@ -138,63 +136,12 @@ public class DoubleHashTable  <K extends HashValue,V>
         return this.<V>getEnumeration(VALUES);
     }
 
-    /*public void rehashWithInc() {
-        itemSize = itemSize + itemSize * incPercent / 100;
-        rehash();
-    }
-
-    public void rehash() {
-        DoubleHashTable table = new DoubleHashTable(itemSize, incPercent);
-        table.setCalculateFunction(f1);
-
-        for (int i = item.length; i-- > 0; ) {
-            Entry<K, V> e = (Entry<K, V>) item[i];
-            if (e != null) {
-                table.put(e.key, e.value);
-            }
-        }
-
-        itemSize = table.itemSize;
-        item = table.item;
-        deleted = table.deleted;
-        Collplus = table.Collplus;
-    }
-
-    // добавить пару ключ-значение громоздско очень
-   /* public V put(K key, V value) { // from IntDictionary<K,V>
-        if (value == null) {
-            throw new NullPointerException();
-        }
-        int hash = key.getHash();
-        int collis = 0;
-        while (true) {
-            if (collis > Collplus) {
-                rehashWithIncrement();
-                collis = 0;
-            }
-            int index = f1.apply(hash, itemSize, collis++);
-            Entry<K, V> e = (Entry<K, V>) item[index];
-            if (e == null) {
-                item[index] = new Entry<>(hash, key, value);
-                deleted[index] = false;
-                size++;
-                return null;
-            } else if ((e.hash == hash) && e.key.equals(key)) {
-                V oldValue = e.value;
-                e.value = value;
-                size++;
-                return oldValue;
-            }
-        }
-    }*/
-
-    // добавить пару ключ-значение
-    public V add(K key, V value) { // по задаче имя д.б. такое
+    public V add(K key, V value) { // по задаче имя метода// добавить пару ключ-значение
         return put(key, value);
     }
 
-    // получить значение по ключу
-    public V get(Object key) { // from IntDictionary<K,V>
+
+    public V get(Object key) { // from IntDictionary<K,V> // получить значение по ключу
         int hash = ((K) key).getHash();
         int collis = 0;
         while (true) {
@@ -202,11 +149,11 @@ public class DoubleHashTable  <K extends HashValue,V>
                 return null;
             }
             int index = f1.apply(hash, itemSize, collis++);
-            Entry<K, V> e = (Entry<K, V>) item[index];
-            if (e == null) {
+            Entry<K, V> entry = (Entry<K, V>) item[index];
+            if (entry == null) {
                 if (!deleted[index]) return null;
-            } else if ((e.hash == hash) && e.key.equals(key)) {
-                return e.value;
+            } else if ((entry.hash == hash) && entry.key.equals(key)) {
+                return entry.value;
             }
         }
     }
@@ -216,8 +163,8 @@ public class DoubleHashTable  <K extends HashValue,V>
         return null;
     }
 
-    // удалить элемент по ключу
-    public V remove(Object key) {
+
+    public V remove(Object key) {// удалить элемент по ключу
         int hash = ((K) key).getHash();
         int collis = 0;
         while (true) {
@@ -228,7 +175,7 @@ public class DoubleHashTable  <K extends HashValue,V>
             Entry<K, V> e = (Entry<K, V>) item[index];
             if (e == null) {
                 if (!deleted[index]) {
-                    // элемент не найден и не удален, выходим, или можно вернуть исключение
+
                     return null;
                 }
             } else if ((e.hash == hash) && e.key.equals(key)) {
@@ -295,20 +242,20 @@ public class DoubleHashTable  <K extends HashValue,V>
 
         public T nextElement() {
             for (int i = itemIndex + 1; i < itemSize; i++) {
-                Entry<?, ?> e = (Entry<?, ?>) table[i];
-                if (e != null) {
+                Entry<?, ?> entry = (Entry<?, ?>) table[i];
+                if (entry != null) {
                     itemIndex = i;
                     count++;
-                    return type == KEYS ? (T) e.key : (type == VALUES ? (T) e.value : (T) e);
+                    return type == KEYS ? (T) entry.key : (type == VALUES ? (T) entry.value : (T) entry);
                 }
             }
             throw new NoSuchElementException("Hashtable Enumerator");
         }
 
-        // Iterator methods
+
         public boolean hasNext() {
             return hasMoreElements();
-        }
+        }// Iterator methods
 
         public T next() {
             return nextElement();
@@ -322,12 +269,7 @@ public class DoubleHashTable  <K extends HashValue,V>
     }
 
     public static void main(String[] args) {
-        /*long start = System.nanoTime();
-        System.out.println(Prime.get(10000));
-        System.out.println(Prime.get(20));
-        System.out.println((System.nanoTime()-start)/1000);//1310751-18x
-        System.out.println("[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199]");
-        System.out.println(Prime.list);*/
+
 
         DoubleHashTable<Value, String> table = new DoubleHashTable();
 
@@ -348,11 +290,7 @@ public class DoubleHashTable  <K extends HashValue,V>
         });
 
                table.setCalculateFunction((k, m, c) -> {
-            // При двойном хешировании используются две независимые хеш-функции h1(k) и h2(k).
-            // Пусть k — это наш ключ, m — размер нашей таблицы, n mod m — остаток от деления n на m,
-            // тогда сначала исследуется ячейка с адресом h1(k), если она уже занята, то рассматривается
-            // (h1(k)+h2(k))mod m, затем (h1(k)+2⋅h2(k))mod m и так далее.
-            // В общем  идёт проверка последовательности ячеек (h1(k)+i⋅h2(k))modm где i=(0,1,...,m−1)
+
             double tmp = 0.6180339887d * (k & 0x7FFFFFFF); // золотое сечение =(sqrt(5)-1)/2
             int h1 = (int) ((tmp - Math.floor(tmp)) * m);
             int h2 = k * k;
@@ -372,21 +310,82 @@ public class DoubleHashTable  <K extends HashValue,V>
             return res;
         });
 
-        //table.setCalculateFunction((h,s,c)->c);
+        table.setCalculateFunction((h,s,c)->c);
         for (int i = 200; i < 388; i++) {
-            //211 elements -> 21 collisions limit
-            //184 for k+c
-            //200 for k+c*k*c
-            //207 for k+c*k
+
             table.put(Value.of(i), "value " + i);
         }
         System.out.println("ItemSize=" + table.itemSize);
 
-       /* Iterator<Entry<Value, String>> i = table.getIterator();
+        }
+    }
+//ItemSize=101
+//211 elements -> 21 collisions limit
+//184 for k+c
+//200 for k+c*k*c
+//207 for k+c*k
+
+ /*long start = System.nanoTime();
+        System.out.println(Prime.get(10000));
+        System.out.println(Prime.get(20));
+        System.out.println((System.nanoTime()-start)/1000);//1310751-18x
+        System.out.println("[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199]");
+        System.out.println(Prime.list);*/
+ /* Iterator<Entry<Value, String>> i = table.getIterator();
         while (i.hasNext()) {
             Entry<Value, String> e = i.next();
             System.out.println("k="+e.key+" v="+e.value);*/
-        }
+/* При двойном хешировании используются две независимые хеш-функции h1(k) и h2(k).
+             Пусть k — это наш ключ, m — размер нашей таблицы, n mod m — остаток от деления n на m,
+             тогда сначала исследуется ячейка с адресом h1(k), если она уже занята, то рассматривается
+             (h1(k)+h2(k))mod m, затем (h1(k)+2⋅h2(k))mod m и так далее.
+             В общем  идёт проверка последовательности ячеек (h1(k)+i⋅h2(k))modm где i=(0,1,...,m−1)*/
+ /*public void rehashWithInc() {
+        itemSize = itemSize + itemSize * incPercent / 100;
+        rehash();
     }
 
-//ItemSize=101
+    public void rehash() {
+        DoubleHashTable table = new DoubleHashTable(itemSize, incPercent);
+        table.setCalculateFunction(f1);
+
+        for (int i = item.length; i-- > 0; ) {
+            Entry<K, V> e = (Entry<K, V>) item[i];
+            if (e != null) {
+                table.put(e.key, e.value);
+            }
+        }
+
+        itemSize = table.itemSize;
+        item = table.item;
+        deleted = table.deleted;
+        Collplus = table.Collplus;
+    }
+
+    // добавить пару ключ-значение громоздско очень
+   /* public V put(K key, V value) { // from IntDictionary<K,V>
+        if (value == null) {
+            throw new NullPointerException();
+        }
+        int hash = key.getHash();
+        int collis = 0;
+        while (true) {
+            if (collis > Collplus) {
+                rehashWithIncrement();
+                collis = 0;
+            }
+            int index = f1.apply(hash, itemSize, collis++);
+            Entry<K, V> e = (Entry<K, V>) item[index];
+            if (e == null) {
+                item[index] = new Entry<>(hash, key, value);
+                deleted[index] = false;
+                size++;
+                return null;
+            } else if ((e.hash == hash) && e.key.equals(key)) {
+                V oldValue = e.value;
+                e.value = value;
+                size++;
+                return oldValue;
+            }
+        }
+    }*/
