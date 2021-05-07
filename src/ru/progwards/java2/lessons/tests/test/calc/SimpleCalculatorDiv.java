@@ -1,14 +1,10 @@
 package ru.progwards.java2.lessons.tests.test.calc;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import ru.progwards.java2.lessons.tests.calc.SimpleCalculator;
-
-import java.util.Arrays;
-import java.util.Collection;
-
+import org.junit.*;
+import org.junit.runner.*;
+import org.junit.runners.*;
+import ru.progwards.java2.lessons.tests.calc.*;
+import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(value = Parameterized.class)
