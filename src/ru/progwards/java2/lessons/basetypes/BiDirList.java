@@ -125,7 +125,7 @@ public class BiDirList<T> implements Iterable<T> {
             array[i++] = element.item;
             element = element.next;
         }
-        //return array;
+
     }
 
     public Iterator<T> getIterator() {//реализовать интерфейс Iterable<T>
