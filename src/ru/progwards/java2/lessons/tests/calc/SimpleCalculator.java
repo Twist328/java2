@@ -28,9 +28,9 @@ public class SimpleCalculator {
 
     public int div(int val1, int val2) {
         if (val2 == 0) throw new ArithmeticException("cannot be divided by zero");
-        long a = (long) val1 / val2;
-        if (a > Integer.MAX_VALUE || a < Integer.MIN_VALUE) throw new ArithmeticException("integers is over");
-        return (int) a;
+        long longRes = (long) val1 / val2;
+        if (longRes > Integer.MAX_VALUE || longRes < Integer.MIN_VALUE) throw new ArithmeticException("integers is over");
+        return val1 / val2;
     }
 }
 

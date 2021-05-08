@@ -43,5 +43,11 @@ public class SimpleCalculatorDiv {
         long res = calc.div(A, B);
         assertEquals(expected, res);
     }
-}
 
+   /* @Test(expected = IllegalArgumentException.class)
+    public void testDivByZero() {
+        int a = 15;
+        int b = 0;
+        calc.div(a, b);
+    }*/
+}
