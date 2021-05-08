@@ -45,7 +45,7 @@ public class SimpleCalculatorDiff {
 
     @Test
     public void testDiffNum() {
-        long res  = calc.diff(A, B);
+        var res  = calc.diff(A, B);
         assertEquals(expected, res);
 
     }

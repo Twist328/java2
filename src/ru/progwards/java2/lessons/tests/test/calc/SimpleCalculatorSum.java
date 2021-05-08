@@ -43,7 +43,7 @@ public class SimpleCalculatorSum {
 
     @Test
     public void testAddNum() {
-        long res = calc.sum(A, B);
+        var res = calc.sum(A, B);
         assertEquals(expected, res);
 
     }
