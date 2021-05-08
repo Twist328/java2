@@ -40,7 +40,7 @@ public class SimpleCalculatorMult {
 
     @Test
     public void testMultNum() {
-        var res = calc.mult(A, B);
+        int res = calc.mult(A, B);
         assertEquals(expected, res);
     }
 }

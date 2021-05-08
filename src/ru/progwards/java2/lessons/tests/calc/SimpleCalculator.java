@@ -8,21 +8,21 @@ public class SimpleCalculator {
     public static int sum(int val1, int val2) throws IntOverflowExc {
         long longRes = ((long)val1) + val2;
         if (longRes > Integer.MAX_VALUE || longRes < Integer.MIN_VALUE)
-            throw new IntOverflowExc(val1, val2, "Int range overflow during addition " + longRes);
+            throw new IntOverflowExc("Int range overflow during addition " + longRes);
         return val1 + val2;
     }
 
     public static int diff(int val1, int val2) throws IntOverflowExc {
         long longRes = ((long)val1) - val2;
         if (longRes > Integer.MAX_VALUE || longRes < Integer.MIN_VALUE)
-            throw new IntOverflowExc(val1, val2, "Int range overflow during on subtraction " + longRes);
+            throw new IntOverflowExc("Int range overflow during on subtraction " + longRes);
         return val1 - val2;
     }
 
     public static int mult(int val1, int val2) {
         long longRes = (long)val1 * val2;
         if (longRes > Integer.MAX_VALUE || longRes < Integer.MIN_VALUE)
-            throw new IntOverflowExc(val1, val2, "Int range overflow during on mult " + longRes);
+            throw new IntOverflowExc("Int range overflow during on mult " + longRes);
         return val1 * val2;
     }
 
