@@ -21,12 +21,13 @@ public class CalculatorEx {
                 {"22/1(@@"},
                 {"(21-4("},
                 {"(1-8)+(2+2(#"},
-                {"(23*1-(7+6)="}
+                {"(23*1-(7+6)="},
+                {"23/(10-10)"}
         });
     }
 
     @Test(expected = Exception.class)
-    public void test_exceptions() throws Exception {
+    public void testExceptions() throws Exception {
         Calculator.calculate(expression);
     }
 

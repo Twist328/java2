@@ -35,7 +35,7 @@ public class CalculatorA {
     }
 
     @Test
-    public void testall() throws Exception {
+    public void testAll() throws Exception {
         int res = Calculator.calculate(expression);
         assertEquals(expected, res);
     }
