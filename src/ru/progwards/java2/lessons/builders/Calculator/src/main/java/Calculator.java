@@ -1,13 +1,12 @@
 public class Calculator {
     private String expression;
     private int pos;
-    private enum Operation {ADD, SUB, MUL, DIV, NONE};
+    private enum Operation {SUM, DIFF, MULT, DIV, NONE};
 
     private Calculator(String expression) {
         this.expression = expression;
     }
 
-    // scanner
     private String getNext() throws Exception {
         if (hasNext()) {
             return expression.substring(pos++,pos);
@@ -33,9 +32,9 @@ public class Calculator {
         if (op.length()>0)
             switch (op.toCharArray()[0]) {
                 case ')': return Operation.NONE;
-                case '+': return Operation.ADD;
-                case '-': return Operation.SUB;
-                case '*': return Operation.MUL;
+                case '+': return Operation.SUM;
+                case '-': return Operation.DIFF;
+                case '*': return Operation.MULT;
                 case '/': return Operation.DIV;
             }
         throw new Exception("unknown operation " + op);
@@ -68,11 +67,11 @@ public class Calculator {
         int res = getTerm2();
         while (hasNext()) {
             Operation op = checkOperation();
-            if (op == Operation.MUL || op == Operation.DIV) {
+            if (op == Operation.MULT || op == Operation.DIV) {
                 op = getOperation();
                 int num = getTerm2();
                 switch (op) {
-                    case MUL:
+                    case MULT:
                         res *= num;
                         break;
                     case DIV:
@@ -91,14 +90,14 @@ public class Calculator {
         int res = getTerm();
         while (hasNext()) {
             Operation op = checkOperation();
-            if (op == Operation.ADD || op == Operation.SUB) {
+            if (op == Operation.SUM || op == Operation.DIFF) {
                 op = getOperation();
                 int num = getTerm();
                 switch (op) {
-                    case ADD:
+                    case SUM:
                         res += num;
                         break;
-                    case SUB:
+                    case DIFF:
                         res -= num;
                         break;
                     default:
