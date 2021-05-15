@@ -1,7 +1,7 @@
 public class Calculator {
     private static String INFO;
     private int pos;
-    private enum Action {SUM, DIFF, MULT, DIV, NONE};
+    private enum Action {SUM, DIFF, MULT, DIV, NOTHING};
 
     private Calculator(String info) {
         this.INFO = info;
@@ -52,7 +52,7 @@ public class Calculator {
     Action getAction(String oper) throws Exception {
         if (oper.length()>0)
             switch (oper.toCharArray()[0]) {
-                case ')': return Action.NONE;
+                case ')': return Action.NOTHING;
                 case '+': return Action.SUM;
                 case '-': return Action.DIFF;
                 case '*': return Action.MULT;
