@@ -8,11 +8,11 @@ public class CalculatorEx {
 
 
     @Parameterized.Parameter
-    public String expression;
+    public static String INFO;
 
 
     @Parameterized.Parameters(name = "calculate({0}}) = exception")
-    public static Collection<Object[]> data() {
+    public static Collection<Object[]> record() {
         return Arrays.asList(new Object[][]{
                 {"(1+2"},
                 {"(333-244"},
@@ -28,7 +28,7 @@ public class CalculatorEx {
 
     @Test(expected = Exception.class)
     public void testExceptions() throws Exception {
-        Calculator.calculate(expression);
+        Calculator.calc(INFO);
     }
 
 }

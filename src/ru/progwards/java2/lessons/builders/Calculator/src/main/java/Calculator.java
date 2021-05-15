@@ -1,75 +1,18 @@
 public class Calculator {
-    private String expression;
+    private static String INFO;
     private int pos;
-    private enum Operation {SUM, DIFF, MULT, DIV, NONE};
+    private enum Action {SUM, DIFF, MULT, DIV, NONE};
 
-    private Calculator(String expression) {
-        this.expression = expression;
+    private Calculator(String info) {
+        this.INFO = info;
     }
-
-    private String getNext() throws Exception {
-        if (hasNext()) {
-            return expression.substring(pos++,pos);
-        } else
-            throw new Exception("unexpected end of expression");
-    }
-    private String checkNext() throws Exception {
-        if (hasNext())
-            return expression.substring(pos,pos+1);
-        else
-            return "";
-    }
-    private boolean hasNext() {
-        return pos < expression.length();
-    }
-
-    int getNumber() throws Exception {
-        String num = getNext();
-        return Integer.valueOf(num);
-    }
-
-    Operation getOperation(String op) throws Exception {
-        if (op.length()>0)
-            switch (op.toCharArray()[0]) {
-                case ')': return Operation.NONE;
-                case '+': return Operation.SUM;
-                case '-': return Operation.DIFF;
-                case '*': return Operation.MULT;
-                case '/': return Operation.DIV;
-            }
-        throw new Exception("unknown operation " + op);
-    }
-
-    Operation getOperation() throws Exception {
-        String op = getNext();
-        return getOperation(op);
-    }
-
-    Operation checkOperation() throws Exception {
-        String op = checkNext();
-        return getOperation(op);
-    }
-
-    private int getTerm2() throws Exception {
-        String br = checkNext();
-        if (br.equals("(")) {
-            getNext();
-            int expr = expression();
-            if (!getNext().equals(")"))
-                throw new Exception("\")\" expected");
-            return expr;
-        }
-        return getNumber();
-    }
-
-    // parser
-    private int getTerm() throws Exception {
-        int res = getTerm2();
+    private int getExpir() throws Exception {
+        int res = getOperation();
         while (hasNext()) {
-            Operation op = checkOperation();
-            if (op == Operation.MULT || op == Operation.DIV) {
-                op = getOperation();
-                int num = getTerm2();
+            Action op = checkAction();
+            if (op == Action.MULT || op == Action.DIV) {
+                op = getAction();
+                int num = getOperation();
                 switch (op) {
                     case MULT:
                         res *= num;
@@ -85,14 +28,68 @@ public class Calculator {
         }
         return res;
     }
+    private String getNext() throws Exception {
+        if (hasNext()) {
+            return INFO.substring(pos++,pos);
+        } else
+            throw new Exception("unexpected end of expression");
+    }
+    private String checkNext() throws Exception {
+        if (hasNext())
+            return INFO.substring(pos,pos+1);
+        else
+            return "";
+    }
+    private boolean hasNext() {
+        return pos < INFO.length();
+    }
 
-    private int expression() throws Exception {
-        int res = getTerm();
+    int getNumber() throws Exception {
+        String num = getNext();
+        return Integer.valueOf(num);
+    }
+
+    Action getAction(String oper) throws Exception {
+        if (oper.length()>0)
+            switch (oper.toCharArray()[0]) {
+                case ')': return Action.NONE;
+                case '+': return Action.SUM;
+                case '-': return Action.DIFF;
+                case '*': return Action.MULT;
+                case '/': return Action.DIV;
+            }
+        throw new Exception("unknown operation " + oper);
+    }
+
+    Action getAction() throws Exception {
+        String op = getNext();
+        return getAction(op);
+    }
+
+    Action checkAction() throws Exception {
+        String op = checkNext();
+        return getAction(op);
+    }
+
+    private int getOperation() throws Exception {
+        String br = checkNext();
+        if (br.equals("(")) {
+            getNext();
+            int norm = information();
+            if (!getNext().equals(")"))
+                throw new Exception("\")\" expected");
+            return norm;
+        }
+        return getNumber();
+    }
+
+    private int information() throws Exception {
+        int res = getExpir();
         while (hasNext()) {
-            Operation op = checkOperation();
-            if (op == Operation.SUM || op == Operation.DIFF) {
-                op = getOperation();
-                int num = getTerm();
+            Action op = checkAction();
+            if (op == Action.SUM || op == Action.DIFF) {
+                op = getAction();
+                int num = getExpir();
                 switch (op) {
                     case SUM:
                         res += num;
@@ -109,12 +106,12 @@ public class Calculator {
         return res;
     }
 
-    private int calculate() throws Exception {
-        return expression();
+    public int calculation() throws Exception {
+        return information();
     }
 
-    public static int calculate(String expression) throws Exception {
-        return new Calculator(expression).calculate();
+    public static int calc(String data) throws Exception {
+        return new Calculator(data).calculation();
     }
 
    /* public static void main(String[] args) throws Exception {

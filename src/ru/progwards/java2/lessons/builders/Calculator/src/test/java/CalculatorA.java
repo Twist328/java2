@@ -12,14 +12,14 @@ public class CalculatorA {
 
 
     @Parameterized.Parameter(0)
-    public String expression;
+    public String declaration;
 
     @Parameterized.Parameter(1)
     public int expected;
 
 
-    @Parameterized.Parameters(name = "calculate({0}}) = {1}")
-    public static Collection<Object[]> data() {
+    @Parameterized.Parameters(name = "calc({0}}) = {1}")
+    public static Collection<Object[]> record() {
         return Arrays.asList(new Object[][]{
                 {"1+0",  1},
                 {"1-9",  -8},
@@ -36,7 +36,7 @@ public class CalculatorA {
 
     @Test
     public void testAll() throws Exception {
-        int res = Calculator.calculate(expression);
+        int res = Calculator.calc(declaration);
         assertEquals(expected, res);
     }
 

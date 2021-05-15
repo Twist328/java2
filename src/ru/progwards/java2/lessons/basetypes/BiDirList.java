@@ -117,12 +117,12 @@ public class BiDirList<T> implements Iterable<T> {
     }
 
 
-    public void toArray(T[] array) {
-        array = (T[]) new Object[size];//скопировать в массив
+    public void toArray() {
+        T[] array = (T[]) new Object[size];//скопировать в массив
         int i = 0;
         Element<T> element = firstEl;
         while (element != null) {
-            array[i++] = element.item;
+           array[i++] = element.item;
             element = element.next;
         }
 
