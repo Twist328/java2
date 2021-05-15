@@ -1,11 +1,12 @@
 
-import org.junit.jupiter.api.*;
+import org.junit.*;
+
 import org.junit.runner.*;
-import org.junit.runners.Parameterized;
+import org.junit.runners.*;
 
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
+
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,24 +24,23 @@ public class CalculatorA {
     @Parameterized.Parameters(name = "calculate({0}}) = {1}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"1+2",  3},
-                {"3-4",  -1},
-                {"2*4",  8},
-                {"9/4",  2},
-                {"3/1",  3},
-                {"(1-4)", -3},
-                {"(2)*3", 6},
+                {"1+0",  1},
+                {"1-9",  -8},
+                {"2*2",  4},
+                {"9/3",  3},
+                {"5/1",  5},
+                {"2*8", 16},
                 {"(1-1)+(2+2)", 4},
                 {"(3/2)-(6*6)", -35},
-                {"(2-1)*(5+(1*2)/(4-3*3*3/3/3))", 7},
-                {"(((((2+3*0/2)))))", 2}
+                {"(8-2)*(7+(2*3)/(8-6*4*1/9/2))", 42},
+                {"(4+3)*0)/9)", 0}
         });
     }
 
     @Test
     public void testall() throws Exception {
-        int result = Calculator.calculate(expression);
-        assertEquals(expected, result);
+        int res = Calculator.calculate(expression);
+        assertEquals(expected, res);
     }
 
 }
