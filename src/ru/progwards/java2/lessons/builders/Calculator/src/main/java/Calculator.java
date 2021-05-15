@@ -114,12 +114,4 @@ public class Calculator {
         return new Calculator(data).calculation();
     }
 
-   /* public static void main(String[] args) throws Exception {
-        StringBuilder sb = new StringBuilder();
-        for (String s: args) {
-            sb.append(s);
-        }
-        if(sb.length()<=0) throw new RuntimeException("Parameters are not provided. Example: (2+3)-1*5");
-        System.out.println(Calculator.calculate(sb.toString()));
-    }*/
 }
