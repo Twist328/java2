@@ -46,7 +46,7 @@
                 <updatePolicy>never</updatePolicy>
             </releases>
             <snapshots>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
             </snapshots>
             <id>central</id>
             <name>Central Repository</name>

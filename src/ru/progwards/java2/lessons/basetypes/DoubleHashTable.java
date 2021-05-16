@@ -154,9 +154,9 @@ public class DoubleHashTable<K extends HashValue,V> {
 
     public Iterator<Node<K,V>> getIterator() {
         return new Iterator<>() {
-            private int indx = 0;
+            private int index = 0;
             private Node<K,V> lastReturned;
-            private Node<K,V> current = table[indx];
+            private Node<K,V> current = table[index];
 
             @Override
             public boolean hasNext() {
@@ -168,11 +168,11 @@ public class DoubleHashTable<K extends HashValue,V> {
                  * */
                 if (current == null || current.isDeleted()) {
                     if (findNextNotNull())
-                        current = table[indx];
+                        current = table[index];
                     else
                         return false;
                 }
-                return indx < table.length;
+                return index < table.length;
             }
 
             @Override
@@ -187,32 +187,32 @@ public class DoubleHashTable<K extends HashValue,V> {
                  * если элементов != null нет, то выводим переменную indx за границы таблицы, чтобы метод hasNext()
                  * вернул false
                  * */
-                int indxNext = indx + 1;
+                int indxNext = index + 1;
                 if (indxNext < table.length) {
                     if (table[indxNext] == null || table[indxNext].isDeleted) {
                         if (findNextNotNull())
-                            current = table[indx];
+                            current = table[index];
                         else
-                            indx = table.length;
+                            index = table.length;
                     } else {
-                        ++indx;
-                        current = table[indx];
+                        ++index;
+                        current = table[index];
                     }
                 } else
-                    ++indx;
+                    ++index;
 
                 return lastReturned;
             }
 
             // метод выясняет имеются ли дальше в таблице элементы != null
             private boolean findNextNotNull() {
-                for (int i = indx + 1; i < table.length; i++) {
+                for (int i = index + 1; i < table.length; i++) {
                     /*
                      * если елемент имеется и он не удален, то присваиваем переменной indx значение индекса этого
                      * элемента
                      *  */
                     if (table[i] != null && !table[i].isDeleted()) {
-                        indx = i;
+                        index = i;
                         return true;
                     }
                 }
