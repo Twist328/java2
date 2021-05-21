@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/src/ru/progwards/java2/lessons/builders/Calculator/pom.xml" />
+        <option value="$PROJECT_DIR$/src/ru/progwards/java2/lessons/gc/Heap/pom.xml" />
       </list>
     </option>
   </component>

@@ -3,6 +3,7 @@ package ru.progwards.java2.lessons.basetypes;
 import java.util.*;
 
 public class BiDirList<T> implements Iterable<T> {
+    BiDirList mane;
     /*
         Реализовать класс BiDirList - двунаправленный связный список
 Методы:
@@ -28,7 +29,7 @@ public class BiDirList<T> implements Iterable<T> {
         }
     }
 
-    int size;           // размер списка
+    int size=3;           // размер списка
     Element<T> firstEl;  // первый элемент списка
     Element<T> lastEl;   // последний элемент списка
 
@@ -117,13 +118,13 @@ public class BiDirList<T> implements Iterable<T> {
     }
 
 
+    T[]array = (T[]) new Object[size];
+
     public void toArray(T[] array) {
-        array = (T[]) new Object[size];//скопировать в массив
-        int i = 0;
-        Element<T> element = firstEl;
-        while (element != null) {
-           array[i++] = element.item;
-            element = element.next;
+
+        mane.toArray(array);
+        for (T s : array) {
+            System.out.println(s);
         }
 
     }
@@ -176,6 +177,7 @@ public class BiDirList<T> implements Iterable<T> {
     public static void main(String[] args) {
         BiDirList<Integer> a = new BiDirList<Integer>();
 
+
         a.addLast(3);
         a.addFirst(25);
         a.remove(3);
@@ -184,15 +186,33 @@ public class BiDirList<T> implements Iterable<T> {
         a.addLast(20);
 
         System.out.println("Поиск по индексу 3 = " + a.at(3));
-        //System.out.println(Arrays.asList(new BiDirList[]{a}));
-        System.out.println("________________________________");
-
+        System.out.println("________________________________ \n");
         for (Integer i : a) {
             System.out.println(i);
-            //System.out.println(new BiDirList<>().addLast(biDirList1));
+            System.out.println("________________________________\n");
+
+            final int size = 3;
+            BiDirList mane = new BiDirList();
+            String[] params = new String[size];
+
+
+            mane.toArray(params);
+            for (String s : params)
+                System.out.println(s);
+
         }
     }
+
+    public void toArray(String[] array) {
+        //array = new String[size];
+        array[0] = "abc";
+        array[1] = "def";
+        array[2] = "ghj";
+
+    }
 }
+
+
 
 
 

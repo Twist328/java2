@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.gc;
+package gc;
 
 public class OutOfMemoryException extends RuntimeException {
     private int size;

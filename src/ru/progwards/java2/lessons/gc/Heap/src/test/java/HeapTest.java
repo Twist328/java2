@@ -1,4 +1,6 @@
-package ru.progwards.java2.lessons.gc;
+import gc.Heap;
+import gc.InvalidPointerException;
+import gc.OutOfMemoryException;
 
 import java.util.ArrayDeque;
 import java.util.concurrent.ThreadLocalRandom;
@@ -35,7 +37,7 @@ public class HeapTest {
         return size > (maxSize-allocated)-1 ? (maxSize-allocated)/2+1 : size+1;
     }
 
-    public static void main(String[] args) throws InvalidPointerException, ru.progwards.java2.lessons.gc.InvalidPointerException, OutOfMemoryException {
+    public static void main(String[] args) throws InvalidPointerException, gc.InvalidPointerException, OutOfMemoryException {
         Heap heap = new Heap(maxSize);
         ArrayDeque<Block> blocks = new ArrayDeque<>();
         int count = 0;
@@ -67,7 +69,7 @@ public class HeapTest {
                     freeTime += lstop - lstart;
                     allocated -= block.size;
                 }
-                //blocks.remove(n);
+                blocks.remove(n);
             }
             n = Math.abs(ThreadLocalRandom.current().nextInt()%100000);
             if (n==0)

@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.gc;
+package gc;
 
 public class InvalidPointerException extends RuntimeException {
     private int ptr;
@@ -12,3 +12,4 @@ public class InvalidPointerException extends RuntimeException {
         return "Занятого блока памяти с начальным индексом " + ptr + " не существует";
     }
 }
+

@@ -1,7 +1,9 @@
-import org.junit.*;
-import org.junit.runner.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.*;
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 @RunWith(Parameterized.class)
 public class CalculatorEx {
