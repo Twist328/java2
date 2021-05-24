@@ -58,7 +58,12 @@ public class Heap {
 
         return firstUnused;
     }
-
+    public void getBytes(int ptr, byte[] bytes) {
+        //System.arraycopy(this.bytes, ptr, bytes, 0, size);
+    }
+    public void setBytes(int ptr, byte[] bytes) {
+        //System.arraycopy(bytes, 0, this.bytes, ptr, size);
+    }
     public void free(int ptr) throws InvalidPointerException{
     //- "удаляет", т.е. помечает как свободный блок памяти по "указателю".
     // Проверять валидность указателя - т.е. то, что он соответствует началу ранее выделенного блока,
