@@ -3,34 +3,31 @@ package ru.progwards.java2.lessons.less7;
 import java.math.BigInteger;
 
 public class FiboWithRecursion {
-    BigInteger prev;
-    BigInteger current;
-    public FiboWithRecursion(BigInteger prev, BigInteger current) throws NullPointerException{
+    long prev;
+    long current;
+    public FiboWithRecursion(long prev, long current) throws NullPointerException{
         this.prev = prev;
         this.current = current;
     }
 
-    public FiboWithRecursion(int i, int i1) {
-    }
-
     FiboWithRecursion next() {
-        return new FiboWithRecursion( current, BigInteger.valueOf(prev.intValue()+( current.intValue())));
+        return new FiboWithRecursion( current, prev +( current));
     }
     @Override
     public String toString() {
         return String.valueOf(current);
     }
-    public static FiboWithRecursion getFibo(BigInteger num) {
-        switch ((num.intValue())){ // условие выхода
-            case 1: return new FiboWithRecursion( BigInteger.ZERO, BigInteger.ONE);
-            case 2: return new FiboWithRecursion( BigInteger.ONE, BigInteger.ONE);
+    public static FiboWithRecursion getFibo(long num) {
+        switch (Math.toIntExact(num)){ // условие выхода
+            case 1: return new FiboWithRecursion( 0, 1);
+            case 2: return new FiboWithRecursion( 1, 1);
         }
         // рекурсия
-        FiboWithRecursion preFibo = getFibo(num.subtract(BigInteger.ONE));
+        FiboWithRecursion preFibo = getFibo(num-1);
         return preFibo.next();
     }
     public static void main(String[] args) {
-        FiboWithRecursion fwr = FiboWithRecursion. getFibo(BigInteger.valueOf(44));
+        FiboWithRecursion fwr = FiboWithRecursion. getFibo((70));
         System.out.println(fwr);
     }
 
