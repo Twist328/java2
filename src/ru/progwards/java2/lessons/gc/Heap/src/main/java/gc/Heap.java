@@ -1,6 +1,6 @@
 package gc;
 
-import com.google.common.collect.TreeMultimap;
+import com.google.common.collect.*;
 import java.util.*;
 
 public class Heap {
@@ -77,7 +77,7 @@ public class Heap {
         for (var block : freeBlocksMap.entrySet()) {
             if (current != null) {
                 /*
-                 * если сумма ключа(указателя) + значения(дины) равна указателю следующего элемента,
+                 * если сумма ключа(указателя) + значения(длины) равна указателю следующего элемента,
                  * то значит блоки смежные и их можно объединить
                  *  */
                 if (current.getKey() + current.getValue() == block.getKey()) {
@@ -137,50 +137,21 @@ public class Heap {
     }
 
     public static void main(String[] args) {
-        Heap heap = new Heap(50);
+        Heap heap = new Heap(120);
 
-        System.out.println(heap.looseBlocks);
+        heap.looseBlocks.forEach((k, v) -> System.out.println("cвободный блок:Key = " + k + ", Value = " + v));
+        heap.occupiedBlocks.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
 
+        heap.malloc(21);
         heap.malloc(20);
         heap.malloc(13);
-
-        System.out.println(heap.looseBlocks);
-        System.out.println(heap.occupiedBlocks);
-
-        heap.free(0);
-
-        System.out.println(heap.looseBlocks);
-        System.out.println(heap.occupiedBlocks);
-
-        heap.defrag();
-
-        System.out.println(heap.looseBlocks);
-        System.out.println(heap.occupiedBlocks);
-
-       /* heap.malloc(21);
-
-        System.out.println(heap.looseBlocks);
-        System.out.println(heap.busyBlocks);
-
         heap.malloc(50);
 
-        System.out.println(heap.looseBlocks);
-        System.out.println(heap.occupiedBlocks);
+        heap.looseBlocks.forEach((k, v) -> System.out.println("свободный блок: Key = " + k + ", Value = " + v));
+        System.out.println("----");
+        heap.free(21);
+        heap.occupiedBlocks.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
 
-        heap.free(0);
-
-        System.out.println(heap.looseBlocks);
-        System.out.println(heap.occupiedBlocks);
-
-        heap.malloc(20);
-
-        System.out.println(heap.looseBlocks);
-        System.out.println(heap.occupiedBlocks);
-
-        heap.malloc(14);
-
-        System.out.println(heap.looseBlocks);
-        System.out.println(heap.occupiedBlocks);*/
     }
 }
 
