@@ -124,7 +124,6 @@ public class Heap {
             defrag();
         }
     }
-
     // метод создает из TreeMultimap обычный TreeMap
     private TreeMap<Integer, Integer> getMap(TreeMultimap<Integer, Integer> map) {
         TreeMap<Integer, Integer> resultMap = new TreeMap<>();
@@ -137,7 +136,7 @@ public class Heap {
     }
 
     public static void main(String[] args) {
-        Heap heap = new Heap(120);
+        Heap heap = new Heap(110);
 
         heap.looseBlocks.forEach((k, v) -> System.out.println("cвободный блок:Key = " + k + ", Value = " + v));
         heap.occupiedBlocks.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
