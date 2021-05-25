@@ -2,7 +2,7 @@ import gc.Heap;
 import gc.InvalidPointerException;
 import gc.OutOfMemoryException;
 
-import java.util.ArrayDeque;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class HeapTest {
