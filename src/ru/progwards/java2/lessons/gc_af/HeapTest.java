@@ -53,7 +53,7 @@ public class HeapTest {
             int ptr = heap.malloc(size);
             lstop = System.currentTimeMillis();
             allocTime += lstop-lstart;
-            blocks.offer(new Block(ptr, size));
+           // blocks.offer(new Block(ptr, size));
             int n = Math.abs(ThreadLocalRandom.current().nextInt()%25);
             if (n == 0) {
                // n = Math.abs(ThreadLocalRandom.current().nextInt()%blocks.size());
@@ -67,7 +67,7 @@ public class HeapTest {
                     freeTime += lstop - lstart;
                     allocated -= block.size;
                 }
-               // blocks.remove(n);
+                blocks.remove(n);
             }
             n = Math.abs(ThreadLocalRandom.current().nextInt()%100000);
             if (n==0)
