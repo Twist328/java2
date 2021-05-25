@@ -94,6 +94,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\ru\progwards\java2\lessons\less7\FiboWithRecursion.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
