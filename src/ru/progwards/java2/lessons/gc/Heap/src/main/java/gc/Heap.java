@@ -152,5 +152,45 @@ public class Heap {
         heap.occupiedBlocks.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
 
     }
+
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+
+    public TreeMultimap<Integer, Integer> getLooseBlocks() {
+        return looseBlocks;
+    }
+
+    public void setLooseBlocks(TreeMultimap<Integer, Integer> looseBlocks) {
+        this.looseBlocks = looseBlocks;
+    }
+
+    public TreeMap<Integer, Integer> getOccupiedBlocks() {
+        return occupiedBlocks;
+    }
+
+    public void setOccupiedBlocks(TreeMap<Integer, Integer> occupiedBlocks) {
+        this.occupiedBlocks = occupiedBlocks;
+    }
+
+    public Map.Entry<Integer, Integer> getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Map.Entry<Integer, Integer> current) {
+        this.current = current;
+    }
+
+    public int getQuantityCompact() {
+        return quantityCompact;
+    }
+
+    public void setQuantityCompact(int quantityCompact) {
+        this.quantityCompact = quantityCompact;
+    }
 }
 

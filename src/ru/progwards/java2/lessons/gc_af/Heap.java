@@ -2,6 +2,22 @@ package ru.progwards.java2.lessons.gc_af;
 
 import java.util.*;
 public class Heap {
+    public int getFirstUnused() {
+        return firstUnused;
+    }
+
+    public void setFirstUnused(int firstUnused) {
+        this.firstUnused = firstUnused;
+    }
+
+    public byte[] getBytes() {
+        return bytes;
+    }
+
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+
     public Heap(int maxHeapSize) {
         bytes = new byte[maxHeapSize];
     }
@@ -35,7 +51,7 @@ public class Heap {
 
 //если в хвосте достаточно пустого места - помещаем туда
         if (bytes.length - size > firstUnused) {
-            used.put(firstUnused, size);
+            //used.put(firstUnused, size);
             firstUnused = firstUnused + size;
             return firstUnused - size;
         }
@@ -119,6 +135,14 @@ public class Heap {
         } catch (InvalidPointerException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public HashMap<Integer, Integer> getUsed() {
+        return used;
+    }
+
+    public void setUsed(HashMap<Integer, Integer> used) {
+        this.used = used;
     }
 }
 
