@@ -52,10 +52,10 @@ public class HeapTest {
             allocated += size;
             count++;
             lstart = System.currentTimeMillis();
-           // int ptr = heap.malloc(size);
+            int ptr = heap.malloc(size);
             lstop = System.currentTimeMillis();
             allocTime += lstop-lstart;
-           // blocks.offer(new Block(ptr, size));
+            //blocks.offer(new Block(ptr, size));
             int n = Math.abs(ThreadLocalRandom.current().nextInt()%25);
             if (n == 0) {
                 //n = Math.abs(ThreadLocalRandom.current().nextInt()%blocks.size());

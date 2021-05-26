@@ -37,7 +37,7 @@ public class FiboWithRecursion {
     }
 
     public static void main(String[] args) {
-        FiboWithRecursion fwr = FiboWithRecursion.getFibo((BigInteger.valueOf(200)));
+        FiboWithRecursion fwr = FiboWithRecursion.getFibo((BigInteger.valueOf(199)));
         System.out.println(fwr);
         System.out.println("__________");
 
