@@ -1,11 +1,15 @@
 package ru.progwards.java2.lessons.tree;
 
+import java.util.Iterator;
 import java.util.function.Consumer;
-import java.util.function.Function;
+
 public class BinaryTree<K extends Comparable<K>, V> {
     private static final String KEYEXIST = "Key already exist";
     private static final String KEYNOTEXIST = "Key not exist";
 
+    public TreeIterator<K,V> getIterator() {
+        return new TreeIterator(this);
+    }
     class TreeLeaf<K extends Comparable<K>, V> {
         K key;
         V value;
@@ -74,7 +78,7 @@ public class BinaryTree<K extends Comparable<K>, V> {
                 right.process(consumer);
         }
     }
-    private TreeLeaf<K, V> root;
+    public TreeLeaf<K, V> root;
 
     public V find(K key) {
         if (root == null)
