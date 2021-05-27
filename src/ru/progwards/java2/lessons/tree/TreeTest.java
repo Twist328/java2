@@ -9,7 +9,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TreeTest {
-    static final int ITERATIONS = 1000;
+    static final int ITERATIONS = 10000;
     public static void main(String[] args) throws TreeException {
         TreeMap<Integer, Integer> map = new TreeMap<>();
         BinaryTree<Integer, String> tree = new BinaryTree<>();
