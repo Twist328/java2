@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.tree;
+package ru.progwards.java2.lessons.trees;
 
 public class TreeException extends Exception {
     public TreeException(String message) {

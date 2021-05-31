@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.tree;
+package ru.progwards.java2.lessons.trees;
 
 public class BTree<K extends Comparable<K>, V> {
     class Page<K extends Comparable<K>, V> {

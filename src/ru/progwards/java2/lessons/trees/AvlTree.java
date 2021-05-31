@@ -1,7 +1,6 @@
-package ru.progwards.java2.lessons.tree;
+package ru.progwards.java2.lessons.trees;
 
 import java.util.Collection;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;

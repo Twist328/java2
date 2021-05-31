@@ -1,6 +1,5 @@
-package ru.progwards.java2.lessons.tree;
+package ru.progwards.java2.lessons.trees;
 
-import java.util.Iterator;
 import java.util.function.Consumer;
 
 public class BinaryTree<K extends Comparable<K>, V> {

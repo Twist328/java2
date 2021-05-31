@@ -1,10 +1,9 @@
-package ru.progwards.java2.lessons.tree;
+package ru.progwards.java2.lessons.trees;
 
-import ru.progwards.java2.lessons.basetypes.BinaryHeap;
+import ru.progwards.java2.lessons.trees.BinaryTree;
+import ru.progwards.java2.lessons.trees.TreeException;
 
-import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
 
