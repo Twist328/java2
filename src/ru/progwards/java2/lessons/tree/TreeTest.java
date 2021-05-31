@@ -21,7 +21,7 @@ public class TreeTest {
             }
         }
         System.out.println("add passed OK");
-        //tree.process(System.out::println);
+        tree.process(System.out::println);
         ArrayList<BinaryTree.TreeLeaf> sorted = new ArrayList<>();
         tree.process(sorted::add);
         for(BinaryTree.TreeLeaf leaf: sorted) {
