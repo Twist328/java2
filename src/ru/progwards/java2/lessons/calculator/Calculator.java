@@ -35,7 +35,6 @@ public class Calculator {
     public static void main(String[] args) {
         System.out.println(calculate("2+3*2+8/2")); //12
         System.out.println(calculate("1+1*2-5/5")); //2
-        // System.out.println(calculate1("1+2*2+(-5/5)+1"));//11+4-2+11=24
-        //System.out.println(calculate1("-11+1-(02*2)-(-10/(002-1+4)+11)"));//-23*/
+
     }
 }
