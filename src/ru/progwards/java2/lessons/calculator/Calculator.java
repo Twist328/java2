@@ -1,8 +1,8 @@
 package ru.progwards.java2.lessons.calculator;
 
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 public class Calculator {
 
@@ -15,26 +15,26 @@ public class Calculator {
         String str = expression;
         int i = Integer.valueOf(str.substring(0, 1));
         if (str.length() == 1) return i;
-        String op = str.substring(1, 2);
-        while (op.equals("*") || op.equals("/")) {
-            if (op.equals("*"))
+        String s = str.substring(1, 2);
+        while (s.equals("*") || s.equals("/")) {
+            if (s.equals("*")) {
                 i *= Integer.valueOf(str.substring(2, 3));
-            else if (op.equals("/"))
+            }else if (s.equals("/"))
                 i /= Integer.valueOf(str.substring(2, 3));
             str = str.substring(2);
             if (str.length() == 1) return i;
-            op = str.substring(1, 2);
+            s = str.substring(1, 2);
         }
-        if (op.equals("+"))
+        if (s.equals("+")) {
             i += calculate(str.substring(2));
-        else if (op.equals("-"))
+        }else if (s.equals("-"))
             i -= calculate(str.substring(2));
         return i;
     }
 
     public static void main(String[] args) {
-        System.out.println(calculate("2+3*2+7*2")); //22
-        System.out.println(calculate("1+1*2-5/5")); //18
+        System.out.println(calculate("2+3*2+8/2")); //12
+        System.out.println(calculate("1+1*2-5/5")); //2
         // System.out.println(calculate1("1+2*2+(-5/5)+1"));//11+4-2+11=24
         //System.out.println(calculate1("-11+1-(02*2)-(-10/(002-1+4)+11)"));//-23*/
     }
