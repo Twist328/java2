@@ -21,7 +21,7 @@ public class Calculator {
         if (str.length() == 1) return i;
         String s = str.substring(1, 2);
 
-        while (s.equals("*") || s.equals("/")) {
+        while (s.equals("*") | s.equals("/")) {
             if (s.equals("*")) {
 
                 i *= Integer.valueOf(str.substring(2, 3));
