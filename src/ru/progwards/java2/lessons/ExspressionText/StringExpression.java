@@ -21,9 +21,11 @@ public class StringExpression {
         String expression = "1+3*2-9/3*(9+7)-9";
         List<Symbol> symbols = symAnalyze(expression);
         SymbolBuffer symbolBuffer = new SymbolBuffer(symbols);
-        String expression1 = "122 - 34 - 3* (55 + 5* (3 - 2)) * 2";
+
+        String expression1 = "2 - 4 - 3* (5 + 5* (3 - 2)) * 2";
         List<Symbol> symbols1 = symAnalyze(expression1);
         SymbolBuffer symbolBuffer1 = new SymbolBuffer(symbols1);
+
         System.out.println("****************************************");
         System.out.println("результат вычислений N1:    "+ expr(symbolBuffer));
         System.out.println("результат вычислений N2:    "+ expr(symbolBuffer1));
