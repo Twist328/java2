@@ -10,7 +10,7 @@ public class Calculator {
         int res = getOperation();
         while (hasNext()) {
             Action op = checkAction();
-            if (op == Action.MULT || op == Action.DIV) {
+            if (op.equals(Action.MULT) || op.equals(Action.DIV)) {
                 op = getAction();
                 int num = getOperation();
                 switch (op) {

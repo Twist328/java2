@@ -13,7 +13,7 @@ public class TestSubstring {
         System.out.println(testString.substring(2,6));
         System.out.println(testString.substring(0,7));
         System.out.println(testString.substring(1,7));
-        System.out.println(testString.substring(2,7));
+        System.out.println(testString.substring(2,15));
         System.out.println("______________________________________");
         String Str = new String("Добро пожаловать на Progwards.ru");
 
