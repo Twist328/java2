@@ -5,16 +5,21 @@ public class Calculator {
     int pos;
 
     public static void main(String[] args) {
-        System.out.println(calculate("(2+3)*(6/3)"));
+        System.out.println("\n***********************************");
+        System.out.println("результат вычисления:    " + calculate("2+(2+3)*(6/3)-2*5"));
+        System.out.println("***********************************");
     }
-
     public Calculator(String expression) {
         this.expression = expression;
         pos = 0;
     }
 
+    public static int calculate(String expression) {
+        return new Calculator(expression).calculate();
+    }
+
     // получить символ выражения (expression)
-    String getSym() {
+    String getSymbol() {
         if (pos >= expression.length())
             try {
                 throw new IndexOutOfBoundsException();
@@ -24,18 +29,18 @@ public class Calculator {
         return expression.substring(pos++, pos);
     }
 
-    // просматриваем что за символ впереди
-    String checkSym() {
+    // проверка следующего символа
+    String checkSymbol() {
         if (pos >= expression.length())
             return "";
         return expression.substring(pos, pos + 1);
     }
 
-    // получить из символа число
+    // получить число из символа
     int getNum() {
         int num = 0;
         try {
-            num = Integer.parseInt(getSym());
+            num = Integer.parseInt(getSymbol());
         } catch (NumberFormatException ex) {
             throw new NumberFormatException("Неверное число");
         }
@@ -48,12 +53,12 @@ public class Calculator {
     }
 
     // метод вычисляет результат выражения в скобках, если они есть
-    int term2() {
-        String symbol = checkSym();
+    int calcBracket1() {
+        String symbol = checkSymbol();
         if (symbol.equals("(")) {
-            getSym();
-            int result = expression();
-            String symbolNext = getSym();
+            getSymbol();
+            int result = calculate();
+            String symbolNext = getSymbol();
             if (symbolNext.equals(")")) {
                 return result;
             } else {
@@ -67,13 +72,13 @@ public class Calculator {
         return getNum();
     }
 
-    int term() {
-        int result = term2();
+    int calcBracket() {
+        int result = calcBracket1();
         while (hasNext()) {
-            String symbol = checkSym();
+            String symbol = checkSymbol();
             if ("*/".contains(symbol)) {
-                getSym();
-                int num = term2();
+                getSymbol();
+                int num = calcBracket1();
                 switch (symbol) {
                     case "*":
                         result *= num;
@@ -94,13 +99,13 @@ public class Calculator {
         return result;
     }
 
-    int expression() {
-        int result = term();
+    public int calculate() {
+        int result = calcBracket();
         while (hasNext()) {
-            String symbol = checkSym();
+            String symbol = checkSymbol();
             if ("+-".contains(symbol)) {
-                getSym();
-                int num = term();
+                getSymbol();
+                int num = calcBracket();
                 switch (symbol) {
                     case "+":
                         result += num;
@@ -119,10 +124,6 @@ public class Calculator {
                 return result;
         }
         return result;
-    }
-
-    public static int calculate(String expression) {
-        return new Calculator(expression).expression();
     }
 }
 

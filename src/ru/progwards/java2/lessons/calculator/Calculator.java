@@ -3,7 +3,6 @@ package ru.progwards.java2.lessons.calculator;
 
 public class Calculator {
 
-
     public static void main(String[] args) {
         System.out.println("\n************************************");
         System.out.println("результат вычислений:  "+ calculate("8/3*2+8/2-5")); //3
