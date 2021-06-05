@@ -22,7 +22,7 @@ public class StringExpression {
         List<Symbol> symbols = symAnalyze(expression);
         SymbolBuffer symbolBuffer = new SymbolBuffer(symbols);
 
-        String expression1 = "2 - 4 - 3* (5 + 5* (3 - 2)) * 2";
+        String expression1 = "1+3*2-9/3*9";
         List<Symbol> symbols1 = symAnalyze(expression1);
         SymbolBuffer symbolBuffer1 = new SymbolBuffer(symbols1);
 
