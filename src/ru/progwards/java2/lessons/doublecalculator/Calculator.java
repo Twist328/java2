@@ -6,18 +6,18 @@ import javax.script.ScriptException;
 import java.util.*;
 
 public class Calculator {
-    public static void main(String[] args) throws ScriptException {
-       /* String num = "2 * ( ( 2 / 1 ) +1 ) - 1";
+    public static void main(String[] args) {
+        String num = "2 * ( ( 2 / 1 ) +1 ) - 3";
         System.out.println(calculate(num));
-    }*/
-        ScriptEngineManager factory = new ScriptEngineManager();
+    }
+       /* ScriptEngineManager factory = new ScriptEngineManager();
         ScriptEngine engine = factory.getEngineByName("JavaScript");
         engine.eval("var result = 2 / (( 2 + 0 ) * 1 ) - 7;");
 
-        System.out.println(engine.get("result"));
-    }
-}
-   /* public static Double calculate(String expression) {
+        System.out.println(engine.get("result"));*/
+
+
+    public static int calculate(String expression) {
 
 //  Этап 1
 //  На данном этапе преобразуем нашу строку в список строк, через совмещение цикла for-each и метода split(),
@@ -30,8 +30,8 @@ public class Calculator {
             strList.add(" ");
         }
         strList.remove(strList.size() - 1);
-//        for (String x : strList) System.out.print(x + "");
-//        System.out.println();
+        /*for (String x : strList) System.out.print(x + "");
+        System.out.println();*/
 //        После того, как дочитаете код до конца, расскоментируйте две верхние строчки
 //        и посмотрите как работает рекрусия
 
@@ -55,10 +55,10 @@ public class Calculator {
                     String test = expression.substring(expression.indexOf("("), expression.lastIndexOf(")") + 1);
                     // test - последовательность как и сверху, но с добавлением скобок по краям
 
-                    // т.к. наш метод evaluate() возвращает Double, мы должны преобразовать результат рекрусии в String;
+                    // т.к. наш метод calculate() возвращает int, мы должны преобразовать результат рекрусии в String;
                     String testRecursion = String.valueOf(calculate(recursion));
                     expression = expression.replace(test, testRecursion);
-                    // преобразовали нашу строку с использование рекруси. Избавились от первых скобок
+                    // преобразовали нашу строку с использование рекрусии. Избавились от первых скобок
                     strList.removeAll(strList);
                     for (String newElement : expression.trim().split(" ")) {
                         strList.add(newElement);
@@ -88,13 +88,13 @@ public class Calculator {
 
 //  Этап 3
 //  Заключительный этап на котором мы будем реализовывать сами вычесления (-+)*/
-//  Всю реализацию помещаем в цикл while ( который прекратиться, если все действия будут выполнены (соответственно в списке останется 1 элемент)).
+//  Всю реализацию помещаем в цикл while ( который прекратится, если все действия будут выполнены (соответственно в списке останется 1 элемент)).
 //  Внимательно посмотрите на порядок операций: 1)/ 2)* 3)- 4)+
 
 //        System.out.println(expression + "-------expression-");
 //        System.out.println();
         // создаем очередной список для реализации вычеслений, на этот раз без добавления " ".
-        /*List<String> stringList2 = new ArrayList<>();
+        List<String> stringList2 = new ArrayList<>();
         for (String element : expression.trim().split(" ")) {
             stringList2.add(element);
         }
@@ -107,68 +107,63 @@ public class Calculator {
 //            for (String x : stringList2) System.out.print(x );
 //            System.out.println();
 
-            // наш Double :) Также стоит обратить внимание, что для получения класса обертки мы используем не
+            // можно и в  Double :) Также стоит обратить внимание, что для получения класса обертки мы используем не
             // Double.parseDouble() а Double.valueOf()
-            Double result = 0d;
+            int result = 0;
 
 //  Сами алгоритмы вычеслений, впринципе понятны, поэтому не буду их комментировать.
 //  Однако обратите внимание на очередность, особенно при вычетании (там вместо 1 условия, 3)
 //  Если что в комментариях под постом немного объясню, если кто-нибудь дочитает до сюда и у него будет желание)
             if (stringList2.indexOf("/") != -1) {
                 int index = stringList2.indexOf("/");
-                result = Double.valueOf(stringList2.get(index - 1)) / Double.valueOf(stringList2.get(index + 1));
+                result = Integer.valueOf(stringList2.get(index - 1)) / Integer.valueOf(stringList2.get(index + 1));
                 stringList2.add(index - 1, String.valueOf(result));
                 stringList2.remove(index + 2);
                 stringList2.remove(index + 1);
                 stringList2.remove(index);
-            }
-            else if (stringList2.indexOf("*") != -1) {
+            } else if (stringList2.indexOf("*") != -1) {
                 int index = stringList2.indexOf("*");
-                result = Double.valueOf(stringList2.get(index - 1)) * Double.valueOf(stringList2.get(index + 1));
+                result = Integer.valueOf(stringList2.get(index - 1)) * Integer.valueOf(stringList2.get(index + 1));
                 stringList2.add(index - 1, String.valueOf(result));
                 stringList2.remove(index + 2);
                 stringList2.remove(index + 1);
                 stringList2.remove(index);
-            }
-            else if (stringList2.indexOf("-") != -1) {
+            } else if (stringList2.indexOf("-") != -1) {
                 int index = stringList2.indexOf("-");
                 int lastIndex = stringList2.lastIndexOf("-");
                 if (index == 0) {
-                    result = 0.0 - Double.valueOf(stringList2.get(index + 1));
+                    result = (int) (0 - Integer.valueOf(stringList2.get(index + 1)));
                     stringList2.add(0, String.valueOf(result));
                     stringList2.remove(2);
                     stringList2.remove(1);
-                }
-                else if ((lastIndex-2>0) && (stringList2.get(lastIndex-2).equals("-"))){
-                    result = Double.valueOf(stringList2.get(lastIndex + 1)) + Double.valueOf(stringList2.get(lastIndex - 1));
+                } else if ((lastIndex - 2 > 0) && (stringList2.get(lastIndex - 2).equals("-"))) {
+                    result = Integer.valueOf(stringList2.get(lastIndex + 1)) + Integer.valueOf(stringList2.get(lastIndex - 1));
                     stringList2.add(lastIndex - 1, String.valueOf(result));
                     stringList2.remove(lastIndex + 2);
                     stringList2.remove(lastIndex + 1);
                     stringList2.remove(lastIndex);
-                }
-                else {
-                    result = Double.valueOf(stringList2.get(index - 1)) - Double.valueOf(stringList2.get(index + 1));
+                } else {
+                    result = Integer.valueOf(stringList2.get(index - 1)) - Integer.valueOf(stringList2.get(index + 1));
                     stringList2.add(index - 1, String.valueOf(result));
                     stringList2.remove(index + 2);
                     stringList2.remove(index + 1);
                     stringList2.remove(index);
                 }
-            }
-            else if (stringList2.indexOf("+") != -1) {
+            } else if (stringList2.indexOf("+") != -1) {
                 int index = stringList2.indexOf("+");
-                result = Double.valueOf(stringList2.get(index - 1)) + Double.valueOf(stringList2.get(index + 1));
+                result = Integer.valueOf(stringList2.get(index - 1)) + Integer.valueOf(stringList2.get(index + 1));
                 stringList2.add(index - 1, String.valueOf(result));
                 stringList2.remove(index + 2);
                 stringList2.remove(index + 1);
                 stringList2.remove(index);
             }
 
-            // Вот тут все немного коряво. (На всякий случий проверял отсутствие (+-))*/
-           /* if ((stringList2.indexOf("*") == -1) && (stringList2.indexOf("/") == -1) && (stringList2.indexOf("+") == -1) && (stringList2.indexOf("-") == -1)) {
+            // Вот тут все немного коряво. (На всякий случий проверял отсутствие (+-))
+            if ((stringList2.indexOf("*") == -1) && (stringList2.indexOf("/") == -1) && (stringList2.indexOf("+") == -1) && (stringList2.indexOf("-") == -1)) {
                 return result;
             }
         }
-        return Double.valueOf(stringList2.get(0));
+        return Integer.valueOf(stringList2.get(0));
     }
-}*/
+}
 

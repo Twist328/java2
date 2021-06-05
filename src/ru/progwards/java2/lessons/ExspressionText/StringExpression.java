@@ -22,11 +22,11 @@ public class StringExpression {
         List<Symbol> symbols = symAnalyze(expression);
         SymbolBuffer symbolBuffer = new SymbolBuffer(symbols);
 
-        String expression1 = "1+3*2-9/3*9";
+        String expression1 = "8/3*2+8/2-5";
         List<Symbol> symbols1 = symAnalyze(expression1);
         SymbolBuffer symbolBuffer1 = new SymbolBuffer(symbols1);
 
-        System.out.println("****************************************");
+        System.out.println("\n****************************************");
         System.out.println("результат вычислений N1:    "+ expr(symbolBuffer));
         System.out.println("результат вычислений N2:    "+ expr(symbolBuffer1));
         System.out.println("****************************************");
@@ -35,7 +35,7 @@ public class StringExpression {
     public enum SymbolType {
         LEFT_BRACKET, RIGHT_BRACKET,
         OP_PLUS, OP_MINUS, OP_MUL, OP_DIV,
-        NUMBER, EOF;
+        NUMBER, EOF;   //EOF - and of file
     }
 
     public static class Symbol {
