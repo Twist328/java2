@@ -1,12 +1,12 @@
 package ru.progwards.java2.lessons.ExpCalc;
 
 public class Calculator {
-    String expression;
+    String expression; // символьная строка
     int pos;
 
     public static void main(String[] args) {
         System.out.println("\n***********************************");
-        System.out.println("результат вычисления:    " + calculate("2+(2+3)*(6/3)-(2*5*3)"));//-18
+        System.out.println("результат вычисления:    " + calculate1("2+(2+3)*(6/3)-(2*5*3)"));//-18
         System.out.println("***********************************");
     }
     public Calculator(String expression) {
@@ -14,7 +14,7 @@ public class Calculator {
         pos = 0;
     }
 
-    public static int calculate(String expression) {
+    public static int calculate1(String expression) {
         return new Calculator(expression).calculate();
     }
 
@@ -53,7 +53,7 @@ public class Calculator {
     }
 
     // метод вычисляет результат выражения в скобках, если они есть
-    int calcBracket1() {
+    int bracketCalc() {
         String symbol = checkSymbol();
         if (symbol.equals("(")) {
             getSymbol();
@@ -63,7 +63,7 @@ public class Calculator {
                 return result;
             } else {
                 try {
-                    throw new Exception("Ожидалась \")\"");
+                    throw new Exception("Ожидалoсь \")\"");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -72,13 +72,13 @@ public class Calculator {
         return getNum();
     }
 
-    int calcBracket() {
-        int result = calcBracket1();
+    int bracketСalc1() {
+        int result = bracketCalc();
         while (hasNext()) {
             String symbol = checkSymbol();
             if ("*/".contains(symbol)) {
                 getSymbol();
-                int num = calcBracket1();
+                int num = bracketCalc();
                 switch (symbol) {
                     case "*":
                         result *= num;
@@ -100,12 +100,12 @@ public class Calculator {
     }
 
     public int calculate() {
-        int result = calcBracket();
+        int result = bracketСalc1();
         while (hasNext()) {
             String symbol = checkSymbol();
             if ("+-".contains(symbol)) {
                 getSymbol();
-                int num = calcBracket();
+                int num = bracketСalc1();
                 switch (symbol) {
                     case "+":
                         result += num;
