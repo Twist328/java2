@@ -6,13 +6,21 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 public class GettersAndSetters {
+    public static void main(String[] args) throws IOException {
+
+        System.out.println(check("ru.progwards.java2.lessons.reflection.TestMethod"));
+    }
+
+    @Override
+    public String toString() {
+        return "GettersAndSetters{}";
+    }
 
     public static String check(String clazz) throws IOException {
         try {
             Class<?> aClass = Class.forName(clazz);
             privateFieldSearch(aClass);
-        }
-        catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
         return clazz;
@@ -72,13 +80,4 @@ public class GettersAndSetters {
         return firstChar + str.substring(1);
     }
 
-    public static void main(String[] args) throws IOException {
-
-        System.out.println(check("ru.progwards.java2.lessons.reflection.TestMethod"));
-    }
-
-    @Override
-    public String toString() {
-        return "GettersAndSetters{}";
-    }
 }
