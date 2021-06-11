@@ -31,7 +31,7 @@ public class TestFibonacci {
 
         System.out.println("_______________\n");
         Stream.iterate(new long[]{1, 1}, arr -> new long[]{arr[1], arr[0] + arr[1]})
-                .limit(90)
+                .limit(50)
                 .map(y -> y[0])
                 .forEach(x -> System.out.println(x));
         System.out.println("_______________________________________\n");

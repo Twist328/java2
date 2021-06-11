@@ -5,7 +5,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.util.*;
 
-public class Calculator {
+public class Doublecalculator {
     public static void main(String[] args) {
         String num = "2 * ( ( 2 / 1 ) +1 ) - 3";
         System.out.println(calculate(num));

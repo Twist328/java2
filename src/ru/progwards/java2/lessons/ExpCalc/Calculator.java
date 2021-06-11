@@ -7,6 +7,7 @@ public class Calculator {
     public static void main(String[] args) {
         System.out.println("\n***********************************");
         System.out.println("результат вычисления:    " + calculate1("2+(2+3)*(6/3)-(2*5*3)"));//-18
+        System.out.println("результат вычисления:    " + calculate1("2*(2+3)*(6/3)-(2*5*3)-7"));//-10
         System.out.println("***********************************");
     }
     public Calculator(String expression) {
