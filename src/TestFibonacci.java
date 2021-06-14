@@ -8,7 +8,7 @@ public class TestFibonacci {
         BigInteger count = BigInteger.ONE;
         BigInteger next = BigInteger.ZERO;
         int i;
-        for (i = 0; i < 100; i++) {
+        for (i = 0; i < 10; i++) {
             prev = count;
             count = next;
             next = prev.add(count);
@@ -22,7 +22,7 @@ public class TestFibonacci {
         BigInteger prev1 = BigInteger.ONE;
         BigInteger count1 = BigInteger.ONE;
         BigInteger next1;
-        for (int j = 2; j < 1000; j++) {
+        for (int j = 2; j < 10; j++) {
             next1 = prev1.add(count1);
             prev1 = count1;
             count1 = next1;
@@ -31,11 +31,11 @@ public class TestFibonacci {
 
         System.out.println("_______________\n");
         Stream.iterate(new long[]{1, 1}, arr -> new long[]{arr[1], arr[0] + arr[1]})
-                .limit(50)
+                .limit(10)
                 .map(y -> y[0])
                 .forEach(x -> System.out.println(x));
         System.out.println("_______________________________________\n");
-        System.out.println(new TestFibonacci().fibonacci(100));
+        System.out.println(new TestFibonacci().fibonacci(50));
     }
 
     public static BigInteger[][] matrixMultiplication(BigInteger[][] a, BigInteger[][] b) {

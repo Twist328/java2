@@ -7,7 +7,7 @@ public class SieveEratosthenes {
     private boolean[] nums;
 
     public static void main(String[] args) {
-        int n = 1000;
+        int n = 100;
         SieveEratosthenes s = new SieveEratosthenes(n);
         for (int i = 0; i < s.nums.length; i++) {
             if (s.nums[i]) {

@@ -2,8 +2,8 @@ package ru.progwards.java2.lessons.recursion;
 
 public class AsNumbersSum {
 
-    private static final String EQUAll = " = ";
-    private static final String SUMM = "+";
+    private static final String EQUAl = " = ";
+    private static final String SUM = "+";
 
      /*Реализовать класс AsNumbersSum
      раскладывает параметр number, как всевозможные уникальные комбинации сумм натуральных чисел, например:
@@ -14,9 +14,9 @@ public class AsNumbersSum {
         return
                 (a <= 0 ? "" :       // условие выхода из рекурсии
                         (b > a                                                         //  второе число больше
-                                ? showAllThePoss(a, b - a, c + a + SUMM)        // все варианты второго числа
-                                : EQUAll + c + a + SUMM + b                          // вариант в настоящем времени
-                                + showAllThePoss(b - 1, 1, c + a + SUMM)   // плюс все возможности
+                                ? showAllThePoss(a, b - a, c + a + SUM)        // все варианты второго числа
+                                : EQUAl + c + a + SUM + b                          // вариант в настоящем времени
+                                + showAllThePoss(b - 1, 1, c + a + SUM)   // плюс все возможности
                         )
                                 + showAllThePoss(a - 1, b + 1, c)           // + ещё варианты, со вторым числом
                 );
@@ -28,7 +28,7 @@ public class AsNumbersSum {
 
     public static void main(String[] args) {
 
-        System.out.println(putItAllSum(9));
+        System.out.println(putItAllSum(7));
     }
 
 }
