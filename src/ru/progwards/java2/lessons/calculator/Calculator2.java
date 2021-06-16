@@ -1,11 +1,10 @@
-package ru.progwards.java2.lessons.ExspressionText;
-
-
+package ru.progwards.java2.lessons.calculator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringExpression {
+
+public class Calculator2 {
     /*------------------------------------------------------------------
      * PARSER RULES
      *------------------------------------------------------------------*/
@@ -29,8 +28,8 @@ public class StringExpression {
         SymbolBuffer symbolBuffer1 = new SymbolBuffer(symbols1);
 
         System.out.println("\n****************************************");
-        System.out.println("результат вычислений N1:    "+ expr(symbolBuffer));
-        System.out.println("результат вычислений N2:    "+ expr(symbolBuffer1));
+        System.out.println("результат вычислений N1:    " + expr(symbolBuffer));
+        System.out.println("результат вычислений N2:    " + expr(symbolBuffer1));
         System.out.println("****************************************");
     }
 
@@ -63,7 +62,7 @@ public class StringExpression {
         }
     }
 
-    public static class SymbolBuffer  {
+    public static class SymbolBuffer {
         private int pos;
 
         public List<Symbol> symbols;
@@ -88,7 +87,7 @@ public class StringExpression {
     public static List<Symbol> symAnalyze(String expText) {
         ArrayList<Symbol> symbols = new ArrayList<>();
         int pos = 0;
-        while (pos< expText.length()) {
+        while (pos < expText.length()) {
             char c = expText.charAt(pos);
             switch (c) {
                 case '(':
@@ -215,3 +214,5 @@ public class StringExpression {
     }
 
 }
+
+
