@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.annotation;
+package ru.progwards.java2.lessons.less10;
 
 import java.lang.annotation.*;
 import java.lang.reflect.Method;
