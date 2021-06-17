@@ -355,7 +355,7 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         t.put(60, "");
         t.remove(56,"");
         t.put(0,"");
-        //t.root.key
+
         System.out.println(t.root.getKey().equals(8));
         System.out.println("____________________");
         System.out.println(t.root);
