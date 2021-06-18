@@ -1,7 +1,7 @@
 package ru.progwards.java2.lessons.less10;
 
 import java.lang.annotation.*;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
@@ -18,11 +18,16 @@ public class Greetings {
     @AnnotationTest
     void test1() {
     }
-
-    @AnnotationTest(text="   Никогда не говори - : Никогда!")
+    @AnnotationTest(text ="   Если не мы то кто?")
     void test2() {
     }
+    @AnnotationTest(text="   Никогда не говори - : Никогда!")
+    void test3() {
+    }
+    @AnnotationTest(text ="   Не говори ПРОЩАЙ, говори ДО СВИДАНИЯ! ")
+    void test4() {
 
+    }
     void printAnnotation() {
         Class<Greetings> clazz = Greetings.class;
 
@@ -31,7 +36,7 @@ public class Greetings {
             Annotation[] annotations = method.getDeclaredAnnotations();
             for (Annotation a: annotations)
                 if(a.annotationType()==AnnotationTest.class)
-                    System.out.println(method.getName() + " "+((AnnotationTest)a).text());
+                    System.out.println(method.getName() + ""+((AnnotationTest)a).text());
         }
     }
 
