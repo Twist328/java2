@@ -1,11 +1,9 @@
 package ru.progwards.java2.lessons.basetypes;
 
-import java.util.Objects;
-
-public class IntegerHK implements HashValue {
+public class IntKey implements HashValue {
     private int value;
 
-    IntegerHK(int value) {
+    IntKey(int value) {
         this.value = value;
     }
 
@@ -23,7 +21,7 @@ public class IntegerHK implements HashValue {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        IntegerHK key = (IntegerHK) o;
+        IntKey key = (IntKey) o;
         return value == key.value;
     }
 }

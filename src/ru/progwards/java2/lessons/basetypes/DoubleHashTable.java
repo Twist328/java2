@@ -41,7 +41,7 @@ public class DoubleHashTable<K extends HashValue,V> {
 
     private static final long INT_MAX = 4294967295L;
 
-    private Node[] table;
+    public Node[] table;
 
     DoubleHashTable() {
         table = new Node[101];

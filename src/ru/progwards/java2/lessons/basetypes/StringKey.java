@@ -1,18 +1,18 @@
 package ru.progwards.java2.lessons.basetypes;
 
-public class StringHK implements HashValue {
+public class StringKey implements HashValue {
     public static final long INT_MAX = 4294967295L;
 
     private String value;
 
-    StringHK(String value) {
+    StringKey(String value) {
         this.value = value;
     }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StringHK key = (StringHK) o;
+        StringKey key = (StringKey) o;
         return value.equals(key.value);
     }
 

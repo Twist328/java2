@@ -5,58 +5,58 @@ import java.util.Iterator;
 
 public class MainHash {
     public static void main(String[] args) {
-        DoubleHashTable<IntegerHK, Integer> doubleHashTable = new DoubleHashTable<>();
+        DoubleHashTable<IntKey, Integer> doubleHashTable = new DoubleHashTable<>();
 
         for (int i = 377; i < 500; i++) {
-            doubleHashTable.add(new IntegerHK(i), i);
+            doubleHashTable.add(new IntKey(i), i);
         }
 
-        System.out.println(doubleHashTable.get(new IntegerHK(400)));
+        System.out.println(doubleHashTable.get(new IntKey(400)));
 
-        doubleHashTable.change(new IntegerHK(400), new IntegerHK(450));
+        doubleHashTable.change(new IntKey(400), new IntKey(450));
 
-        System.out.println(doubleHashTable.get(new IntegerHK(400)));
+        System.out.println(doubleHashTable.get(new IntKey(400)));
 
-        System.out.println(doubleHashTable.get(new IntegerHK(450)));
+        System.out.println(doubleHashTable.get(new IntKey(450)));
 
-        doubleHashTable.add(new IntegerHK(1222), 1222);
+        doubleHashTable.add(new IntKey(1222), 1222);
 
-        doubleHashTable.change(new IntegerHK(377), new IntegerHK(1222));
+        doubleHashTable.change(new IntKey(377), new IntKey(1222));
 
         System.out.println(doubleHashTable.size());
 
-        System.out.println(doubleHashTable.get(new IntegerHK(794)));
+        System.out.println(doubleHashTable.get(new IntKey(794)));
 
-        System.out.println(doubleHashTable.get(new IntegerHK(1222)));
-        System.out.println(doubleHashTable.get(new IntegerHK(377)));
+        System.out.println(doubleHashTable.get(new IntKey(1222)));
+        System.out.println(doubleHashTable.get(new IntKey(377)));
 
-        Iterator<DoubleHashTable.Node<IntegerHK, Integer>> iterator = doubleHashTable.getIterator();
+        Iterator<DoubleHashTable.Node<IntKey, Integer>> iterator = doubleHashTable.getIterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
 
 
-        DoubleHashTable<StringHK, Integer> hashTable = new DoubleHashTable<>();
+        DoubleHashTable<StringKey, Integer> hashTable = new DoubleHashTable<>();
 
-        hashTable.add(new StringHK("Дама"), 10);
-        hashTable.add(new StringHK("Замок"), 21);
-        hashTable.add(new StringHK("Джентльмен"), 567);
-        hashTable.add(new StringHK("Печенье"), 1);
-        hashTable.add(new StringHK("Банка"), 23);
-        hashTable.add(new StringHK("Hello, world!"), 98);
-        hashTable.add(new StringHK("Нина"), 67);
-        hashTable.add(new StringHK("Парик"), 111);
-        hashTable.add(new StringHK("Петербург"), 2236);
-        hashTable.add(new StringHK("Мишка"), 568);
-        hashTable.add(new StringHK("Праздник"), 23365);
-        hashTable.add(new StringHK("Игрушка"), 235);
-        hashTable.add(new StringHK("Изделие"), 83);
+        hashTable.add(new StringKey("Дама"), 10);
+        hashTable.add(new StringKey("Замок"), 21);
+        hashTable.add(new StringKey("Джентльмен"), 567);
+        hashTable.add(new StringKey("Печенье"), 1);
+        hashTable.add(new StringKey("Банка"), 23);
+        hashTable.add(new StringKey("Hello, world!"), 98);
+        hashTable.add(new StringKey("Нина"), 67);
+        hashTable.add(new StringKey("Парик"), 111);
+        hashTable.add(new StringKey("Петербург"), 2236);
+        hashTable.add(new StringKey("Мишка"), 568);
+        hashTable.add(new StringKey("Праздник"), 23365);
+        hashTable.add(new StringKey("Игрушка"), 235);
+        hashTable.add(new StringKey("Изделие"), 83);
 
-        Iterator<DoubleHashTable.Node<StringHK, Integer>> iterator1 = hashTable.getIterator();
+        Iterator<DoubleHashTable.Node<StringKey, Integer>> iterator1 = hashTable.getIterator();
 
         while (iterator1.hasNext())
             System.out.println(iterator1.next());
 
-        System.out.println(hashTable.get(new StringHK("Банка")));
+        System.out.println(hashTable.get(new StringKey("Банка")));
     }
 }

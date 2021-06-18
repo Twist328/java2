@@ -1,9 +1,9 @@
 package ru.progwards.java2.lessons.trees;
 
-import ru.progwards.java2.lessons.trees.BinaryTree;
-import ru.progwards.java2.lessons.trees.TreeException;
-
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /*Для обычного BinaryTree из примера в лекциях сделать итератор,
    который позволяет в обычном for получить прямой обход дерева.
@@ -23,6 +23,8 @@ public class TreeIterator<K extends Comparable<K>, V> implements Iterator<Binary
         parentNow = -1;
         parents = new ArrayDeque<>();
     }
+
+
 
     @Override
     public boolean hasNext() {

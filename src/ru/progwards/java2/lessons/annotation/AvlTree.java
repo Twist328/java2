@@ -1,7 +1,5 @@
 package ru.progwards.java2.lessons.annotation;
 
-import ru.progwards.java2.lessons.trees.TreeException;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;

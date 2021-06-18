@@ -1,7 +1,5 @@
 package ru.progwards.java2.lessons.trees;
 
-import ru.progwards.java2.lessons.trees.BinaryTree;
-import ru.progwards.java2.lessons.trees.TreeException;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
