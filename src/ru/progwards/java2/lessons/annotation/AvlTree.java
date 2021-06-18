@@ -528,7 +528,6 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         System.out.println(t.root.findMinimum());
         System.out.println("____________________");
         System.out.println(t.root.findMaximum());
-
     }
 }
 
