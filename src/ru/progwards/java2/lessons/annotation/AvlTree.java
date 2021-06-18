@@ -13,20 +13,46 @@ import java.util.function.Consumer;
         2.4 public void change(KK oldKey, KK newKey) - заменить значение ключа на другое
         2.5 public void process(Consumer<Entry<KK,VV>> consumer) - прямой обход дерева*/
 
+/**
+ * Класс АВЛ дерево (вид бинарного дерева), с методами, а также , {@link Entry}
+ * @author Twist
+ * @param <K>
+ * @param <V>
+ * @version 1.0
+ * see Entry
+ */
+
 public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
+    /**
+     * Переопределенное свойство множества с типом словаря, содержащего ключи, возвращающий дефолтное значение (имплементация интерфейса)
+     * @return
+     */
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
         return null;
     }
 
+    /**
+     * Имплементируемое переопределение возвращающее свойства родителя
+     * @param key
+     * @param defaultValue
+     * @return
+     */
     @Override
     public V getOrDefault(Object key, V defaultValue) {
         return Map.super.getOrDefault(key, defaultValue);
     }
 
+
     private static final String KEYEXIST = "Key already exist";
+
     private static final String KEYNOTEXIST = "Key not exist";
 
+    /**
+     * Вложенный класс Entry с параметрами
+     * @param <KK>
+     * @param <VV>
+     */
     class Entry<KK extends Comparable<KK>, VV> {
         KK key;
         VV value;
@@ -36,20 +62,38 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         int height;  // высота
         //int balance; // баланс
 
+        /**
+         * метод получить ключ
+         * @return
+         */
         public KK getKey() {
             return key;
         }
 
+        /**
+         * получить значение
+         * @return
+         */
         public VV getValue() {
             return value;
         }
 
+        /**
+         * конструктор вложенного класса
+         * @param key
+         * @param value
+         */
         public Entry(KK key, VV value) {
             this.key = key;
             this.value = value;
             height = 1;
         }
 
+        /**
+         * метод сравнения для поиска нужного ключа по определенному значению
+         * @param key
+         * @return
+         */
         private Entry<KK, VV> find(KK key) {
             int cmp = key.compareTo(this.key);
             if (cmp > 0)
@@ -65,6 +109,11 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
             return this;
         }
 
+        /**
+         * прибавить ключ - значение
+         * @param leaf
+         * @throws TreeException
+         */
         void add(Entry<KK, VV> leaf) throws TreeException {
             int cmp = leaf.key.compareTo(key);
             if (cmp == 0)
@@ -79,6 +128,9 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
             fixheight(this);
         }
 
+        /**
+         * удалить ненужный ключ
+         */
         void delete() {
             Entry node = null;
             if (left != null || right != null) {
@@ -105,6 +157,10 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
             balance(node);
         }
 
+        /**
+         * найти ключ с максимальным значением
+         * @return
+         */
         private Entry<KK, VV> findMaximum() {
             Entry<KK, VV> node = this;
             while (node.right != null) {
@@ -113,6 +169,10 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
             return node;
         }
 
+        /**
+         * найти ключ с минимальным значением
+         * @return
+         */
         private Entry<KK, VV> findMinimum() {
             Entry<KK, VV> node = this;
             while (node.left != null) {
@@ -121,17 +181,31 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
             return node;
         }
 
+        /**
+         * порядок возвращения результатов поиска
+         * @return
+         */
+        @Override
         public String toString() {
             //return "(" + key + "," + value + ")";
             return key.toString() + " h=" + height + " b=" + bfactor();
         }
 
+        /**
+         * Вывод строки результатов с параметрами
+         * @param prefix
+         * @return
+         */
         public String toStringAll(String prefix) {
             return this.toString()
                     + (right == null ? "" : "\n" + prefix + "R: " + right.toStringAll(prefix + "⁞  "))
                     + (left == null ? "" : "\n" + prefix + "L: " + left.toStringAll(prefix + "⁞  "));
         }
 
+        /**
+         * Обход дерева
+         * @param consumer
+         */
         public void process(Consumer<Entry<KK, VV>> consumer) {
             if (left != null)
                 left.process(consumer);
@@ -140,14 +214,25 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
                 right.process(consumer);
         }
 
+        /**
+         * параметр вычисления баланса высот
+         * @return
+         */
         int bfactor() {
             return height(right) - height(left);
         }
 
+        /**
+         * корректировка баланса по высоте
+         * @param leaf
+         */
         void fixheight(Entry<KK, VV> leaf) {
             leaf.fixheight();
         }
 
+        /**
+         * дефолтный метод балансировки
+         */
         void fixheight() {
             //leaf.height = Math.max(leaf.recalcHeight(leaf.left), leaf.recalcHeight(leaf.right)) + 1;
             int h1 = height(this.left);
@@ -159,8 +244,14 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
 
     }
 
+
     protected Entry<K, V> root;
 
+    /**
+     * получить ключ по полученному значению
+     * @param key
+     * @return
+     */
     public V get(K key) {
         Entry<K, V> p = root;
         while (p != null) {
@@ -175,6 +266,12 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return null;
     }
 
+    /**
+     * вставка ключа k в дерево с корнем p
+     * @param p
+     * @param k
+     * @return
+     */
     Entry<K, V> insert(Entry<K, V> p, Entry<K, V> k) // вставка ключа k в дерево с корнем p
     {
         if (p == null) return k;
@@ -185,6 +282,11 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return balance(p);
     }
 
+    /**
+     * добавить пару ключ-значение
+     * @param p
+     * @return
+     */
     public Entry<K, V> put(Entry<K, V> p) {
         if (root == null)
             root = p;
@@ -193,6 +295,11 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return p;
     }
 
+    /**
+     * балансировка дерева
+     * @param leaf
+     * @return
+     */
     private Entry<K, V> balance(Entry<K, V> leaf) {
         leaf.fixheight();
         int bf = leaf.bfactor();
@@ -209,11 +316,21 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return leaf;
     }
 
+    /**
+     * поиск узла с минимальным ключом в дереве p
+     * @param p
+     * @return
+     */
     Entry<K, V> findmin(Entry<K, V> p) // поиск узла с минимальным ключом в дереве p
     {
         return p.left != null ? findmin(p.left) : p;
     }
 
+    /**
+     * удаление узла с минимальным ключом из дерева p
+     * @param p
+     * @return
+     */
     Entry<K, V> removemin(Entry<K, V> p) // удаление узла с минимальным ключом из дерева p
     {
         if (p.left == null)
@@ -222,6 +339,15 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return balance(p);
     }
 
+    /**
+     * переопределения методов вычисления  размера дерева, проверки на пустые узлы, проверки на содержание ключа
+     * проверки на содержание определенного значения
+     * получения ключа, прибавления ключа-значения
+     * замены ключа на ключ с новым значением
+     * добавления значений в хэш таблицу(словарь)
+     * удаление, замены
+     * @return
+     */
     @Override
     public int size() {
         return 0;
@@ -283,10 +409,22 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return null;
     }
 
+    /**
+     * метод балансировки дерева
+     * @param leaf
+     * @return
+     */
     int height(Entry<K, V> leaf) {
         return leaf == null ? 0 : leaf.height;
     }
 
+    /**
+     * порядок удаления ключа с описанием исключения
+     * @param p
+     * @param k
+     * @return
+     * @throws TreeException
+     */
     Entry<K, V> remove(Entry<K, V> p, K k) throws TreeException {
         if (root == null)
             throw new TreeException(KEYNOTEXIST);
@@ -308,17 +446,32 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return balance(p);
     }
 
+    /**
+     * заменя старого ключа на новый с описанием исключеня
+     * @param oldKey
+     * @param newKey
+     * @throws TreeException
+     */
     public void change(K oldKey, K newKey) throws TreeException {
         Entry<K, V> current = remove(root, oldKey);
         current.key = newKey;
         put(current);
     }
 
+    /**
+     * прямой обход дерева
+     * @param consumer
+     */
     public void process(Consumer<Entry<K, V>> consumer) {
         if (root != null)
             root.process(consumer);
     }
 
+    /**
+     * описание правого вращения р
+     * @param p
+     * @return
+     */
     private Entry<K, V> rotateright(Entry<K, V> p) // правый поворот вокруг p
     {
         Entry<K, V> q = p.left;
@@ -329,6 +482,11 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return q;
     }
 
+    /**
+     * описание левого вращения q
+     * @param q
+     * @return
+     */
     private Entry<K, V> rotateleft(Entry<K, V> q) // левый поворот вокруг q
     {
         Entry<K, V> p = q.right;
@@ -339,6 +497,11 @@ public class AvlTree<K extends Comparable<K>, V> implements Map<K,V> {
         return p;
     }
 
+    /**
+     * тест
+     * @param args
+     * @throws TreeException
+     */
     public static void main(String[] args) throws TreeException {
         AvlTree<Integer, String> t = new AvlTree();
         t.put(45, "");

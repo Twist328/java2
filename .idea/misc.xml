@@ -2,8 +2,11 @@
 <project version="4">
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/AppData/Local/Temp/javadoc" />
-    <option name="OPTION_SCOPE" value="package" />
-    <option name="OPEN_IN_BROWSER" value="false" />
+    <option name="OPTION_SCOPE" value="public" />
+    <option name="OPTION_DOCUMENT_TAG_USE" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_VERSION" value="true" />
+    <option name="OTHER_OPTIONS" value="-encoding utf8 -docencoding utf8 -charset utf8" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
