@@ -5,7 +5,7 @@
  * 2.2 public void delete(K key) - удаление ключа
  * 2.3 public V find(K key) - поиск ключа
  * 2.4 public void change(K oldKey, K newKey) - замена значения ключа на другое
- * метод : прямой обход дерева
+ * метод:прямой обход дерева
  * Также имеются другие вспомогательные методы и переменные, а также тест
  */
 package ru.progwards.java2.lessons.annotation;
