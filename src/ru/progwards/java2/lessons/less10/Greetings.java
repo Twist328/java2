@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @interface AnnotationTest {
-    String text() default "Всегда говори привет";
+    String text() default "   Всегда говори привет";
 }
 
 public class Greetings {
@@ -19,7 +19,7 @@ public class Greetings {
     void test1() {
     }
 
-    @AnnotationTest(text="test")
+    @AnnotationTest(text="   Никогда не говори - : Никогда!")
     void test2() {
     }
 
