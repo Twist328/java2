@@ -1,7 +1,7 @@
 package ru.progwards.java2.lessons.annotation;
 
 /**
- * Класс исключения
+ * Класс исключение
  */
 
 public class TreeException extends Exception {
