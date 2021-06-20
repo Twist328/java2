@@ -112,7 +112,7 @@ public class ClassInspector {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(new ClassInspector().inspect("ru.progwards.java2.lessons.calculator.Calculator1"));
+        System.out.println(new ClassInspector().inspect("ru.progwards.java2.lessons.eratosthenesTest.SieveEratosthenes"));
     }
 
 }

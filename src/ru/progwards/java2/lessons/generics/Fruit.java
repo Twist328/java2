@@ -7,6 +7,11 @@ public class Fruit {
         this.weight = weight;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
     public double getWeight() {
         return weight;
     }

@@ -1,7 +1,14 @@
 package ru.progwards.java2.lessons.generics;
 
-public class Orange extends Fruit {
-    Orange() {
-        setWeight(1.5);
-    }
-}
+class Orange extends Fruit {
+     Orange() {
+super();
+         setWeight(1.5);
+
+     }
+
+      void setWeight(double v) {
+     }
+
+
+ }

@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.EratosthenesTest;
+package ru.progwards.java2.lessons.eratosthenesTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +16,19 @@ public class SieveEratosthenes {
         }
     }
 
+    /**
+     *
+     * @param max
+     */
     public SieveEratosthenes(int max) {
         sieve(max);
     }
 
+    /**
+     *
+     * @param max
+     * @return
+     */
     private boolean[] sieve(int max) {
         nums = new boolean[max + 1];
         initFlags();
@@ -31,6 +40,9 @@ public class SieveEratosthenes {
         return nums;
     }
 
+    /**
+     *
+     */
     private void initFlags() {
         if (nums != null && nums.length > 1) {
             nums[0] = false;
@@ -42,6 +54,10 @@ public class SieveEratosthenes {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Long> sieveToList() {
         List<Long> sieveList = new ArrayList();
         for (int i = 0; i < nums.length; i++) {

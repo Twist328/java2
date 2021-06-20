@@ -21,6 +21,21 @@ public class FruitBox {
 
     List<Fruit> fruitList = new ArrayList<>();
 
+    public int compareTo(FruitBox obj) {
+        FruitBox entry = (FruitBox) obj;
+
+        double result = this.getWeight() - (double) entry.getWeight();
+        if (result != 0) {
+            return (int) result;
+        }
+        result = this.getWeight() - ((entry.getWeight()));
+        if (result != 0) {
+            return (int) ((int) result / Math.abs(result));
+        }
+        return 0;
+    }
+
+
 
     public void add(Fruit fruit) {// добавить единицу фрукта
 

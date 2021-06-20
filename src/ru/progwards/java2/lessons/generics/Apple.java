@@ -1,7 +1,12 @@
 package ru.progwards.java2.lessons.generics;
 
 public class Apple extends Fruit {
-    Apple() {
+    public Apple() {
+        super();
         setWeight(1.0);
     }
+
+     void setWeight(double v) {
+    }
+
 }
