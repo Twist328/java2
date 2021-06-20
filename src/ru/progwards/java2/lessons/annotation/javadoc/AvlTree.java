@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.annotation;
+package ru.progwards.java2.lessons.annotation.javadoc;
 
 import java.util.Collection;
 import java.util.Map;

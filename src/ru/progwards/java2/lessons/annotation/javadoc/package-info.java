@@ -8,4 +8,4 @@
  * метод:прямой обход дерева
  * Также имеются другие вспомогательные методы и переменные, а также тест
  */
-package ru.progwards.java2.lessons.annotation;
+package ru.progwards.java2.lessons.annotation.javadoc;
