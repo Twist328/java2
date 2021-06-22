@@ -1,6 +1,4 @@
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
+import java.io.*;
 
 public class StandartTransientSerialization {
     public static class User implements Serializable {
@@ -8,7 +6,7 @@ public class StandartTransientSerialization {
         public transient String password;
         public transient String name;
         public transient boolean is_mentor;
-        public transient String image = "";
+        public transient String image = " ";
 
         public User(String login, String password, String name, boolean is_mentor) {
             this.login = login;
@@ -20,10 +18,10 @@ public class StandartTransientSerialization {
 
     public static void main(String[] args) {
         // сериализуем
-//        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("users.dat"))) {
-//            User user = new User("login1", "12345", "Фамилия Имя", true);
-//            oos.writeObject(user);
-//        } catch(Exception ignored){}
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("users.dat"))) {
+            User user = new User("login1", "12345", "Фамилия Имя", true);
+           oos.writeObject(user);
+       } catch(Exception ignored){}
 
         // десериализуем
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("users.dat"))) {
