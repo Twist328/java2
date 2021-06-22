@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Heap" />
+        <module name="GsonListSerialization" />
         <module name="Calculator" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Calculator" target="14" />
+      <module name="GsonListSerialization" target="14" />
       <module name="Heap" target="14" />
     </bytecodeTargetLevel>
   </component>

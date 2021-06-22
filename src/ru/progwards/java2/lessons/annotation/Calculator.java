@@ -1,4 +1,5 @@
 package ru.progwards.java2.lessons.annotation;
+
  class Calculator implements CalculatorCalculate {
     @Override
     public int sum(int val1, int val2) {
