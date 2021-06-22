@@ -36,7 +36,7 @@ public class Greetings {
             Annotation[] annotations = method.getDeclaredAnnotations();
             for (Annotation a: annotations)
                 if(a.annotationType()==AnnotationTest.class)
-                    System.out.println(method.getName() + ""+((AnnotationTest)a).text());
+                    System.out.println(method.getName() + " "+((AnnotationTest)a).text());
         }
     }
 
