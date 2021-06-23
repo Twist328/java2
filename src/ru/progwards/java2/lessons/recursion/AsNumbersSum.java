@@ -25,10 +25,10 @@ public class AsNumbersSum {
         return number + showAllThePoss(number-1, 1, "");
     }
 
-
     public static void main(String[] args) {
-
-        System.out.println(putItAllSum(7));
+        System.out.println("\n**********************************************************************************************************");
+        System.out.println(putItAllSum(6));
+        System.out.println("**********************************************************************************************************");
     }
 
 }
