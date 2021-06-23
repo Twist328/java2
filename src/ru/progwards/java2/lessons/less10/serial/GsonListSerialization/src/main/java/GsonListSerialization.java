@@ -42,10 +42,10 @@ public class GsonListSerialization {
 
         // сериализуем в JSON
         String json = new Gson().toJson(users);
-        Files.writeString(Path.of("users.json"), json);
+        Files.writeString(Path.of("src/ru/progwards/java2/lessons/less10/serial/GsonListSerialization/src/main/resources/users.json"), json);
 
-        // десериализуем из JSON
-        json = Files.readString(Path.of("users.json"));
+        // десериализуем из JSONsrc/main/resources/users.json
+        json = Files.readString(Path.of("src/ru/progwards/java2/lessons/less10/serial/GsonListSerialization/src/main/resources/users.json"));
         Type type = new TypeToken<ArrayList<User>>() {}.getType();
         ArrayList<User> list = new Gson().fromJson(json, type);
         System.out.println("\n******************************************************************************************");
