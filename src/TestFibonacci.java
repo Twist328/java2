@@ -13,7 +13,7 @@ public class TestFibonacci {
             count = next;
             next = prev.add(count);
 
-            System.out.println("Число фибо:" + next);
+            System.out.println("\nЧисло фибо:" + next);
 
 
         }
