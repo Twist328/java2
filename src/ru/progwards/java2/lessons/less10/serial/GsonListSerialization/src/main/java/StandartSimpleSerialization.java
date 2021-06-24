@@ -18,13 +18,13 @@ public class StandartSimpleSerialization {
 
     public static void main(String[] args) {
         // сериализуем
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("users.dat"))) {
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/ru/progwards/java2/lessons/less10/serial/GsonListSerialization/src/main/resources/users.dat"))) {
             User user = new User("login1", "12345", "Фамилия Имя", true);
             oos.writeObject(user);
         } catch(Exception ignored){}
 
         // десериализуем
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("users.dat"))) {
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/ru/progwards/java2/lessons/less10/serial/GsonListSerialization/src/main/resources/users.dat"))) {
             User user = (User)ois.readObject();
             System.out.println("Пользователь " + user.login + ", " + user.name);
         } catch(Exception ignored){}

@@ -17,8 +17,8 @@ public class CalculatorT {
     public void testSum10() {
         int a = 33;
         int b = 28;
-        assertEquals(a+b, CALCULATOR.sum(a, b));
-        System.out.println("Сложение " + a + " + " + b + " = 61 тест пройден");
+        assertEquals(a + b, CALCULATOR.sum(a, b));
+        System.out.println("Сложение " + a + " + " + b + " = " + (a + b) + " тест пройден");
         System.out.println("********************************************");
     }
 
@@ -26,8 +26,8 @@ public class CalculatorT {
     public void testDiff3() {
         int a = 28;
         int b = 37;
-        assertEquals(a-b, CALCULATOR.different(a, b));
-        System.out.println("Вычитание " + a + " - " + b + " = - 9 тест пройден");
+        assertEquals(a - b, CALCULATOR.different(a, b));
+        System.out.println("Вычитание " + a + " - " + b + " = " + (a - b) + " тест пройден");
         System.out.println("********************************************");
     }
 
@@ -35,8 +35,8 @@ public class CalculatorT {
     public void testMult6() {
         int a = 12;
         int b = 13;
-        assertEquals(a*b, CALCULATOR.multiply(a, b));
-        System.out.println("Умножение " + a + " * " + b + "= 156 тест пройден");
+        assertEquals(a * b, CALCULATOR.multiply(a, b));
+        System.out.println("Умножение " + a + " * " + b + " = " + a * b + " тест пройден");
         System.out.println("********************************************");
     }
 
@@ -44,8 +44,8 @@ public class CalculatorT {
     public void testDiff5() {
         int a = 35;
         int b = 7;
-        assertEquals(a-b, CALCULATOR.different(a, b));
-        System.out.println("Вычитание " + a + " - " + b + " = 28 тест пройден");
+        assertEquals(a - b, CALCULATOR.different(a, b));
+        System.out.println("Вычитание " + a + " - " + b + " = " + (a - b) + " тест пройден");
         System.out.println("********************************************");
     }
 
@@ -53,8 +53,8 @@ public class CalculatorT {
     public void testMult8() {
         int a = 34;
         int b = 9;
-        assertEquals(a*b, CALCULATOR.multiply(a, b));
-        System.out.println("Умножение " + a + " * " + b + " = 306 тест пройден");
+        assertEquals(a * b, CALCULATOR.multiply(a, b));
+        System.out.println("Умножение " + a + " * " + b + " = " + a * b + "  тест пройден");
         System.out.println("********************************************");
     }
 
@@ -62,8 +62,8 @@ public class CalculatorT {
     public void testMult2() {
         int a = 47;
         int b = 5;
-        assertEquals(a*b, CALCULATOR.multiply(a, b));
-        System.out.println("Умножение " + a + " * " + b + " = 235 тест пройден");
+        assertEquals(a * b, CALCULATOR.multiply(a, b));
+        System.out.println("Умножение " + a + " * " + b + " = " + a * b + " тест пройден");
         System.out.println("********************************************");
     }
 
@@ -71,8 +71,8 @@ public class CalculatorT {
     public void testDiv9() {
         int a = 124;
         int b = 4;
-        assertEquals(a/b, CALCULATOR.divid(a, b));
-        System.out.println("Деление " + a + " / " + b + " = 31 тест пройден");
+        assertEquals(a / b, CALCULATOR.divid(a, b));
+        System.out.println("Деление " + a + " / " + b + " = " + a / b + " тест пройден");
         System.out.println("********************************************");
     }
 
@@ -80,8 +80,8 @@ public class CalculatorT {
     public void testDiv4() {
         int a = 51;
         int b = 17;
-        assertEquals(a/b, CALCULATOR.divid(a, b));
-        System.out.println("Деление " + a + " / " + b + " = 3 тест пройден");
+        assertEquals(a / b, CALCULATOR.divid(a, b));
+        System.out.println("Деление " + a + " / " + b + " = " + a / b + " тест пройден");
         System.out.println("********************************************");
     }
 
@@ -89,8 +89,8 @@ public class CalculatorT {
     public void testDiv7() {
         int a = 96;
         int b = 16;
-        assertEquals(a/b, CALCULATOR.divid(a, b));
-        System.out.println("Деление " + a + " / " + b + " = 6 тест пройден");
+        assertEquals(a / b, CALCULATOR.divid(a, b));
+        System.out.println("Деление " + a + " / " + b + " = " + a / b + " тест пройден");
         System.out.println("********************************************");
     }
 
@@ -98,9 +98,9 @@ public class CalculatorT {
     public void testSum() {
         int a = 1;
         int b = 2;
-        assertEquals(a+b, CALCULATOR.sum(a, b));
-       // System.out.println("********************************************");
-        System.out.println("Сложение " + a + " + " + b + " = 3 тест пройден");
+        assertEquals(a + b, CALCULATOR.sum(a, b));
+        // System.out.println("********************************************");
+        System.out.println("Сложение " + a + " + " + b + " = " + (a + b) + " тест пройден");
         System.out.println("********************************************");
     }
 
