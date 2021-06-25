@@ -1,9 +1,8 @@
 import java.util.Scanner;
 
-public class SphereVolume {  // объем шара
-
-
-
+public class SphereVolume {// объем шара
+    public SphereVolume() {
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -14,7 +13,7 @@ public class SphereVolume {  // объем шара
 //  без сканера
         double radius1 = 82;
         double volume1 = (4 * 3.14 * Math.pow(radius1, 3)) / 3;
-        System.out.println("*****************************************************");
+        System.out.println("*********************************************");
         System.out.println("Объем шара = " + volume1);
 
     }
