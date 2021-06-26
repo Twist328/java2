@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.classloaders;
+package ru.progwards.java2.lessons.less11.classloaders;
 
 public class ClassLoaderGetLoaders {
     public static void main(String[] args) {
