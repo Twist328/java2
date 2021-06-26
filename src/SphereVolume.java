@@ -13,7 +13,7 @@ public class SphereVolume {// объем шара
 //  без сканера
         double radius1 = 82;
         double volume1 = (4 * 3.14 * Math.pow(radius1, 3)) / 3;
-        System.out.println("*********************************************");
+        System.out.println("*********************************************1");
         System.out.println("Объем шара = " + volume1);
 
     }
