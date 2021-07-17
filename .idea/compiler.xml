@@ -15,6 +15,7 @@
       <module name="Calculator" target="14" />
       <module name="GsonListSerialization" target="14" />
       <module name="Heap" target="14" />
+      <module name="profiler" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>

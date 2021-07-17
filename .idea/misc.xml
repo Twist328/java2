@@ -13,7 +13,13 @@
         <option value="$PROJECT_DIR$/src/ru/progwards/java2/lessons/builders/Calculator/pom.xml" />
         <option value="$PROJECT_DIR$/src/ru/progwards/java2/lessons/gc/Heap/pom.xml" />
         <option value="$PROJECT_DIR$/src/ru/progwards/java2/lessons/less10/serial/GsonListSerialization/pom.xml" />
+        <option value="$USER_HOME$/IdeaProjects/profiler/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$USER_HOME$/IdeaProjects/profiler/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="14" project-jdk-type="JavaSDK">
