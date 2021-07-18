@@ -135,14 +135,15 @@ public class Dijkstra {
         // готовим алгоритм
         Dijkstra dijkstra = new Dijkstra(matrix);
 
-        // выводим для нулевого узла
-        //System.out.println(Arrays.deepToString(d.find(0)));
+        // выводим для нулевого узла+5
+        System.out.println("\n***********************");
         System.out.println(Arrays.toString(dijkstra.find(0)));
         System.out.println(Arrays.toString(dijkstra.find(1)));
         System.out.println(Arrays.toString(dijkstra.find(2)));
         System.out.println(Arrays.toString(dijkstra.find(3)));
         System.out.println(Arrays.toString(dijkstra.find(4)));
         System.out.println(Arrays.toString(dijkstra.find(5)));
+        System.out.println("***********************");
     }
 
 }
