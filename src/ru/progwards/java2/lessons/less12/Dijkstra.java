@@ -3,6 +3,8 @@ package ru.progwards.java2.lessons.less12;
 import java.util.Arrays;
 import java.util.TreeSet;
 
+import ru.progwards.java2.lessons.less12.State.*;
+
 import static ru.progwards.java2.lessons.less12.State.*;
 
 
@@ -34,32 +36,6 @@ public class Dijkstra {
         }
         this.graph = graph;
     }
-
-    /**
-     * Вершина
-     */
-    class Vertex {
-        /**
-         * Порядковый номер (с нуля)
-         */
-        int n;
-        /**
-         * Вес (сколько стоит добраться)
-         */
-        int weight;
-        /**
-         * Состояние
-         *
-         * @see State
-         */
-        State status;
-
-        @Override
-        public String toString() {
-            return "Vertex{n=" + n + ", weight=" + weight + '}';
-        }
-    }
-
     /*
      * Алгоритм Дейсктры из вершины n
      * @param n Вершина, из которой надо построить маршруты
