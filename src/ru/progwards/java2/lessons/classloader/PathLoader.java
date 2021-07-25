@@ -115,9 +115,6 @@ public class PathLoader extends ClassLoader {
             ex.printStackTrace();
         }
 
-
-
-
         Map<String, TestLoader> map = new LinkedHashMap<>();
 
         while(true) {
@@ -128,7 +125,7 @@ public class PathLoader extends ClassLoader {
             }
 
             try {
-                Thread.sleep(700);
+                Thread.sleep(7_000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
