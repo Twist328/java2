@@ -8,8 +8,6 @@ import java.util.List;
  */
 public class BoruvkaMod {
 
-
-
     /**
      * Вершины графа
      *
@@ -17,12 +15,12 @@ public class BoruvkaMod {
      * @param <E> объект, подвязанный к дуге графа
      */
 
-    static class Node<N, E> {
+   public static class Node<N, E> {
         N info; // информация об узле
-        List<Edge<N, E>> in; // массив входящих ребер
-        List<Edge<N, E>> out; // массив исходящих ребер
-        Condition condition; // состояние узла (пометка для алгоритма)
-        Graph<N, E> graph; // в каком оставном дереве находится данный узел (пометка для алгоритма)
+        public List<Edge<N, E>> in; // массив входящих ребер
+        public List<Edge<N, E>> out; // массив исходящих ребер
+        public Condition condition; // состояние узла (пометка для алгоритма)
+        public Graph<N, E> graph; // в каком оставном дереве находится данный узел (пометка для алгоритма)
 
         public Node(N info) {
             this.info = info;
@@ -40,14 +38,14 @@ public class BoruvkaMod {
      * @param <N> объект, подвязанный к вершине
      * @param <E> объект, подвязанный к дуге графа
      */
-    static class Edge<N, E> {
+    public static class Edge<N, E> {
         E info; // информация о ребре
         Node<N, E> out; // вершина, из которой исходит ребро
         Node<N, E> in; // вершина, в которую можно попасть
         // по этому ребру
         double weight; // стоимость перехода
-        int id; // идентификатор узла (уникальный ключ) (пометка для алгоритма)
-        boolean calculate; // была ли проанализирована дуга
+        public int id; // идентификатор узла (уникальный ключ) (пометка для алгоритма)
+        public boolean calculate; // была ли проанализирована дуга
 
         public Edge(E info, Node<N, E> out, Node<N, E> in, double weight) {
             this.info = info;
@@ -88,10 +86,10 @@ public class BoruvkaMod {
      * @param <N> объект, подвязанный к вершине
      * @param <E> объект, подвязанный к дуге графа
      */
-    static class Graph<N, E> {
-        List<Node<N, E>> nodes;
-        List<Edge<N, E>> edges;
-        Condition status; // состояние узла (пометка для алгоритма)
+    public static class Graph<N, E> {
+        public List<Node<N, E>> nodes;
+        public List<Edge<N, E>> edges;
+        public Condition condition; // состояние узла (пометка для алгоритма)
         Thread t; // ссылка на рассчитывающий поток
         int id; // идентификатор узла (уникальный ключ) (пометка для алгоритма)
 
@@ -104,7 +102,7 @@ public class BoruvkaMod {
     /**
      * Компаратор для выстраивания дерева по возрастанию веса дуг
      */
-    static Comparator<Edge> edgesComparator = (e1, e2) -> {
+    public static Comparator<Edge> edgesComparator = (e1, e2) -> {
         if (e1.weight != e2.weight)
             return e1.weight < e2.weight ? -1 : 1;
         return e1.id == e2.id ? 0 : (e1.id < e2.id ? -1 : 1);
