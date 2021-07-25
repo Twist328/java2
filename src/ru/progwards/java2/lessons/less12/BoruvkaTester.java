@@ -2,14 +2,9 @@ package ru.progwards.java2.lessons.less12;
 
 import ru.progwards.java2.lessons.graph.BoruvkaMod;
 import ru.progwards.java2.lessons.graph.IBoruvka;
-
 import java.util.List;
-
-import  ru.progwards.java2.lessons.less12.BoruvkaGenerator.*;
-
 import static ru.progwards.java2.lessons.less12.BoruvkaGenerator.genGraph;
 import static ru.progwards.java2.lessons.less12.BoruvkaGenerator.simpleGraph;
-
 
 /**
  * Нагрузочное тестирование классов, замеры времени и памяти
