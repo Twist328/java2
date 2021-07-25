@@ -42,7 +42,7 @@ public class Boruvka<N, E> implements IBoruvka<N, E> {
      * @param <E> Тип "Ребро"
      * @return минимальное остовное дерево в виде списка дуг графа
      */
-    static <N, E> List<Edge<N, E>> minTree(Graph<N, E> graph) {
+    public static <N, E> List<Edge<N, E>> minTree(Graph<N, E> graph) {
         Boruvka<N, E> alg = new Boruvka<N, E>();
         return alg.getMinEdgeTree(graph);
     }

@@ -16,7 +16,7 @@ public class BoruvkaMod {
      */
 
    public static class Node<N, E> {
-        N info; // информация об узле
+       public N info; // информация об узле
         public List<Edge<N, E>> in; // массив входящих ребер
         public List<Edge<N, E>> out; // массив исходящих ребер
         public Condition condition; // состояние узла (пометка для алгоритма)
