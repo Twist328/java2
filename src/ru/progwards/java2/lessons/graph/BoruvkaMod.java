@@ -43,7 +43,7 @@ public class BoruvkaMod {
         Node<N, E> out; // вершина, из которой исходит ребро
         Node<N, E> in; // вершина, в которую можно попасть
         // по этому ребру
-        double weight; // стоимость перехода
+       public double weight; // стоимость перехода
         public int id; // идентификатор узла (уникальный ключ) (пометка для алгоритма)
         public boolean calculate; // была ли проанализирована дуга
 
@@ -91,7 +91,7 @@ public class BoruvkaMod {
         public List<Edge<N, E>> edges;
         public Condition condition; // состояние узла (пометка для алгоритма)
         Thread t; // ссылка на рассчитывающий поток
-        int id; // идентификатор узла (уникальный ключ) (пометка для алгоритма)
+        public int id; // идентификатор узла (уникальный ключ) (пометка для алгоритма)
 
         public Graph(List<Node<N, E>> nodes, List<Edge<N, E>> edges) {
             this.nodes = nodes;

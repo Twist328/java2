@@ -1,12 +1,12 @@
 package ru.progwards.java2.lessons.less12;
 
-import static ru.progwards.java2.lessons.graph.BoruvkaMod.Edge.*;
+import ru.progwards.java2.lessons.graph.BoruvkaMod.Edge.*;
 import ru.progwards.java2.lessons.graph.Boruvka;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import static ru.progwards.java2.lessons.graph.BoruvkaMod.*;
-import static ru.progwards.java2.lessons.graph.BoruvkaMod.Node.*;
+import  ru.progwards.java2.lessons.graph.BoruvkaMod.*;
+import  ru.progwards.java2.lessons.graph.BoruvkaMod.Node.*;
 /**
  * Генерация тестовых деревьев
  */
