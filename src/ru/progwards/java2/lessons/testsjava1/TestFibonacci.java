@@ -1,3 +1,5 @@
+package ru.progwards.java2.lessons.testsjava1;
+
 import java.math.BigInteger;
 import java.util.stream.Stream;
 
@@ -82,3 +84,4 @@ public class TestFibonacci {
 
     }
 }
+

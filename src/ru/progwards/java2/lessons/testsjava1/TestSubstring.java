@@ -1,4 +1,4 @@
-import java.io.*;
+package ru.progwards.java2.lessons.testsjava1;
 
 public class TestSubstring {
     public class MiddleStrTest {
