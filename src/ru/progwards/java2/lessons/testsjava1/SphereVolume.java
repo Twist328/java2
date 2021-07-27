@@ -1,6 +1,6 @@
 package ru.progwards.java2.lessons.testsjava1;
 
-public class SphereVolume {// объем шара
+public class SphereVolume {// объем шара// площадь шара
     public SphereVolume() {
     }
     public double SvolumeErth(double diameter) { //площадь планеты
