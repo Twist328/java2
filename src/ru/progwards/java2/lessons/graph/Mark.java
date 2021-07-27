@@ -3,7 +3,7 @@ package ru.progwards.java2.lessons.graph;
 /**
  * Возможные состояния объекта в процессе поиска
  */
-enum Mark {
+public enum Mark {
     /**
      * Не используется (белая вершина в алгоритме Тарьяна)
      */

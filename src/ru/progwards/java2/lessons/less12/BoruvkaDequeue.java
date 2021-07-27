@@ -17,7 +17,7 @@ import static ru.progwards.java2.lessons.graph.Condition.*;
  * Основа для очерди рёбер - PriorityQueue
  * По тестам, где рёбер в 10 раз больше чем вершин - выгоднее чем TreeSet, по памяти - одинаково
  */
- class BoruvkaDequeue<N, E> implements IBoruvka<N, E> {
+ public class BoruvkaDequeue<N, E> implements IBoruvka<N, E> {
 
     /**
      * Брать ли дуги, исходящие из узла
@@ -48,7 +48,7 @@ import static ru.progwards.java2.lessons.graph.Condition.*;
      * @param <E> Тип "Ребро"
      * @return минимальное остовное дерево в виде списка дуг графа
      */
-    static <N, E> List<Edge<N, E>> minTree(Graph<N, E> graph) {
+    public static <N, E> List<Edge<N, E>> minTree(Graph<N, E> graph) {
         BoruvkaDequeue<N, E> alg = new BoruvkaDequeue<N, E>();
         return alg.getMinEdgeTree(graph);
     }

@@ -1,6 +1,6 @@
 package ru.progwards.java2.lessons.graph;
 
- class Vertex implements Comparable<Vertex> {
+ public class Vertex implements Comparable<Vertex> {
     private int number;
     private int mark;
 

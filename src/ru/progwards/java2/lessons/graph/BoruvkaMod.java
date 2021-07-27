@@ -40,8 +40,8 @@ public class BoruvkaMod {
      */
     public static class Edge<N, E> {
         E info; // информация о ребре
-        Node<N, E> out; // вершина, из которой исходит ребро
-        Node<N, E> in; // вершина, в которую можно попасть
+       public Node<N, E> out; // вершина, из которой исходит ребро
+        public Node<N, E> in; // вершина, в которую можно попасть
         // по этому ребру
        public double weight; // стоимость перехода
         public int id; // идентификатор узла (уникальный ключ) (пометка для алгоритма)

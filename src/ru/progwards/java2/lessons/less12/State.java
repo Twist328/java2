@@ -3,7 +3,7 @@ package ru.progwards.java2.lessons.less12;
 /**
  * Состояние вершины
  */
-public enum State {
+ enum State {
     // Расчет завершен
     DONE,
     // Расчёт в процессе (в очереди)

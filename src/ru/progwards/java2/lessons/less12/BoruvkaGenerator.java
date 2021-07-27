@@ -11,9 +11,9 @@ import  ru.progwards.java2.lessons.graph.BoruvkaMod.Node.*;
  * Генерация тестовых деревьев
  */
 
-public class BoruvkaGenerator {
+ class BoruvkaGenerator {
 
-    public static Graph<String, String> simpleGraph() {
+     static Graph<String, String> simpleGraph() {
         Node<String, String> A = new Node<>("A");
         Node<String, String> B = new Node<>("B");
         Node<String, String> C = new Node<>("C");
@@ -51,7 +51,7 @@ public class BoruvkaGenerator {
                 List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11));
     }
 
-    public static Graph<String, String> genGraph(int nodesCount, int edgesCount) {
+     static Graph<String, String> genGraph(int nodesCount, int edgesCount) {
         List<Node<String, String>> nodes = new ArrayList<>(nodesCount);
         for (int i= 0; i<nodesCount; i++) {
             Node<String, String> n = new Node<>("n"+i+"n");

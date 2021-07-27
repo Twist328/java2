@@ -33,7 +33,7 @@ public class BoruvkaThreaded<N, E> implements IBoruvka<N, E> {
      * Если оба параметра будут {@code false}, то дуги найдены не будут
      * Если {@true} имеет только один параметр, очень важно, с какой веришины начинаем обход(от расположения в графе), т.к. дерево может получиться не минимальным
      *
-     * @see BoruvkaThreaded#takeOuts
+     * @see BoruvkaThreaded#EXSPORT
      */
     final static boolean TAKE_INSIDE = true;
 

@@ -5,7 +5,7 @@ package ru.progwards.java2.lessons.less12;
  * @autor: twist328
  * @create: 2021-07-21 10
  **/
-public class Vertex {
+ class Vertex {
     /**
      * Порядковый номер (с нуля)
      */

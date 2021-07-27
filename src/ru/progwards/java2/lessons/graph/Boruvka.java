@@ -1,6 +1,10 @@
 package ru.progwards.java2.lessons.graph;
 
-import java.util.*;
+import ru.progwards.java2.lessons.graph.Condition.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
 
 import static ru.progwards.java2.lessons.graph.BoruvkaMod.*;
 import static ru.progwards.java2.lessons.graph.Condition.*;
