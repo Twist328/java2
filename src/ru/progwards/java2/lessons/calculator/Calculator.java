@@ -78,7 +78,7 @@ class Calculator1 {
     String checkSymbol() {
         if (pos >= expression.length())
             return "";
-        return expression.substring(pos, pos + 1);
+        return expression.substring(pos, pos +1);
     }
 
     // получить число из символа
