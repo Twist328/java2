@@ -5,8 +5,8 @@ public class Calculator {
 
     public static void main(String[] args) {
         System.out.println("\n************************************");
-        System.out.println("результат вычислений:  "+ calculate("8/3*2+8/2-5")); //3
-        System.out.println("результат вычислений:  "+ calculate("1+3*2-9/3*9")); //-20
+        System.out.println("результат вычислений:  "+ calculate("9/3*2+8/2-5")); //5
+        System.out.println("результат вычислений:  "+ calculate("1+3*2-6/3*9")); //-11
         System.out.println("************************************");
     }
 
@@ -18,21 +18,22 @@ public class Calculator {
     public static int calculate(String expression) { //не получилось со скобками
 
         String str = expression; // создание символьной строки
-        int i = Integer.valueOf(str.substring(0, 1)); //первый элемент
+        int i = Integer.valueOf(str.substring(0, 1)); //первый элемент ( первый множитель или делитель)
         //if (i == Integer.valueOf(str.substring(0), Integer.parseInt("-"))) return Integer.parseInt("-" +i); нельзя отрицательные значения
         if (str.length()== 1) return i;
-        String s = str.substring(1, 2); // операнд (для манипуляций calculate)
+
+        String s = str.substring(1, 2); // операнд (символ + или -, * или /, для манипуляций calculate)
 
         while (s.equals("*") || s.equals("/")) {   //логика
+
             if (s.equals("*")) {
-
-                i *= Integer.valueOf(str.substring(2, 3)); //множитель index 2
-
+                i *= Integer.valueOf(str.substring(2, 3)); //множитель умножается на множитель подстроки с index 2, при этом индекс 0 = i;
             } else if (s.equals("/"))
-                i /= Integer.valueOf(str.substring(2, 3)); //процедура calculate деления: i делится на делитель с index 2
+                i /= Integer.valueOf(str.substring(2, 3)); //процедура calculate деления: i делится на делитель с index 2, при этом индекс 0=i;
             str = str.substring(2);                        //Строка начинается с Подстроки  с символа по указанному индексу 2 до конца строки
+
             if (str.length() == 1) return i;               //указатель на index i
-            s = str.substring(1, 2);                      //указатель на index операнда
+            s = str.substring(1, 2);                      //указатель на index операнда( первое слагаемое или уменьшаемое число)
         }
         if (s.equals("+")) {
             i += calculate(str.substring(2));            //calculate процедура сложения
