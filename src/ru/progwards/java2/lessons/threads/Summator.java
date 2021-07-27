@@ -49,19 +49,6 @@ public class Summator {
             e.printStackTrace();
         }
     }
-
-    // метод суммирует числа от start до finish
-    private BigInteger sumBlock(BigInteger start, BigInteger finish) {
-        BigInteger sum = BigInteger.ZERO;
-
-        for (BigInteger i = start; i.compareTo(finish) <= 0; i = i.add(BigInteger.ONE)) {
-            sum = sum.add(i);
-        }
-       // System.out.println(sum);
-        return sum;
-
-    }
-
     // метод складывает значения элементов списка
     private BigInteger resultSum(List<BigInteger> list) {
         BigInteger result = BigInteger.ZERO;
@@ -73,23 +60,6 @@ public class Summator {
         return result;
     }
 
-    class RunnableSummator implements Runnable {
-        private BigInteger start;
-        private BigInteger finish;
-        private List<BigInteger> list;
-
-        RunnableSummator(BigInteger start, BigInteger finish, List<BigInteger> list) {
-            this.start = start;
-            this.finish = finish;
-            this.list = list;
-            //System.out.println(list);
-        }
-
-        @Override
-        public void run() {
-            list.add(sumBlock(start, finish));
-        }
-    }
 
     public static void main(String[] args) {
 
