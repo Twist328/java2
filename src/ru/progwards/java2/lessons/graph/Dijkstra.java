@@ -3,6 +3,7 @@ package ru.progwards.java2.lessons.graph;
 import java.util.*;
 
 public class Dijkstra {
+
     private int[][] graph;
 
     Dijkstra(int[][] graph) {
