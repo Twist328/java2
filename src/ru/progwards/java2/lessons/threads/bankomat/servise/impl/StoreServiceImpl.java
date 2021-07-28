@@ -1,47 +1,89 @@
 package ru.progwards.java2.lessons.threads.bankomat.servise.impl;
 
+import ru.progwards.java2.lessons.threads.bankomat.DI;
 import ru.progwards.java2.lessons.threads.bankomat.Store;
 import ru.progwards.java2.lessons.threads.bankomat.model.Account;
 import ru.progwards.java2.lessons.threads.bankomat.servise.StoreService;
-
 import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
+@DI.Dependency(name="StoreService", isSingleton=true)
 public class StoreServiceImpl implements StoreService {
+
+    Map<String, Account> store;
+    Lock lock = new ReentrantLock();
+
+    public StoreServiceImpl(Store store) {
+        this.store = store.getStore();
+    }
+
     @Override
     public Account get(String id) {
-        Account account = Store.getStore().get(id);
-        if (account == null){
-            throw new RuntimeException("Account not found by id:"+id);
+        lock.lock();
+        try {
+            Account account = store.get(id);
+            if (account == null) {
+                throw new RuntimeException("Account not found by id: " + id);
+            }
+            return account;
+        } finally {
+            lock.unlock();
         }
-        return account;
     }
 
     @Override
     public Collection<Account> get() {
-        if(Store.getStore().size() == 0){
-            throw new RuntimeException("Store is empty");
+        lock.lock();
+        try {
+            if (store.size() == 0) {
+                throw new RuntimeException("Store is empty");
+            }
+            return store.values();
+        } finally {
+            lock.unlock();
         }
-        return Store.getStore().values();
     }
 
     @Override
     public void delete(String id) {
-        if (Store.getStore().get(id) == null){
-            throw new RuntimeException("Account not found by id:"+id);
+        lock.lock();
+        try {
+            if (store.get(id) == null) {
+                throw new RuntimeException("Account not found by id:" + id);
+            }
+            store.remove(id);
+        } finally {
+            lock.unlock();
         }
-        Store.getStore().remove(id);
+    }
+
+    public void insertInternal(Account account) {
+        store.put(account.getId(), account);
     }
 
     @Override
     public void insert(Account account) {
-        Store.getStore().put(account.getId(), account);
+        lock.lock();
+        try {
+            insertInternal(account);
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
     public void update(Account account) {
-        if (Store.getStore().get(account.getId()) == null){
-            throw new RuntimeException("Account not found by id:"+account.getId());
+        lock.lock();
+        try {
+            if (store.get(account.getId()) == null) {
+                throw new RuntimeException("Account not found by id:" + account.getId());
+            }
+            this.insertInternal(account);
+        } finally {
+            lock.unlock();
         }
-        this.insert(account);
     }
+
 }

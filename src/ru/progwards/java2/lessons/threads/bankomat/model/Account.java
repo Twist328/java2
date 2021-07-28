@@ -3,6 +3,12 @@ package ru.progwards.java2.lessons.threads.bankomat.model;
 import java.util.Date;
 
 //POJO
+import ru.progwards.java2.lessons.threads.bankomat.DI;
+
+import java.util.Date;
+
+//POJO
+@DI.Dependency(name="Account")
 public class Account {
 
     private String id;
@@ -10,6 +16,15 @@ public class Account {
     private Date date;
     private double amount;
     private int pin;
+
+    public Account() {
+    }
+
+    public Account(String id, String holder, Integer pin) {
+        this.id = id;
+        this.holder = holder;
+        this.pin = pin;
+    }
 
     public String getId() {
         return id;
@@ -49,5 +64,16 @@ public class Account {
 
     public void setPin(int pin) {
         this.pin = pin;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                ", holder='" + holder + '\'' +
+                ", date=" + date +
+                ", amount=" + amount +
+                ", pin=" + pin +
+                '}';
     }
 }

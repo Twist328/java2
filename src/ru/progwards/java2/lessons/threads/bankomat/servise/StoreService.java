@@ -5,9 +5,12 @@ import ru.progwards.java2.lessons.threads.bankomat.model.Account;
 import java.util.Collection;
 
 public interface StoreService {
-    public Account get(String id);
-    public Collection<Account> get();
-    public void delete(String id);
-    public void insert(Account account);
-    public void update(Account account);
+
+    Account get(String id);
+    Collection<Account> get();
+
+    void delete(String id);
+    void insert(Account account);
+    void update(Account account);
+
 }
