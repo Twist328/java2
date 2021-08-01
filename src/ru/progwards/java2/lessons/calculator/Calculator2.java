@@ -19,11 +19,11 @@ public class Calculator2 {
 
 
     public static void main(String[] args) {
-        String expression = "1+3*2-9/3*(9+7)-9";
+        String expression = "2+(2+3)*(6/3)-(2*5*3)";
         List<Symbol> symbols = symAnalyze(expression);
         SymbolBuffer symbolBuffer = new SymbolBuffer(symbols);
 
-        String expression1 = "8/(4*2)+8/(3-5)";
+        String expression1 = "8/2*(2+2)";
         List<Symbol> symbols1 = symAnalyze(expression1);
         SymbolBuffer symbolBuffer1 = new SymbolBuffer(symbols1);
 

@@ -5,8 +5,8 @@ public class Calculator {
 
     public static void main(String[] args) {
         System.out.println("\n************************************");
-        System.out.println("результат вычислений:  "+ calculate("9/3*2+8/2-5")); //5
-        System.out.println("результат вычислений:  "+ calculate("1+3*2-6/3*9")); //-11
+        System.out.println("результат вычислений:  " + calculate("8/2*8/2-5")); //11
+        System.out.println("результат вычислений:  " + calculate("1+3*2-6/3*9")); //-11
         System.out.println("************************************");
     }
 
@@ -20,7 +20,7 @@ public class Calculator {
         String str = expression; // создание символьной строки
         int i = Integer.valueOf(str.substring(0, 1)); //первый элемент ( первый множитель или делитель)
         //if (i == Integer.valueOf(str.substring(0), Integer.parseInt("-"))) return Integer.parseInt("-" +i); нельзя отрицательные значения
-        if (str.length()== 1) return i;
+        if (str.length() == 1) return i;
 
         String s = str.substring(1, 2); // операнд (символ + или -, * или /, для манипуляций calculate)
 
@@ -43,8 +43,8 @@ public class Calculator {
 
     }
 }
-//*********************************************************************************************************************
 
+//*********************************************************************************************************************
 class Calculator1 {
     String expression; // символьная строка
     int pos;
@@ -53,10 +53,14 @@ class Calculator1 {
         System.out.println("\n***********************************");
         System.out.println("результат вычисления:    " + calculate1("2+(2+3)*(6/3)-(2*5*3)"));//-18
         System.out.println("***********************************");
+        System.out.println("результат вычисления:    " + calculate1("8/2*(2+2)"));//16
+        System.out.println("***********************************");
+
     }
+
     public Calculator1(String expression) {
         this.expression = expression;
-        pos = 0;
+        //pos = 0;
     }
 
     public static int calculate1(String expression) {
@@ -78,7 +82,7 @@ class Calculator1 {
     String checkSymbol() {
         if (pos >= expression.length())
             return "";
-        return expression.substring(pos, pos +1);
+        return expression.substring(pos, pos + 1);
     }
 
     // получить число из символа
@@ -165,6 +169,132 @@ class Calculator1 {
                             ex.printStackTrace();
                         }
                 }
+            } else
+                return result;
+        }
+        return result;
+    }
+}
+
+//*******************************************************************
+class Calculator3 {// Тренировка за 40 мин
+    String exspression;
+    int pos;
+
+    public static void main(String[] args) {
+
+        System.out.println("***********************************");
+        System.out.println("результат вычисления:    " + calculate3("8/2*(2+2)*9"));//144
+        System.out.println("***********************************");
+    }
+
+    public Calculator3(String exspression) {
+        this.exspression = exspression;
+    }
+
+    public static int calculate3(String exspression) {
+        return new Calculator3(exspression).calculate();
+    }
+
+    String getSymbol() {
+        if (pos >= exspression.length())
+            try {
+                throw new IndexOutOfBoundsException();
+            } catch (IndexOutOfBoundsException ex) {
+                ex.printStackTrace();
+            }
+        return exspression.substring(pos++, pos);
+    }
+
+    String checkSymbol() {
+        if (pos >= exspression.length())
+            return "";
+        return exspression.substring(pos, pos + 1);
+    }
+
+    int getNum() {
+        int num = 0;
+        try {
+            num = Integer.parseInt(getSymbol());
+        } catch (NumberFormatException ex) {
+            throw new NumberFormatException("Неправильное число");
+        }
+        return num;
+    }
+
+    boolean hasNext() {
+        return pos < exspression.length();
+    }
+
+    int bracketCalc() {
+        String symbol = checkSymbol();
+        if (symbol.equals("(")) {
+            getSymbol();
+            int result = calculate();
+            String symbolNext = getSymbol();
+            if (symbolNext.equals(")")) {
+                return result;
+            } else {
+                try {
+                    throw new Exception("Ожидалось \")\"");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return getNum();
+    }
+
+    int bracketCalc1() {
+        int result = bracketCalc();
+        while (hasNext()) {
+            String symbol = checkSymbol();
+            if ("*/".contains(symbol)) {
+                getSymbol();
+                int num = bracketCalc();
+                switch (symbol) {
+                    case "*":
+                        result *= num;
+                        break;
+                    case "/":
+                        result /= num;
+                        break;
+                    default:
+                        try {
+                            throw new Exception("Неизвестная операция");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                }
+
+            } else
+                return result;
+        }
+        return result;
+    }
+
+    public int calculate() {
+        int result = bracketCalc1();
+        while (hasNext()) {
+            String symbol = checkSymbol();
+            if ("+-".contains(symbol)) {
+                getSymbol();
+                int num = bracketCalc1();
+                switch (symbol) {
+                    case "+":
+                        result += num;
+                        break;
+                    case "-":
+                        result -= num;
+                        break;
+                    default:
+                        try {
+                            throw new Exception("Неизвестная операция");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                }
+
             } else
                 return result;
         }
