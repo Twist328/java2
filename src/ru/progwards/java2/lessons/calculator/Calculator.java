@@ -227,18 +227,18 @@ class Calculator3 {
     }
 
     int bracketCalc() {
-        String symbol = checkSymbol();//String symbol = checkSymbol();
-        if (symbol.equals("(")) {//if (symbol.equals("(")) {
-            getSymbol();// getSymbol();
-            int result = calculate();// int result = calculate();
-            String symbolNext = getSymbol();//String symbolNext = getSymbol();
-            if (symbolNext.equals(")")) {//if (symbolNext.equals(")")) {
-                return result;//return result;
-            } else {// } else {
-                try {//try {
-                    throw new Exception("Ожидалось \")\"");//throw new Exception("Ожидалoсь \")\"");
-                } catch (Exception ex) {//} catch (Exception ex) {
-                    ex.printStackTrace();//ex.printStackTrace();
+        String symbol = checkSymbol();
+        if (symbol.equals("(")) {
+            getSymbol();
+            int result = calculate();
+            String symbolNext = getSymbol();
+            if (symbolNext.equals(")")) {
+                return result;
+            } else {
+                try {
+                    throw new Exception("Ожидалось \")\"");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         }
