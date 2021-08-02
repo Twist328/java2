@@ -67,7 +67,7 @@ class Calculator1 {//со скобками
     }
 
     public static int calculate1(String expression) {
-        return new Calculator1(expression).calculate();
+        return new Calculator1(expression).addSubtract();
     }
 
     // получить символ выражения (expression)
@@ -109,7 +109,7 @@ class Calculator1 {//со скобками
         String symbol = checkSymbol();
         if (symbol.equals("(")) {
             getSymbol();
-            int result = calculate();
+            int result = addSubtract();
             String symbolNext = getSymbol();
             if (symbolNext.equals(")")) {
                 return result;
@@ -124,7 +124,7 @@ class Calculator1 {//со скобками
         return getNum();
     }
 
-    int bracketСalc1() {
+    int multiDivide() {
         int result = bracketCalc();
         while (hasNext()) {
             String symbol = checkSymbol();
@@ -151,13 +151,13 @@ class Calculator1 {//со скобками
         return result;
     }
 
-    public int calculate() {
-        int result = bracketСalc1();
+    public int addSubtract() {
+        int result = multiDivide();
         while (hasNext()) {
             String symbol = checkSymbol();
             if ("+-".contains(symbol)) {
                 getSymbol();
-                int num = bracketСalc1();
+                int num = multiDivide();
                 switch (symbol) {
                     case "+":
                         result += num;
@@ -197,7 +197,7 @@ class Calculator3 {
     }
 
     public static int calculate3(String exspression) {
-        return new Calculator3(exspression).calculate();
+        return new Calculator3(exspression).addSubtract();
     }
 
     String getSymbol() {
@@ -230,7 +230,7 @@ class Calculator3 {
         String symbol = checkSymbol();
         if (symbol.equals("(")) {
             getSymbol();
-            int result = calculate();
+            int result = addSubtract();
             String symbolNext = getSymbol();
             if (symbolNext.equals(")")) {
                 return result;
@@ -247,7 +247,7 @@ class Calculator3 {
     boolean hasNext() {
         return pos < exspression.length();
     }
-    int bracketCalc1() {
+    int multiDivide() {
         int result = bracketCalc();
         while (hasNext()) {
             String symbol = checkSymbol();
@@ -273,13 +273,14 @@ class Calculator3 {
         }
         return result;
     }
-    public int calculate(){
-        int result = bracketCalc1();
+
+    public int addSubtract(){
+        int result = multiDivide();
         while (hasNext()) {
             String symbol = checkSymbol();
             if ("+-".contains(symbol)) {
                 getSymbol();
-                int num = bracketCalc1();
+                int num = multiDivide();
                 switch (symbol) {
                     case "+":
                         result += num;
