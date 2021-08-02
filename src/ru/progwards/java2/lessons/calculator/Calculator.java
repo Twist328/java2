@@ -180,16 +180,16 @@ class Calculator1 {//со скобками
 }
 
 //*******************************************************************
-class Calculator3 {// Тренировка за 40 мин
+class Calculator3 {
     String exspression;
     int pos;
 
     public static void main(String[] args) {
 
-        System.out.println("\n**************************************"+ Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES+Emoji.GRINNING_FACE_WITH_SMILING_EYES);
-        System.out.println("результат: " + calculate3("8/2*(2+2)*9")+(LocalDateTime.now().format(DateTimeFormatter.ofPattern
-                (" СЕГОДНЯ   " + "dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm ")))));//144
-        System.out.println("**************************************"+ Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES+Emoji.GRINNING_FACE_WITH_SMILING_EYES);
+        System.out.println("\n**************************************" + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES + Emoji.GRINNING_FACE_WITH_SMILING_EYES);
+        System.out.println("результат= " + calculate3("8/2*(2+2)*9") + (LocalDateTime.now().format(DateTimeFormatter.ofPattern
+                (" СЕГОДНЯ " + "dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm ")))) + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT);//144
+        System.out.println("**************************************" + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES + Emoji.GRINNING_FACE_WITH_SMILING_EYES);
     }
 
     public Calculator3(String exspression) {
@@ -216,39 +216,37 @@ class Calculator3 {// Тренировка за 40 мин
         return exspression.substring(pos, pos + 1);
     }
 
-    int getNum() {
+    public int getNum() {
         int num = 0;
         try {
             num = Integer.parseInt(getSymbol());
         } catch (NumberFormatException ex) {
-            throw new NumberFormatException("Неправильное число");
+            throw new NumberFormatException("Число не верно");
         }
         return num;
     }
 
-    boolean hasNext() {
-        return pos < exspression.length();
-    }
-
     int bracketCalc() {
-        String symbol = checkSymbol();
-        if (symbol.equals("(")) {
-            getSymbol();
-            int result = calculate();
-            String symbolNext = getSymbol();
-            if (symbolNext.equals(")")) {
-                return result;
-            } else {
-                try {
-                    throw new Exception("Ожидалось \")\"");
-                } catch (Exception e) {
-                    e.printStackTrace();
+        String symbol = checkSymbol();//String symbol = checkSymbol();
+        if (symbol.equals("(")) {//if (symbol.equals("(")) {
+            getSymbol();// getSymbol();
+            int result = calculate();// int result = calculate();
+            String symbolNext = getSymbol();//String symbolNext = getSymbol();
+            if (symbolNext.equals(")")) {//if (symbolNext.equals(")")) {
+                return result;//return result;
+            } else {// } else {
+                try {//try {
+                    throw new Exception("Ожидалось \")\"");//throw new Exception("Ожидалoсь \")\"");
+                } catch (Exception ex) {//} catch (Exception ex) {
+                    ex.printStackTrace();//ex.printStackTrace();
                 }
             }
         }
         return getNum();
     }
-
+    boolean hasNext() {
+        return pos < exspression.length();
+    }
     int bracketCalc1() {
         int result = bracketCalc();
         while (hasNext()) {
@@ -265,19 +263,17 @@ class Calculator3 {// Тренировка за 40 мин
                         break;
                     default:
                         try {
-                            throw new Exception("Неизвестная операция");
+                            throw new Exception("Ошибка операции");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-
             } else
                 return result;
         }
         return result;
     }
-
-    public int calculate() {
+    public int calculate(){
         int result = bracketCalc1();
         while (hasNext()) {
             String symbol = checkSymbol();
@@ -293,52 +289,51 @@ class Calculator3 {// Тренировка за 40 мин
                         break;
                     default:
                         try {
-                            throw new Exception("Неизвестная операция");
+                            throw new Exception("Ошибка операции");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-
             } else
                 return result;
         }
         return result;
     }
-    enum Emoji {
+        enum Emoji {
 
-        GRINNING_FACE_WITH_SMILING_EYES('\uD83D', '\uDE01'),
-        FACE_WITH_TEARS_OF_JOY('\uD83D', '\uDE02'),
-        SMILING_FACE_WITH_OPEN_MOUTH('\uD83D', '\uDE03'),
-        SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES('\uD83D', '\uDE04'),
-        SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT('\uD83D', '\uDE05'),
-        SMILING_FACE_WITH_OPEN_MOUTH_AND_TIGHTLY_CLOSED_EYES('\uD83D', '\uDE06'),
-        WINKING_FACE('\uD83D', '\uDE09');
+            GRINNING_FACE_WITH_SMILING_EYES('\uD83D', '\uDE01'),
+            FACE_WITH_TEARS_OF_JOY('\uD83D', '\uDE02'),
+            SMILING_FACE_WITH_OPEN_MOUTH('\uD83D', '\uDE03'),
+            SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES('\uD83D', '\uDE04'),
+            SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT('\uD83D', '\uDE05'),
+            SMILING_FACE_WITH_OPEN_MOUTH_AND_TIGHTLY_CLOSED_EYES('\uD83D', '\uDE06'),
+            WINKING_FACE('\uD83D', '\uDE09');
 
-        Character firstChar;
-        Character secondChar;
+            Character firstChar;
+            Character secondChar;
 
-        Emoji(Character firstChar, Character secondChar) {
-            this.firstChar = firstChar;
-            this.secondChar = secondChar;
-        }
-
-        Emoji() {
-
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-
-            if (this.firstChar != null) {
-                sb.append(this.firstChar);
-            }
-            if (this.secondChar != null) {
-                sb.append(this.secondChar);
+            Emoji(Character firstChar, Character secondChar) {
+                this.firstChar = firstChar;
+                this.secondChar = secondChar;
             }
 
-            return sb.toString();
-        }
+            Emoji() {
 
+            }
+
+            @Override
+            public String toString() {
+                StringBuilder sb = new StringBuilder();
+
+                if (this.firstChar != null) {
+                    sb.append(this.firstChar);
+                }
+                if (this.secondChar != null) {
+                    sb.append(this.secondChar);
+                }
+
+                return sb.toString();
+            }
+
+        }
     }
-}
