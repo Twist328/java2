@@ -48,7 +48,7 @@ public class Calculator {
 }
 
 //*********************************************************************************************************************
-class Calculator1 {
+class Calculator1 {//со скобками
     String expression; // символьная строка
     int pos;
 
@@ -186,10 +186,10 @@ class Calculator3 {// Тренировка за 40 мин
 
     public static void main(String[] args) {
 
-        System.out.println("\n***********************************"+ Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES);
-        System.out.println("результат вычисления: " + calculate3("8/2*(2+2)*9")+(LocalDateTime.now().format(DateTimeFormatter.ofPattern
+        System.out.println("\n**************************************"+ Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES+Emoji.GRINNING_FACE_WITH_SMILING_EYES);
+        System.out.println("результат: " + calculate3("8/2*(2+2)*9")+(LocalDateTime.now().format(DateTimeFormatter.ofPattern
                 (" СЕГОДНЯ   " + "dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm ")))));//144
-        System.out.println("***********************************"+ Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES);
+        System.out.println("**************************************"+ Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES+Emoji.GRINNING_FACE_WITH_SMILING_EYES);
     }
 
     public Calculator3(String exspression) {
