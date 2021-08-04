@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SystemPrfiler" />
+        <module name="profiler" />
         <module name="Heap" />
         <module name="GsonListSerialization" />
         <module name="Calculator" />
