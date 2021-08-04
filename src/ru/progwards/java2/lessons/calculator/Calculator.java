@@ -180,9 +180,13 @@ class Calculator1 {//со скобками
 }
 
 //*******************************************************************
-class Calculator3 {// Тренировка за 40 мин
+class Calculator3{
     String exspression;
     int pos;
+
+    public Calculator3(String exspression) {
+        this.exspression = exspression;
+    }
 
     public static void main(String[] args) {
 
@@ -191,54 +195,44 @@ class Calculator3 {// Тренировка за 40 мин
                 (" СЕГОДНЯ   " + "dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm ")))));//144
         System.out.println("**************************************"+ Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES+Emoji.GRINNING_FACE_WITH_SMILING_EYES);
     }
-
-    public Calculator3(String exspression) {
-        this.exspression = exspression;
-    }
-
-    public static int calculate3(String exspression) {
-        return new Calculator3(exspression).calculate();
-    }
-
-    String getSymbol() {
-        if (pos >= exspression.length())
+public static int calculate3(String exspression){
+        return new Calculator3(exspression).addSubstrate();
+}
+    String getSymbol(){
+        if (pos>=exspression.length())
             try {
                 throw new IndexOutOfBoundsException();
-            } catch (IndexOutOfBoundsException ex) {
-                ex.printStackTrace();
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
             }
-        return exspression.substring(pos++, pos);
+        return exspression.substring(pos++,pos);
     }
-
-    String checkSymbol() {
-        if (pos >= exspression.length())
+    String checkSymbol(){
+        if (pos>=exspression.length())
             return "";
-        return exspression.substring(pos, pos + 1);
+        return exspression.substring(pos,pos+1);
     }
-
     int getNum() {
-        int num = 0;
+        int num;
         try {
             num = Integer.parseInt(getSymbol());
-        } catch (NumberFormatException ex) {
-            throw new NumberFormatException("Неправильное число");
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Ошибка значения числа");
         }
         return num;
     }
-
-    boolean hasNext() {
-        return pos < exspression.length();
+    boolean hasNext(){
+        return pos<exspression.length();
     }
-
-    int bracketCalc() {
-        String symbol = checkSymbol();
-        if (symbol.equals("(")) {
+    int bracketCalc(){
+        String symbol=checkSymbol();
+        if (symbol.equals("(")){
             getSymbol();
-            int result = calculate();
+            int result=addSubstrate();
             String symbolNext = getSymbol();
             if (symbolNext.equals(")")) {
                 return result;
-            } else {
+            }else {
                 try {
                     throw new Exception("Ожидалось \")\"");
                 } catch (Exception e) {
@@ -248,8 +242,7 @@ class Calculator3 {// Тренировка за 40 мин
         }
         return getNum();
     }
-
-    int bracketCalc1() {
+    int multiDivide() {
         int result = bracketCalc();
         while (hasNext()) {
             String symbol = checkSymbol();
@@ -270,20 +263,18 @@ class Calculator3 {// Тренировка за 40 мин
                             e.printStackTrace();
                         }
                 }
-
             } else
                 return result;
         }
         return result;
     }
-
-    public int calculate() {
-        int result = bracketCalc1();
+    int addSubstrate(){
+        int result = multiDivide();
         while (hasNext()) {
             String symbol = checkSymbol();
             if ("+-".contains(symbol)) {
                 getSymbol();
-                int num = bracketCalc1();
+                int num = multiDivide();
                 switch (symbol) {
                     case "+":
                         result += num;
@@ -298,13 +289,13 @@ class Calculator3 {// Тренировка за 40 мин
                             e.printStackTrace();
                         }
                 }
-
             } else
                 return result;
         }
         return result;
     }
-    enum Emoji {
+
+        enum Emoji {
 
         GRINNING_FACE_WITH_SMILING_EYES('\uD83D', '\uDE01'),
         FACE_WITH_TEARS_OF_JOY('\uD83D', '\uDE02'),
