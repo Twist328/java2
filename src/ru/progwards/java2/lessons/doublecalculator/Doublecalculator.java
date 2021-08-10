@@ -1,9 +1,7 @@
 package ru.progwards.java2.lessons.doublecalculator;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Doublecalculator {
     public static void main(String[] args) {
