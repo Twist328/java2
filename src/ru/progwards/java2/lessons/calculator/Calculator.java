@@ -14,7 +14,7 @@ class Calculator {
     public static void main(String[] args) {
         System.out.println("\n************************************");
         System.out.println("результат вычислений:  " + calculate("8/2*8/2-5")); //11
-        System.out.println("результат вычислений:  " + calculate("1+3*2-6/3*9")); //-11
+        System.out.println("результат вычислений:  " + calculate("2+3*2")); //8
         System.out.println("************************************");
     }
 
@@ -179,13 +179,12 @@ class Calculator1 {//со скобками
 
 //*******************************************************************
 class Calculator3 {
-    String exspression;
     int pos;
+    String exspression;
 
     public Calculator3(String exspression) {
         this.exspression = exspression;
     }
-
 
     public static void main(String[] args) {
 
@@ -197,7 +196,6 @@ class Calculator3 {
 
     public static int calculate3(String exspression) {
         return new Calculator3(exspression).addSub();
-
     }
 
     String getSymbol() {
@@ -208,7 +206,6 @@ class Calculator3 {
                 e.printStackTrace();
             }
         return exspression.substring(pos++, pos);
-
     }
 
     String checkSymbol() {
@@ -218,11 +215,11 @@ class Calculator3 {
     }
 
     int getNum() {
-        int num;
+        int num = 0;
         try {
             num = Integer.parseInt(getSymbol());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ошибка числа");
+            e.printStackTrace();
         }
         return num;
     }
@@ -246,58 +243,59 @@ class Calculator3 {
                     e.printStackTrace();
                 }
             }
-
         }
         return getNum();
     }
 
     int multDiv() {
         int result = bracketCalc();
-        while (hasNext()){
-            String symbol=checkSymbol();
-            if ("*/".contains(symbol)){
+        while (hasNext()) {
+            String symbol = checkSymbol();
+            if ("*/".contains(symbol)) {
                 getSymbol();
-                int num=bracketCalc();
-                switch (symbol){
+                int num = bracketCalc();
+                switch (symbol) {
                     case "*":
-                        result*=num;
+                        result *= num;
                         break;
                     case "/":
-                        result/=num;
+                        result /= num;
                         break;
                     default:
                         try {
-                            throw new Exception("Ошибка операции");
+                            throw new Exception("Ошибка вычисления");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-            }else return result;
+            } else return result;
         }
         return result;
     }
-    int addSub(){
+
+    int addSub() {
+
         int result = multDiv();
-        while (hasNext()){
-            String symbol=checkSymbol();
-            if ("+-".contains(symbol)){
+        while (hasNext()) {
+            String symbol = checkSymbol();
+            if ("+-".contains(symbol)) {
                 getSymbol();
-                int num=multDiv();
-                switch (symbol){
+                int num = multDiv();
+                switch (symbol) {
                     case "+":
-                        result+=num;
+                        result += num;
                         break;
                     case "-":
-                        result-=num;
+                        result -= num;
                         break;
                     default:
                         try {
-                            throw new Exception("Ошибка операции");
+                            throw new Exception("Ошибка вычисления");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-            }else return result;
+            } else return result;
         }
         return result;
     }
