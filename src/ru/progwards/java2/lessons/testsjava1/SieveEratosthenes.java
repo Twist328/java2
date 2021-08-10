@@ -1,4 +1,4 @@
-package ru.progwards.java2.lessons.eratosthenesTest;
+package ru.progwards.java2.lessons.testsjava1;
 
 import java.util.ArrayList;
 import java.util.List;

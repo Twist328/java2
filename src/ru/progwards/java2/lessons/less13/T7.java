@@ -20,7 +20,9 @@ public class T7 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             System.out.println("thread started "+count.getCount());
+
         }
     }
 
