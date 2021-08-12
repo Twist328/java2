@@ -29,3 +29,51 @@ public class ClasToken {
         }
     }
 }
+
+//*******************************************************************
+
+class StringTokenizer_Demo {
+
+    public static void main(String args[])
+
+    {
+        StringTokenizer str_arr = new StringTokenizer("Lets practice at Progwards in 2021");
+
+        System.out.println("The number of Tokens are: " + str_arr.countTokens());// Подсчет токенов
+
+        System.out.println(str_arr.hasMoreElements());// Проверка на наличие токенов
+
+        while (str_arr.hasMoreElements()) {// Проверка и отображение токенов
+
+            System.out.println("The Next token: " + str_arr.nextToken());
+
+        }
+
+    }
+
+}
+//**********************************************************************************
+ class StringTokenizer_Demo1 {
+
+    public static void main(String args[])
+
+    {
+        // Создание StringTokenizer
+
+        StringTokenizer str_arr = new StringTokenizer("Lets practice at Progwards");
+
+        // Подсчет токенов
+
+        int count = str_arr.countTokens();
+
+        System.out.println("Total number of Tokens: " + count);
+
+        // Распечатать токены
+
+        for (int i = 0; i < count; i++)
+
+            System.out.println("token at [" + i + "] : " + str_arr.nextToken());
+
+    }
+
+}

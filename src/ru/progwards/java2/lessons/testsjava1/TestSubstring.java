@@ -6,6 +6,9 @@ public class TestSubstring {
     public static void main(String args[]){
         String testString = "КАКЖЕТЫЗАДОЛБАЛ";
         System.out.println(testString.substring(0,5));
+        System.out.println(testString.substring(0,1));
+        System.out.println(testString.substring(1,2));
+        System.out.println(testString.substring(2));
         System.out.println(testString.substring(1,5));
         System.out.println(testString.substring(2,5));
         System.out.println(testString.substring(0,6));

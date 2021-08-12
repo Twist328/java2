@@ -24,25 +24,27 @@ class Calculator {
          должен быть равен 8. По оригинальному условию задачи все числа содержат не более одной цифры, пробелов в строке нет.*/
 
     public static int calculate(String exspression) {
-        int result = Integer.valueOf(exspression.substring(0, 1));
-        if (exspression.length() == 1) return result;
+        int res = Integer.parseInt(exspression.substring(0, 1));
+        if (exspression.length() == 1) return res;
         String symbol = exspression.substring(1, 2);
         while (symbol.equals("*") || (symbol.equals("/"))) {
             if ("*".contains(symbol)) {
-                result *= Integer.valueOf(exspression.substring(2, 3));
+                res *= Integer.parseInt(exspression.substring(2, 3));
             } else if ("/".contains(symbol))
-                result /= Integer.valueOf(exspression.substring(2, 3));
+                res /= Integer.parseInt(exspression.substring(2, 3));
+
             exspression = exspression.substring(2);
-            if (exspression.length() == 1) return result;
+            if (exspression.length() == 1) return res;
             symbol = exspression.substring(1, 2);
         }
         if ("+".contains(symbol)) {
-            result += calculate(exspression.substring(2));
+            res += calculate(exspression.substring(2));
         } else if ("-".contains(symbol))
-            result -= calculate(exspression.substring(2));
-        return result;
+            res -= calculate(exspression.substring(2));
+        return res;
     }
 }
+
 
 //*********************************************************************************************************************
 class Calculator1 {//со скобками
@@ -179,8 +181,8 @@ class Calculator1 {//со скобками
 
 //*******************************************************************
 class Calculator3 {
-    int pos;
     String exspression;
+    int pos;
 
     public Calculator3(String exspression) {
         this.exspression = exspression;
@@ -189,13 +191,14 @@ class Calculator3 {
     public static void main(String[] args) {
 
         System.out.println("\n**************************************" + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES + Emoji.GRINNING_FACE_WITH_SMILING_EYES);
-        System.out.println("результат= " + calculate3("8/2*(2+2)*9") + (LocalDateTime.now().format(DateTimeFormatter.ofPattern
+        System.out.println("результат = " + calculate3("8/2*(2+2)*9") + (LocalDateTime.now().format(DateTimeFormatter.ofPattern
                 (" СЕГОДНЯ " + "dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm ")))) + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT);//144
         System.out.println("**************************************" + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES + Emoji.GRINNING_FACE_WITH_SMILING_EYES);
     }
 
     public static int calculate3(String exspression) {
-        return new Calculator3(exspression).addSub();
+        return new Calculator3(exspression).addSubCalc();
+
     }
 
     String getSymbol() {
@@ -215,11 +218,11 @@ class Calculator3 {
     }
 
     int getNum() {
-        int num = 0;
+        int num;
         try {
             num = Integer.parseInt(getSymbol());
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            throw new NumberFormatException("Ошибочное число");
         }
         return num;
     }
@@ -232,13 +235,13 @@ class Calculator3 {
         String symbol = checkSymbol();
         if (symbol.equals("(")) {
             getSymbol();
-            int result = addSub();
+            int res = addSubCalc();
             String symbolNext = getSymbol();
             if (symbolNext.equals(")")) {
-                return result;
+                return res;
             } else {
                 try {
-                    throw new Exception("Ожидалось \"(\"");
+                    throw new Exception("Ошибка - жидалось : \"(\"");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -247,8 +250,8 @@ class Calculator3 {
         return getNum();
     }
 
-    int multDiv() {
-        int result = bracketCalc();
+    int multDivCalc() {
+        int res = bracketCalc();
         while (hasNext()) {
             String symbol = checkSymbol();
             if ("*/".contains(symbol)) {
@@ -256,48 +259,47 @@ class Calculator3 {
                 int num = bracketCalc();
                 switch (symbol) {
                     case "*":
-                        result *= num;
+                        res *= num;
                         break;
                     case "/":
-                        result /= num;
+                        res /= num;
                         break;
                     default:
                         try {
-                            throw new Exception("Ошибка вычисления");
+                            throw new Exception("Ошибка операции");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-            } else return result;
+            } else return res;
         }
-        return result;
+        return res;
     }
 
-    int addSub() {
-
-        int result = multDiv();
+    int addSubCalc() {
+        int res = multDivCalc();
         while (hasNext()) {
             String symbol = checkSymbol();
             if ("+-".contains(symbol)) {
                 getSymbol();
-                int num = multDiv();
+                int num = multDivCalc();
                 switch (symbol) {
                     case "+":
-                        result += num;
+                        res += num;
                         break;
                     case "-":
-                        result -= num;
+                        res -= num;
                         break;
                     default:
                         try {
-                            throw new Exception("Ошибка вычисления");
+                            throw new Exception("Ошибка операции");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-            } else return result;
+            } else return res;
         }
-        return result;
+        return res;
     }
 
     enum Emoji {

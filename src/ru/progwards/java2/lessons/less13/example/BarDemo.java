@@ -12,7 +12,7 @@ class BarDemo {
         new MyThread1(cb, "B");
         new MyThread1(cb, "C");*/
 
-            CyclicBarrier cb = new CyclicBarrier(3, new BarAction());
+            CyclicBarrier cb = new CyclicBarrier(2, new BarAction());
 
             System.out.println("Запуск потоков");
 
@@ -32,7 +32,6 @@ class MyThread1 implements Runnable {
 
     MyThread1(CyclicBarrier c, String n) {
         cbar = c;
-
         name = n;
         new Thread(this).start();
     }
