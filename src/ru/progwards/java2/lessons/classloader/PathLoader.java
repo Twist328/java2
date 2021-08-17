@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PathLoader extends ClassLoader {
-    final static String PATH_MAIN = "C:\\Projects\\java2\\src\\main\\resources\\users.json";
+    final static String PATH_MAIN = "C:\\Projects\\java2\\src\\main\\resources\\users.FileStoreService.json";
     final static String DOT_CLASS = ".class";
     private static PathLoader loader = new PathLoader(PATH_MAIN);
 
