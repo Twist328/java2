@@ -32,7 +32,7 @@ public class Simposium {
         long reflectSum;// суммарное время, которое философ размышлял в мс
         long eatSum;// суммарное время, которое философ ел в мс
 
-        final long REPEATTIME = 500;
+        final static long INTERVALTIME = 500;
 
         //размышлять. Выводит "размышляет "+ name на консоль с периодичностью 0.5 сек
         void reflect() throws InterruptedException {
@@ -44,7 +44,7 @@ public class Simposium {
                 System.out.println("размышляет " + name);
                 long needReflect = reflectTime - passed;
                 try {
-                    Thread.sleep(needReflect > REPEATTIME ? REPEATTIME : needReflect);
+                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
                 } catch (InterruptedException e) {
                     isInterrupted = true;
                     break;
@@ -68,7 +68,7 @@ public class Simposium {
                 System.out.println("ест " + name);
                 long needReflect = eatTime - passed;
                 try {
-                    Thread.sleep(needReflect > REPEATTIME ? REPEATTIME : needReflect);
+                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
                 } catch (InterruptedException e) {
                     isInterrupted = true;
                     break;
