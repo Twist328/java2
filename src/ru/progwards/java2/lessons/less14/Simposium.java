@@ -5,14 +5,16 @@ import java.util.SplittableRandom;
 public class Simposium {
 
     // вилка
-   static class Fork{
-       boolean isFree=true;
-       private boolean isFree(){
-           return isFree;
-       }
-       private void setFree(boolean free){
-           isFree=free;
-       }
+    static class Fork {
+        boolean areFree = true;
+
+        private boolean areFree() {
+            return areFree;
+        }
+
+        private void setFree(boolean free) {
+            areFree = free;
+        }
     }
 
 
@@ -34,8 +36,8 @@ public class Simposium {
 
         //размышлять. Выводит "размышляет "+ name на консоль с периодичностью 0.5 сек
         void reflect() throws InterruptedException {
-            long tStart = System.currentTimeMillis();
-            long tNow = tStart;
+            long timeStart = System.currentTimeMillis();
+            long timeNow = timeStart;
             long passed = 0;
             boolean isInterrupted = false;
             while (passed < reflectTime) {
@@ -47,21 +49,22 @@ public class Simposium {
                     isInterrupted = true;
                     break;
                 } finally {
-                    tNow = System.currentTimeMillis();
-                    passed = tNow - tStart;
+                    timeNow = System.currentTimeMillis();
+                    passed = timeNow - timeStart;
                 }
             }
             reflectSum += passed;
-            if(isInterrupted) throw new InterruptedException();
+            if (isInterrupted) throw new InterruptedException();
         }
 
         //есть. Выводит "ест "+ name на консоль с периодичностью 0.5 сек
         void eat() throws InterruptedException {
-            long tStart = System.currentTimeMillis();
-            long tNow = tStart;
+            long timeStart = System.currentTimeMillis();
+            long timeNow = timeStart;
             long passed = 0;
             boolean isInterrupted = false;
             while (passed < eatTime) {
+
                 System.out.println("ест " + name);
                 long needReflect = eatTime - passed;
                 try {
@@ -70,12 +73,12 @@ public class Simposium {
                     isInterrupted = true;
                     break;
                 } finally {
-                    tNow = System.currentTimeMillis();
-                    passed = tNow - tStart;
+                    timeNow = System.currentTimeMillis();
+                    passed = timeNow - timeStart;
                 }
             }
             eatSum += passed;
-            if(isInterrupted) throw new InterruptedException();
+            if (isInterrupted) throw new InterruptedException();
         }
 
         Philosopher(String name, Fork left, Fork right, long reflectTime, long eatTime) {
@@ -93,7 +96,9 @@ public class Simposium {
         }
     }
 
-    enum Direction{LEFT, RIGHT};
+    enum Direction {LEFT, RIGHT}
+
+    ;
     final static int PHILSCOUNT = 5; // количество философов
     Thread[] threads = new Thread[PHILSCOUNT]; // поток на каждого философа
     Philosopher[] philosophers = new Philosopher[PHILSCOUNT]; // философы
@@ -104,11 +109,11 @@ public class Simposium {
     // через которое получив 2 вилки философ наестся и положит вилки на место
     Simposium(long reflectTime, long eatTime) {
         Fork[] forks = new Fork[PHILSCOUNT];
-        for (int i=0;i<PHILSCOUNT; i++) {
+        for (int i = 0; i < PHILSCOUNT; i++) {
             forks[i] = new Fork();
         }
-        for (int i=0;i<PHILSCOUNT; i++) {
-            final Philosopher phil = new Philosopher("PH"+(i+1), forks[i], forks[(i+1)% PHILSCOUNT], reflectTime, eatTime);
+        for (int i = 0; i < PHILSCOUNT; i++) {
+            final Philosopher phil = new Philosopher("PH" + (i + 1), forks[i], forks[(i + 1) % PHILSCOUNT], reflectTime, eatTime);
             philosophers[i] = phil;
             threads[i] = new Thread(new Algorithms(phil, random));
         }
@@ -144,7 +149,7 @@ public class Simposium {
                 Fork dirRt = phil.getFork(side);
                 synchronized (dirRt) {
                     // 1. ПОСМОТРИ НАПРАВО, если нет вилки, то через несколько случайное количество секунд повтори действие поменяв сторону (ПОСМОТРИ НАЛЕВО).
-                    if (dirRt.isFree())
+                    if (dirRt.areFree())
                         dirRt.setFree(false); // 2. Увидел вилку на столе то ПОПРОБУЙ ее взять. Если попытка неудачна то прекрати попытку и поменяв сторону вернись в п.1
                     else continue;
                 }
@@ -153,7 +158,7 @@ public class Simposium {
                 Fork dirLt = phil.getFork(side);
                 synchronized (dirLt) {
                     // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
-                    if (dirLt.isFree())
+                    if (dirLt.areFree())
                         dirLt.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
                     else {
                         dirRt.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
@@ -181,17 +186,17 @@ public class Simposium {
 
     // запускает философскую беседу
     void start() {
-        for (int i=0;i<PHILSCOUNT; i++) {
+        for (int i = 0; i < PHILSCOUNT; i++) {
             threads[i].start();
         }
     }
 
     // завершает философскую беседу
     void stop() throws InterruptedException {
-        for (int i=0;i<PHILSCOUNT; i++) {
+        for (int i = 0; i < PHILSCOUNT; i++) {
             threads[i].interrupt();
         }
-        for (int i=0;i<PHILSCOUNT; i++) {
+        for (int i = 0; i < PHILSCOUNT; i++) {
             threads[i].join();
         }
     }
@@ -200,8 +205,10 @@ public class Simposium {
     //Философ name, ел ххх, размышлял xxx
     //где ххх время в мс
     void print() {
-        for (Philosopher PH: philosophers) {
-            System.out.println("Философ "+PH.name+", ел "+PH.eatSum+", размышлял "+PH.reflectSum);
+        System.out.println("***********************************");
+        for (Philosopher PH : philosophers) {
+            System.out.println("Философ " + PH.name + ", ел " + PH.eatSum + ", размышлял " + PH.reflectSum);
+            System.out.println("***********************************");
         }
     }
 
