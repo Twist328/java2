@@ -5,15 +5,16 @@ import java.util.SplittableRandom;
 public class Simposium {
 
     // вилка
-    static class Fork {
-        private boolean isFree = true;
-        public boolean isFree() {
-            return isFree;
-        }
-        public void setFree(boolean free) {
-            isFree = free;
-        }
+   static class Fork{
+       boolean isFree=true;
+       private boolean isFree(){
+           return isFree;
+       }
+       private void setFree(boolean free){
+           isFree=free;
+       }
     }
+
 
     // философ
     static class Philosopher {
@@ -23,8 +24,8 @@ public class Simposium {
         Fork right;// вилка справа
         Fork left;// вилка слева
 
-        long reflectTime;// время, которое философ размышляет в мс
-        long eatTime;// время, которое философ ест в мс
+        long reflectTime;// отрезок времени, когда философ размышляет в мс
+        long eatTime;// отрезок времени, когда философ ест в мс
 
         long reflectSum;// суммарное время, которое философ размышлял в мс
         long eatSum;// суммарное время, которое философ ел в мс
@@ -93,84 +94,84 @@ public class Simposium {
     }
 
     enum Direction{LEFT, RIGHT};
-    final static int PCOUNT = 5; // количество философов
-    Thread[] threads = new Thread[PCOUNT]; // поток на каждого философа
-    Philosopher[] philosophers = new Philosopher[PCOUNT]; // философы
+    final static int PHILSCOUNT = 5; // количество философов
+    Thread[] threads = new Thread[PHILSCOUNT]; // поток на каждого философа
+    Philosopher[] philosophers = new Philosopher[PHILSCOUNT]; // философы
     SplittableRandom random = new SplittableRandom(); //ГСЧ
 
     //который инициализирует необходимое количество философов и вилок. Каждый философ выполняется в отдельном потоке.
     // reflectTime задает время в мс, через которое философ проголодается, eatTime задает время в мс,
     // через которое получив 2 вилки философ наестся и положит вилки на место
     Simposium(long reflectTime, long eatTime) {
-        Fork[] forks = new Fork[PCOUNT];
-        for (int i=0;i<PCOUNT; i++) {
+        Fork[] forks = new Fork[PHILSCOUNT];
+        for (int i=0;i<PHILSCOUNT; i++) {
             forks[i] = new Fork();
         }
-        for (int i=0;i<PCOUNT; i++) {
-            final Philosopher p = new Philosopher("P"+(i+1), forks[i], forks[(i+1)% PCOUNT], reflectTime, eatTime);
-            philosophers[i] = p;
-            threads[i] = new Thread(new Algorithms(p, random));
+        for (int i=0;i<PHILSCOUNT; i++) {
+            final Philosopher phil = new Philosopher("PH"+(i+1), forks[i], forks[(i+1)% PHILSCOUNT], reflectTime, eatTime);
+            philosophers[i] = phil;
+            threads[i] = new Thread(new Algorithms(phil, random));
         }
     }
 
     // основная логика действий философа
     static class Algorithms implements Runnable {
 
-        Philosopher p;
+        Philosopher phil;
         SplittableRandom random;
-        Direction lookNow = Direction.LEFT;
+        Direction side = Direction.LEFT;//side - СТОРОНА (право-лево от философа, касается вилки)
 
-        public Algorithms(Philosopher p, SplittableRandom random) {
-            this.p = p;
+        public Algorithms(Philosopher phil, SplittableRandom random) {
+            this.phil = phil;
             this.random = random;
         }
 
-        public Algorithms(Philosopher p) {
-            this.p = p;
+        public Algorithms(Philosopher phil) {
+            this.phil = phil;
             this.random = random;
         }
 
         @Override
         public void run() {
             while (true) {
-                lookNow = (lookNow == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
+                side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
                 try {
-                    Thread.sleep(random.nextInt(PCOUNT));
+                    Thread.sleep(random.nextInt(PHILSCOUNT));
                 } catch (InterruptedException e) {
                     break;
                 }
                 // Ситуация: Нет ни одной вилки
-                Fork f1 = p.getFork(lookNow);
-                synchronized (f1) {
+                Fork dirRt = phil.getFork(side);
+                synchronized (dirRt) {
                     // 1. ПОСМОТРИ НАПРАВО, если нет вилки, то через несколько случайное количество секунд повтори действие поменяв сторону (ПОСМОТРИ НАЛЕВО).
-                    if (f1.isFree())
-                        f1.setFree(false); // 2. Увидел вилку на столе то ПОПРОБУЙ ее взять. Если попытка неудачна то прекрати попытку и поменяв сторону вернись в п.1
+                    if (dirRt.isFree())
+                        dirRt.setFree(false); // 2. Увидел вилку на столе то ПОПРОБУЙ ее взять. Если попытка неудачна то прекрати попытку и поменяв сторону вернись в п.1
                     else continue;
                 }
                 // Ситуация: В одной руке есть вилка.
-                lookNow = (lookNow == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
-                Fork f2 = p.getFork(lookNow);
-                synchronized (f2) {
+                side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
+                Fork dirLt = phil.getFork(side);
+                synchronized (dirLt) {
                     // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
-                    if (f2.isFree())
-                        f2.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
+                    if (dirLt.isFree())
+                        dirLt.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
                     else {
-                        f1.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
+                        dirRt.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
                         continue;
                     }
                 }
                 // Ситуация: В обеих руках по вилке.
                 // 6. Приступай к еде
                 try {
-                    p.eat();
+                    phil.eat();
                 } catch (InterruptedException e) {
                     break;
                 }
-                p.right.setFree(true);
-                p.left.setFree(true);
+                phil.right.setFree(true);
+                phil.left.setFree(true);
                 // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
                 try {
-                    p.reflect();
+                    phil.reflect();
                 } catch (InterruptedException e) {
                     break;
                 }
@@ -180,17 +181,17 @@ public class Simposium {
 
     // запускает философскую беседу
     void start() {
-        for (int i=0;i<PCOUNT; i++) {
+        for (int i=0;i<PHILSCOUNT; i++) {
             threads[i].start();
         }
     }
 
     // завершает философскую беседу
     void stop() throws InterruptedException {
-        for (int i=0;i<PCOUNT; i++) {
+        for (int i=0;i<PHILSCOUNT; i++) {
             threads[i].interrupt();
         }
-        for (int i=0;i<PCOUNT; i++) {
+        for (int i=0;i<PHILSCOUNT; i++) {
             threads[i].join();
         }
     }
@@ -199,8 +200,8 @@ public class Simposium {
     //Философ name, ел ххх, размышлял xxx
     //где ххх время в мс
     void print() {
-        for (Philosopher p: philosophers) {
-            System.out.println("Философ "+p.name+", ел "+p.eatSum+", размышлял "+p.reflectSum);
+        for (Philosopher PH: philosophers) {
+            System.out.println("Философ "+PH.name+", ел "+PH.eatSum+", размышлял "+PH.reflectSum);
         }
     }
 
