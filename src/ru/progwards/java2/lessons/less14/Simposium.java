@@ -145,11 +145,11 @@ public class Simposium {
         @Override
         public void run() {
             while (true) {
-                if (side.equals(Direction.LEFT)){
-                   side.equals( Direction.RIGHT);
-                }else
+                if (side.equals(Direction.LEFT)) {
+                    side.equals(Direction.RIGHT);
+                } else
                     side.equals(Direction.LEFT);
-               /* side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);*/
+                /* side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);*/
                 try {
                     Thread.sleep(random.nextInt(PHILSCOUNT));
                 } catch (InterruptedException e) {
@@ -164,35 +164,36 @@ public class Simposium {
                     else continue;
                 }
                 // Ситуация: В одной руке есть вилка.
-                side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
-                Fork dirLt = phil.getFork(side);
-                synchronized (dirLt) {
-                    // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
-                    if (dirLt.areFree())
-                        dirLt.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
-                    else {
-                        dirRt.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
-                        continue;
+                     side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
+                    Fork dirLt = phil.getFork(side);
+                    synchronized (dirLt) {
+                        // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
+                        if (dirLt.areFree())
+                            dirLt.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
+                        else {
+                            dirRt.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
+                            continue;
+                        }
                     }
-                }
-                // Ситуация: В обеих руках по вилке.
-                // 6. Приступай к еде
-                try {
-                    phil.eat();
-                } catch (InterruptedException e) {
-                    break;
-                }
-                phil.right.setFree(true);
-                phil.left.setFree(true);
-                // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
-                try {
-                    phil.reflect();
-                } catch (InterruptedException e) {
-                    break;
+                    // Ситуация: В обеих руках по вилке.
+                    // 6. Приступай к еде
+                    try {
+                        phil.eat();
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                    phil.right.setFree(true);
+                    phil.left.setFree(true);
+                    // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
+                    try {
+                        phil.reflect();
+                    } catch (InterruptedException e) {
+                        break;
+                    }
                 }
             }
         }
-    }
+
 
     // запускает философскую беседу
     void start() {
