@@ -6,13 +6,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /*
-Многопоточная версия с сервисным компактизирующим потоком
-В блоках добавлены ссылки на предыдущие и следующие блоки, которые постоянно актуализируются, убран emptiesTreeBySize
-Не требуется сортировка перед дефргментацией и компактизацией.
-Дефрагментация закомментирована, т.к. сервисный поток её выполняет успешно, а в очередь свободных блоков свободные попадают
-в начало - как бы оставляя старые сервисному потоку в удаление Heap_initial_hashTable работает также, суда по passed time,
-но общее время malloc time и free time у него значительно меньше
-При тесте в 25% случаев возникает ошибка высвобождения не существующего объекта - сложно найти, не охота думать :)
+При тесте в часто возникает ошибка высвобождения какого-то объекта(пока не понял)
 */
 
 public class Heap implements HeapInterface {
@@ -41,10 +35,6 @@ public class Heap implements HeapInterface {
     //Hashtable<Integer, MBlock> emptiesMapByPtr; // список пустых по адресу
     final int averageObjectSize = 64; // средний размер объекта (для рассчета общего количества)
 
-    //TreeMap<Integer, MBlock> objectsTreeByPtr; // список объектов по адресам, ключ = адрес
-    //TreeMap<Integer, MBlock> emptiesTreeByPtr; // поиск пустых блоков по размеру
-
-    //MBlock firstEmpty; // первый свободный блок
     MBlock firstObject = null; // первый занятый не дефрагменченный блок
 
     int freeSize;
@@ -91,13 +81,6 @@ public class Heap implements HeapInterface {
             found = emptiesTreeBySize.ceilingEntry(size);
             if (found == null) {
 
-                //defrag();
-
-                //found = emptiesTreeBySize.ceilingEntry(size);
-                //if (found == null) {
-
-                //compact();
-
                 found = emptiesTreeBySize.ceilingEntry(size);
                 if (found == null) {
                     Map.Entry<Integer, ArrayDeque<MBlock>> f = emptiesTreeBySize.pollFirstEntry();
@@ -108,7 +91,7 @@ public class Heap implements HeapInterface {
                     System.out.print(" MBlock: ptr=" + b.ptr + " size=" + b.size);
 //                    throw new OutOfMemoryException("Cannot malloc " + size + " bytes of memory.");
                 }
-                //}
+
             }
 
            int foundSize = found.getKey();
@@ -157,55 +140,18 @@ public class Heap implements HeapInterface {
 
 
     private void newEmpty(MBlock block) {
-        // можно было бы объединять пустые при высвобождении, но пусть это будет в сервисном потоке
-        // если не объединяем, тогда надо бы включить дефрагментацию. Не будем, чтобы не поддерживать firstEmpty
-        /*MBlock prev = block.prev;
-        while(prev!=null && prev.type == BlockType.EMPTY) {
-            ArrayDeque<MBlock> empties = emptiesTreeBySize.get(prev.size);
-            if (empties.size() == 1) {
-                emptiesTreeBySize.remove(prev.size);
-            } else {
-                empties.remove(prev);
-            }
-            block.size += prev.size;
-            block.ptr = prev.ptr;
-            emptiesMapByPtr.remove(prev.ptr);
-            prev = prev.prev;
-            block.prev = prev;
-            if(prev!=null) prev.next = block;
-        }
-        MBlock next = block.next;
-        while(next!=null && next.type == BlockType.EMPTY) {
-            ArrayDeque<MBlock> empties = emptiesTreeBySize.get(next.size);
-            if (empties.size() == 1) {
-                emptiesTreeBySize.remove(next.size);
-            } else {
-                empties.remove(next);
-            }
-            block.size += next.size;
-            emptiesMapByPtr.remove(next.ptr);
-            next = next.next;
-            block.next = next;
-            if(next!=null) next.prev = block;
-        }*/
+
         ArrayDeque<MBlock> newArray = emptiesTreeBySize.get(block.size);
 
         if (newArray != null) {
             //newArray.add(block);
-            newArray.addFirst(block); // в итоге - быстрее на 10%, чем add
+            newArray.addFirst(block);
         } else {
             newArray = new ArrayDeque<>();
             newArray.add(block);
             emptiesTreeBySize.put(block.size, newArray);
         }
 
-        //emptiesMapByPtr.put(block.ptr, block);
-
-//        if(firstEmpty.ptr>block.ptr)
-//            synchronized (firstEmpty) {
-//                if(firstEmpty.ptr>block.ptr)
-//                    firstEmpty = block;
-//            }
     }
 
 
@@ -220,16 +166,6 @@ public class Heap implements HeapInterface {
         return block;
     }
 
-/*    private void removeEmpty(MBlock block) {
-        ArrayDeque<MBlock> empties = emptiesTreeBySize.get(block.size);
-        empties.remove(block);
-        if (empties.size() == 0) {
-            emptiesTreeBySize.remove(block.size);
-        }
-        emptiesMapByPtr.remove(block.ptr);
-    }*/
-
-
     private void newObject(MBlock block) {
         objectsMapByPtr.put(block.ptr, block);
 
@@ -242,13 +178,6 @@ public class Heap implements HeapInterface {
             }
         }
     }
-
-
-/*    private MBlock pollObject(int ptr) throws InvalidPointerException {
-        MBlock block = objectsMapByPtr.remove(ptr);
-        if (block == null) throw new InvalidPointerException();
-        return block;
-    }*/
 
     public void free(int ptr) throws InvalidPointerException {
         lock.lock();
@@ -288,11 +217,6 @@ public class Heap implements HeapInterface {
         prevBlock.prev.next = block;
         block.prev = prevBlock.prev;
 
-//        if(prevBlock==firstEmpty)
-//            synchronized (firstEmpty) {
-//                if(prevBlock==firstEmpty)
-//                    firstEmpty = block;
-//            }
     }
 
     public void defrag() throws OutOfMemoryException {
@@ -300,22 +224,6 @@ public class Heap implements HeapInterface {
         try {
             System.out.print("Defrag(" + emptiesTreeBySize.size() + ")...");
 
-//        MBlock prevBlock;
-//        MBlock block = firstEmpty;
-//        if(block==null) throw new OutOfMemoryException();
-//
-//        while(true) {
-//            while(true) {
-//                prevBlock = block;
-//                block = prevBlock.next;
-//                if(block==null || (block.type==BlockType.EMPTY && prevBlock.type==BlockType.EMPTY))
-//                    break;
-//            }
-//            if(block==null)
-//                break;
-//            resizeEmpty(block, prevBlock);
-//        }
-//        System.out.println(" done(" + emptiesTreeBySize.size() + ")");
         } finally {
             lock.unlock();
         }
@@ -323,14 +231,6 @@ public class Heap implements HeapInterface {
 
     public void compact() throws OutOfMemoryException {
         System.out.print("Compact(" + emptiesTreeBySize.size() + ")");
-//        thread.interrupt();
-//        while (thread.isAlive()) {
-//            try {
-//                Thread.sleep(0);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
         lock.lock();
         heapService.interruptMe();
         try {
@@ -487,14 +387,6 @@ public class Heap implements HeapInterface {
                 if (!isFound)
                     break;
 
-                    /*if(obj == null || obj.ptr > limit) {
-                        System.out.println("HeapService. Break while: "+(obj == null?"on Null": obj.ptr+" > "+limit));
-                        break;
-                    }*/ // перешли на isFound
-                    /*if (++i == 10_000) {
-                        System.out.println("Moved: " + obj.ptr + " -> " + (prevObj.ptr + prevObj.size));
-                        i = 0;
-                    }*/
                 if (lock.tryLock(100, TimeUnit.MILLISECONDS))
                     try {
                         if (obj.prev.next == obj && obj.type == BlockType.OBJECT) {
