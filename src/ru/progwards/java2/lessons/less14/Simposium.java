@@ -17,7 +17,6 @@ public class Simposium {
         }
     }
 
-
     // философ
     static class Philosopher {
 
@@ -68,7 +67,11 @@ public class Simposium {
                 System.out.println("ест " + name);
                 long needReflect = eatTime - passed;
                 try {
-                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
+                    /* Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);*/
+                    if (needReflect > INTERVALTIME) {
+                        Thread.sleep(INTERVALTIME);
+                    } else
+                        Thread.sleep(needReflect);
                 } catch (InterruptedException e) {
                     isInterrupted = true;
                     break;
@@ -92,7 +95,10 @@ public class Simposium {
         }
 
         Fork getFork(Direction side) {
-            return side == Direction.LEFT ? left : right;
+            /*if (side.equals(Direction.LEFT)) {
+                return left;
+            } else return right;*/
+            return side.equals(Direction.LEFT) ? left : right;
         }
     }
 
@@ -139,7 +145,11 @@ public class Simposium {
         @Override
         public void run() {
             while (true) {
-                side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
+                if (side.equals(Direction.LEFT)){
+                   side.equals( Direction.RIGHT);
+                }else
+                    side.equals(Direction.LEFT);
+               /* side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);*/
                 try {
                     Thread.sleep(random.nextInt(PHILSCOUNT));
                 } catch (InterruptedException e) {
