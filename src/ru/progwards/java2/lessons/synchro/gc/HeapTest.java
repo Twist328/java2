@@ -43,6 +43,7 @@ public class HeapTest {
             threads[i] = new Thread(runnables[i]);
             threads[i].start();
         }
+        System.out.println("\n***************************************************");
         long start = System.currentTimeMillis();
         int maxSize=0;
         int allocated=0;
@@ -58,12 +59,14 @@ public class HeapTest {
             freeTime+=t.freeTime;
             count+=t.count;
         }
+
         long stop = System.currentTimeMillis();
         heap.dispose();
         System.out.println("\nfree memory: " + (maxSize - allocated));
         System.out.println("malloc time: " + (allocTime) + " free time: " + freeTime);
         System.out.println("total time: " + (allocTime + freeTime) + " execsCount: " + count);
         System.out.println("passed time: " + (stop - start));
+        System.out.println("***************************************************");
     }
 }
 
