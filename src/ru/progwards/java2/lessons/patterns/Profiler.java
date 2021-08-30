@@ -249,7 +249,7 @@ public enum Profiler {
         /**
          * итератор уникального идентификатора
          */
-        public static int nextId = 0;
+        public /*static*/ int nextId = 0;
         /**
          * уникальный идентификатор секции
          */

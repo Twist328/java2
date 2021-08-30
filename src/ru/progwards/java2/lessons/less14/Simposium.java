@@ -17,8 +17,8 @@ public class Simposium {
 
     static class Philosopher {
         String name;
-        Fork left;
-        Fork right;
+        Simposium.Fork right;
+        Simposium.Fork left;
         long reflectTime;
         long eatTime;
         long reflectSum;
@@ -31,13 +31,12 @@ public class Simposium {
             long passed = 0;
             boolean isInterrupted = false;
             while (passed < reflectTime) {
-                System.out.println("размышляет " + name);
+                System.out.println("размышлял " + name);
                 long needReflect = reflectTime - passed;
                 try {
                     Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
                 } catch (InterruptedException e) {
                     isInterrupted = true;
-                    break;
                 } finally {
                     timeNow = System.currentTimeMillis();
                     passed = timeNow - timeStart;
@@ -48,18 +47,18 @@ public class Simposium {
         }
 
         void eat() throws InterruptedException {
+
             long timeStart = System.currentTimeMillis();
             long timeNow = timeStart;
             long passed = 0;
             boolean isInterrupted = false;
             while (passed < eatTime) {
-                System.out.println("ест " + name);
+                System.out.println("ел " + name);
                 long needReflect = eatTime - passed;
                 try {
                     Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
                 } catch (InterruptedException e) {
                     isInterrupted = true;
-                    break;
                 } finally {
                     timeNow = System.currentTimeMillis();
                     passed = timeNow - timeStart;
@@ -69,32 +68,31 @@ public class Simposium {
             if (isInterrupted) throw new InterruptedException();
         }
 
-        Philosopher(String name, Fork right, Fork left, long reflectTime, long eatTime) {
-            this.name=name;
-            this.right = right;
-            this.left = left;
-            reflectSum = 0;
+        Philosopher(String name, Simposium.Fork right, Simposium.Fork left, long reflectTime, long eatTime) {
             eatSum = 0;
+            reflectSum = 0;
             this.reflectTime = reflectTime;
             this.eatTime = eatTime;
-
+            this.right = right;
+            this.left = left;
+            this.name = name;
         }
 
-        Fork getFork(Direction side) {
-            return side.equals(Direction.LEFT) ? left : right;
+        Simposium.Fork getFork(Simposium.Direction side) {
+            return side.equals(Simposium.Direction.LEFT) ? left : right;
         }
     }
-        enum Direction {LEFT, RIGHT}
 
-        ;
+    enum Direction {LEFT, RIGHT}
 
+    ;
 
     final static int PHILSCOUNT = 5;
     Thread[] threads = new Thread[PHILSCOUNT];
     Philosopher[] philosophers = new Philosopher[PHILSCOUNT];
     SplittableRandom random = new SplittableRandom();
 
-    Simposium(long reflectTime,long eatTime) {
+    Simposium(long reflectTime, long eatTime) {
         Fork[] forks = new Fork[PHILSCOUNT];
         for (int i = 0; i < PHILSCOUNT; i++) {
             forks[i] = new Fork();
@@ -102,12 +100,9 @@ public class Simposium {
         for (int i = 0; i < PHILSCOUNT; i++) {
             final Philosopher phil = new Philosopher("PH" + (i + 1), forks[i], forks[(i + 1) % PHILSCOUNT], reflectTime, eatTime);
             philosophers[i] = phil;
-            threads[i] = new Thread(new Algorithms(phil, random));
-
+            threads[i] = new Thread(new Algorithms(phil,random));
         }
     }
-
-
     // вилка
     /*static class Fork {
         boolean areFree = true;
@@ -232,14 +227,9 @@ public class Simposium {
 
         Philosopher phil;
         SplittableRandom random;
-        Direction side = Direction.LEFT;//side - СТОРОНА (право-лево от философа, касается вилки)
+        Direction side = Direction.LEFT;//side - СТОРОНА (влево от философа, касается стороны от объекта (вилка)
 
         public Algorithms(Philosopher phil, SplittableRandom random) {
-            this.phil = phil;
-            this.random = random;
-        }
-
-        public Algorithms(Philosopher phil) {
             this.phil = phil;
             this.random = random;
         }
@@ -247,33 +237,30 @@ public class Simposium {
         @Override
         public void run() {
             while (true) {
-                if (side.equals(Direction.LEFT)) {
-                    side.equals(Direction.RIGHT);
-                } else
-                    side.equals(Direction.LEFT);
-                /* side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);*/
+
+                 side=side.equals( Direction.LEFT) ? Direction.RIGHT : Direction.LEFT;
                 try {
                     Thread.sleep(random.nextInt(PHILSCOUNT));
                 } catch (InterruptedException e) {
                     break;
                 }
                 // Ситуация: Нет ни одной вилки
-                Fork dirRt = phil.getFork(side);
-                synchronized (dirRt) {
+                Fork dirRight = phil.getFork(side);//также dirRight - Сторона свободная от наличия вилки (правая)
+                synchronized (dirRight) {
                     // 1. ПОСМОТРИ НАПРАВО, если нет вилки, то через несколько случайное количество секунд повтори действие поменяв сторону (ПОСМОТРИ НАЛЕВО).
-                    if (dirRt.areFree())
-                        dirRt.setFree(false); // 2. Увидел вилку на столе то ПОПРОБУЙ ее взять. Если попытка неудачна то прекрати попытку и поменяв сторону вернись в п.1
+                    if (dirRight.areFree())
+                        dirRight.setFree(false); // 2. Увидел вилку на столе то ПОПРОБУЙ ее взять. Если попытка неудачна то прекрати попытку и поменяв сторону вернись в п.1
                     else continue;
                 }
                 // Ситуация: В одной руке есть вилка.
-                side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
-                Fork dirLt = phil.getFork(side);
-                synchronized (dirLt) {
+                side =side.equals(Direction.LEFT) ? Direction.RIGHT : Direction.LEFT;
+                Fork dirLeft = phil.getFork(side);
+                synchronized (dirLeft) {
                     // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
-                    if (dirLt.areFree())
-                        dirLt.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
+                    if (dirLeft.areFree())
+                        dirLeft.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
                     else {
-                        dirRt.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
+                        dirRight.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
                         continue;
                     }
                 }
@@ -334,6 +321,4 @@ public class Simposium {
         simposium.stop();
         simposium.print();
     }
-
-
 }
