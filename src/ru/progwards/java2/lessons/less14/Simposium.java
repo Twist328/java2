@@ -3,9 +3,113 @@ package ru.progwards.java2.lessons.less14;
 import java.util.SplittableRandom;
 
 public class Simposium {
+    static class Fork {
+        boolean areFree = true;
+
+        boolean areFree() {
+            return areFree;
+        }
+
+        void setFree(boolean free) {
+            areFree = free;
+        }
+    }
+
+    static class Philosopher {
+        String name;
+        Fork left;
+        Fork right;
+        long reflectTime;
+        long eatTime;
+        long reflectSum;
+        long eatSum;
+        final static long INTERVALTIME = 500;
+
+        void reflect() throws InterruptedException {
+            long timeStart = System.currentTimeMillis();
+            long timeNow = timeStart;
+            long passed = 0;
+            boolean isInterrupted = false;
+            while (passed < reflectTime) {
+                System.out.println("размышляет " + name);
+                long needReflect = reflectTime - passed;
+                try {
+                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
+                } catch (InterruptedException e) {
+                    isInterrupted = true;
+                    break;
+                } finally {
+                    timeNow = System.currentTimeMillis();
+                    passed = timeNow - timeStart;
+                }
+            }
+            reflectSum += passed;
+            if (isInterrupted) throw new InterruptedException();
+        }
+
+        void eat() throws InterruptedException {
+            long timeStart = System.currentTimeMillis();
+            long timeNow = timeStart;
+            long passed = 0;
+            boolean isInterrupted = false;
+            while (passed < eatTime) {
+                System.out.println("ест " + name);
+                long needReflect = eatTime - passed;
+                try {
+                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
+                } catch (InterruptedException e) {
+                    isInterrupted = true;
+                    break;
+                } finally {
+                    timeNow = System.currentTimeMillis();
+                    passed = timeNow - timeStart;
+                }
+            }
+            eatSum += passed;
+            if (isInterrupted) throw new InterruptedException();
+        }
+
+        Philosopher(String name, Fork right, Fork left, long reflectTime, long eatTime) {
+            this.name=name;
+            this.right = right;
+            this.left = left;
+            reflectSum = 0;
+            eatSum = 0;
+            this.reflectTime = reflectTime;
+            this.eatTime = eatTime;
+
+        }
+
+        Fork getFork(Direction side) {
+            return side.equals(Direction.LEFT) ? left : right;
+        }
+    }
+        enum Direction {LEFT, RIGHT}
+
+        ;
+
+
+    final static int PHILSCOUNT = 5;
+    Thread[] threads = new Thread[PHILSCOUNT];
+    Philosopher[] philosophers = new Philosopher[PHILSCOUNT];
+    SplittableRandom random = new SplittableRandom();
+
+    Simposium(long reflectTime,long eatTime) {
+        Fork[] forks = new Fork[PHILSCOUNT];
+        for (int i = 0; i < PHILSCOUNT; i++) {
+            forks[i] = new Fork();
+        }
+        for (int i = 0; i < PHILSCOUNT; i++) {
+            final Philosopher phil = new Philosopher("PH" + (i + 1), forks[i], forks[(i + 1) % PHILSCOUNT], reflectTime, eatTime);
+            philosophers[i] = phil;
+            threads[i] = new Thread(new Algorithms(phil, random));
+
+        }
+    }
+
 
     // вилка
-    static class Fork {
+    /*static class Fork {
         boolean areFree = true;
 
         private boolean areFree() {
@@ -67,11 +171,8 @@ public class Simposium {
                 System.out.println("ест " + name);
                 long needReflect = eatTime - passed;
                 try {
-                    /* Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);*/
-                    if (needReflect > INTERVALTIME) {
-                        Thread.sleep(INTERVALTIME);
-                    } else
-                        Thread.sleep(needReflect);
+                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
+
                 } catch (InterruptedException e) {
                     isInterrupted = true;
                     break;
@@ -98,7 +199,7 @@ public class Simposium {
             /*if (side.equals(Direction.LEFT)) {
                 return left;
             } else return right;*/
-            return side.equals(Direction.LEFT) ? left : right;
+           /* return side.equals(Direction.LEFT) ? left : right;
         }
     }
 
@@ -113,6 +214,7 @@ public class Simposium {
     //который инициализирует необходимое количество философов и вилок. Каждый философ выполняется в отдельном потоке.
     // reflectTime задает время в мс, через которое философ проголодается, eatTime задает время в мс,
     // через которое получив 2 вилки философ наестся и положит вилки на место
+
     Simposium(long reflectTime, long eatTime) {
         Fork[] forks = new Fork[PHILSCOUNT];
         for (int i = 0; i < PHILSCOUNT; i++) {
@@ -123,7 +225,7 @@ public class Simposium {
             philosophers[i] = phil;
             threads[i] = new Thread(new Algorithms(phil, random));
         }
-    }
+    }*/
 
     // основная логика действий философа
     static class Algorithms implements Runnable {
@@ -164,35 +266,35 @@ public class Simposium {
                     else continue;
                 }
                 // Ситуация: В одной руке есть вилка.
-                     side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
-                    Fork dirLt = phil.getFork(side);
-                    synchronized (dirLt) {
-                        // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
-                        if (dirLt.areFree())
-                            dirLt.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
-                        else {
-                            dirRt.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
-                            continue;
-                        }
+                side = (side == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
+                Fork dirLt = phil.getFork(side);
+                synchronized (dirLt) {
+                    // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
+                    if (dirLt.areFree())
+                        dirLt.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
+                    else {
+                        dirRt.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
+                        continue;
                     }
-                    // Ситуация: В обеих руках по вилке.
-                    // 6. Приступай к еде
-                    try {
-                        phil.eat();
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                    phil.right.setFree(true);
-                    phil.left.setFree(true);
-                    // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
-                    try {
-                        phil.reflect();
-                    } catch (InterruptedException e) {
-                        break;
-                    }
+                }
+                // Ситуация: В обеих руках по вилке.
+                // 6. Приступай к еде
+                try {
+                    phil.eat();
+                } catch (InterruptedException e) {
+                    break;
+                }
+                phil.right.setFree(true);
+                phil.left.setFree(true);
+                // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
+                try {
+                    phil.reflect();
+                } catch (InterruptedException e) {
+                    break;
                 }
             }
         }
+    }
 
 
     // запускает философскую беседу
