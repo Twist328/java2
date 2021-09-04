@@ -1,6 +1,6 @@
 package ru.progwards.java2.lessons.patterns;
 
-import javassist.*;
+/*import javassist.*;*/
 
 import java.io.ByteArrayInputStream;
 import java.io.FileWriter;
