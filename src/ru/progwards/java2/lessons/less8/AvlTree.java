@@ -424,26 +424,27 @@ public class AvlTree<K extends Comparable<K>,V> {
     }
 
     public static void main(String[] args) {
-        AvlTree<Integer, Integer> tree = new AvlTree<>();
-        tree.put(15, 11);
-        tree.put(10, 12);
-        tree.put(20, 1);
-        tree.put(18, 108);
-        tree.put(27, 13);
-        tree.put(5, 10);
-        tree.put(12, 14);
-        tree.put(6, 15);
-        tree.put(2, 16);
-        tree.put(1, 17);
-        tree.put(100, 19);
-        //tree.change(12,18);
-        tree.find(18);
-        tree.delete(18);
-        tree.change(100,1);
+        AvlTree<Integer, Integer> avlTree = new AvlTree<>();
+        avlTree.put(15, 11);
+        avlTree.put(10, 12);
+        avlTree.put(20, 1);
+        avlTree.put(18, 108);
+        avlTree.put(27, 13);
+        avlTree.put(5, 10);
+        avlTree.put(12, 14);
+        avlTree.put(6, 15);
+        avlTree.put(2, 16);
+        avlTree.put(1, 17);
+        avlTree.put(100, 19);
+        //avlTree.change(12,18);
+        avlTree.find(18);
+        avlTree.delete(18);
+        avlTree.change(100,1);
+
         System.out.println("\n**********************************");
-        tree.process(System.out::println);
-        System.out.println(tree.find(1));
-        System.out.println(tree.find(6));
+        avlTree.process(System.out::println);
+        System.out.println(avlTree.find(20));
+        System.out.println(avlTree.find(6));
         System.out.println("**********************************");
     }
 }
