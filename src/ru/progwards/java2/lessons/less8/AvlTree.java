@@ -435,11 +435,16 @@ public class AvlTree<K extends Comparable<K>,V> {
         tree.put(6, 15);
         tree.put(2, 16);
         tree.put(1, 17);
-
-
-        tree.delete(27);
-        tree.change(6,1);
+        tree.put(100, 19);
+        //tree.change(12,18);
+        tree.find(18);
+        tree.delete(18);
+        tree.change(100,1);
+        System.out.println("\n**********************************");
         tree.process(System.out::println);
+        System.out.println(tree.find(1));
+        System.out.println(tree.find(6));
+        System.out.println("**********************************");
     }
 }
 

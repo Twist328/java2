@@ -12,7 +12,6 @@ class Simposium {
 
         void setFree(boolean free) {
             areFree = free;
-
         }
     }
 
@@ -36,9 +35,9 @@ class Simposium {
                 long needReflect = reflectTime - passed;
                 try {
                     Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
-
                 } catch (InterruptedException e) {
                     isInterrupted = true;
+                    break;
                 } finally {
                     timeNow = System.currentTimeMillis();
                     passed = timeNow - timeStart;
@@ -46,6 +45,7 @@ class Simposium {
             }
             reflectSum += passed;
             if (isInterrupted) throw new InterruptedException();
+
         }
 
         void eat() throws InterruptedException {
@@ -54,13 +54,13 @@ class Simposium {
             long passed = 0;
             boolean isInterrupted = false;
             while (passed < eatTime) {
-                System.out.println("ел " + name);
+                System.out.println("eл " + name);
                 long needReflect = eatTime - passed;
                 try {
                     Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
-
                 } catch (InterruptedException e) {
                     isInterrupted = true;
+                    break;
                 } finally {
                     timeNow = System.currentTimeMillis();
                     passed = timeNow - timeStart;
@@ -68,17 +68,17 @@ class Simposium {
             }
             eatSum += passed;
             if (isInterrupted) throw new InterruptedException();
+
         }
 
-        Philosopher(String name, Fork right, Fork left, long eatTime, long reflectTime) {
+        Philosopher(String name, Fork left, Fork right, long reflectTime, long eatTime) {
             eatSum = 0;
             reflectSum = 0;
-            this.reflectTime = reflectTime;
-            this.eatTime = eatTime;
-            this.name = name;
             this.left = left;
             this.right = right;
-
+            this.name = name;
+            this.reflectTime = reflectTime;
+            this.eatTime = eatTime;
         }
 
         Fork getFork(Direction side) {
@@ -89,13 +89,12 @@ class Simposium {
     enum Direction {LEFT, RIGHT}
 
     ;
-
     final static int PHILSCOUNT = 5;
     Thread[] threads = new Thread[PHILSCOUNT];
     Philosopher[] philosophers = new Philosopher[PHILSCOUNT];
     SplittableRandom random = new SplittableRandom();
 
-    Simposium(long eatTime, long reflectTime) {
+    Simposium(long reflectTime, long eatTime) {
         Fork[] forks = new Fork[PHILSCOUNT];
         for (int i = 0; i < PHILSCOUNT; i++) {
             forks[i] = new Fork();
@@ -114,8 +113,8 @@ class Simposium {
         SplittableRandom random;
 
         public Algorithms(Philosopher phil, SplittableRandom random) {
-            this.phil=phil;
-            this.random=random;
+            this.phil = phil;
+            this.random = random;
         }
 
         @Override
@@ -143,43 +142,43 @@ class Simposium {
                         continue;
                     }
                 }
-                try {
-                    phil.eat();
-                } catch (InterruptedException e) {
-                    break;
-                }
-                phil.right.setFree(true);
-                phil.left.setFree(true);
-                try {
-                    phil.reflect();
-                } catch (InterruptedException e) {
-                    break;
+                    try {
+                        phil.eat();
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                    phil.right.setFree(true);
+                    phil.left.setFree(true);
+
+                    try {
+                        phil.reflect();
+                    } catch (InterruptedException e) {
+                        break;
+                    }
                 }
             }
         }
-    }
-    void start(){
-        for (int i = 0; i < PHILSCOUNT; i++) {
-            threads[i].start();
 
+        void start() {
+            for (int i = 0; i < PHILSCOUNT; i++) {
+                threads[i].start();
+            }
         }
-    }
-    void stop() throws InterruptedException {
-        for (int i = 0; i < PHILSCOUNT; i++) {
-            threads[i].interrupt();
-        }
-        for (int i = 0; i < PHILSCOUNT; i++) {
-            threads[i].join();
-        }
-    }
-    void print(){
-        for (Philosopher PH:philosophers){
-            System.out.println("философ "+PH.name+", eл "+PH.eatSum+",размышлял "+PH.reflectSum);
-        }
-    }
 
+        void stop() throws InterruptedException {
+            for (int i = 0; i < PHILSCOUNT; i++) {
+                threads[i].interrupt();
+            }
+            for (int i = 0; i < PHILSCOUNT; i++) {
+                threads[i].join();
+            }
+        }
 
-
+        void print() {
+            for (Philosopher PH : philosophers) {
+                System.out.println("философ " + PH.name + ",ел " + PH.eatSum + ",размышлял " + PH.reflectSum);
+            }
+        }
 
         // вилка
    /* static class Fork {
