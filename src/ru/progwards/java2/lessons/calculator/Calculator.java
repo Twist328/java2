@@ -344,23 +344,23 @@ class Calculator3 {
         public Calculator4() {
         }
 
-        public static int calculate0(String expression) { // оригинальный вариант, 17 минут
+        public static int calculate0(String expression) {
             String str = expression;
             int res = Integer.valueOf(str.substring(0, 1));
-            if (str.length() == 1) return res;
-            String op = str.substring(1, 2);
-            while (op.compareTo("*") == 0 || op.compareTo("/") == 0) {
-                if (op.compareTo("*") == 0)
+            if (str.length()==1) return res;
+            String symbol = str.substring(1, 2);
+            while (symbol.equals("*") || symbol.equals("/")) {
+                if ("*".contains(symbol))
                     res *= Integer.valueOf(str.substring(2, 3));
-                else if (op.compareTo("/") == 0)
+                else if ("/".contains(symbol))
                     res /= Integer.valueOf(str.substring(2, 3));
                 str = str.substring(2);
                 if (str.length() == 1) return res;
-                op = str.substring(1, 2);
+                symbol = str.substring(1, 2);
             }
-            if (op.compareTo("+") == 0)
+            if ("+".contains(symbol))
                 res += calculate0(str.substring(2));
-            else if (op.compareTo("-") == 0)
+            else if ("-".contains(symbol))
                 res -= calculate0(str.substring(2));
             return res;
         }
@@ -368,7 +368,7 @@ class Calculator3 {
 
         public static void main(String[] args) {
             System.out.println("\n**********************************");
-            System.out.println(calculate0("2+2-2*9"));
+            System.out.println(calculate0("2+2-2*9"));//-14
             System.out.println("**********************************");
         }
     }
