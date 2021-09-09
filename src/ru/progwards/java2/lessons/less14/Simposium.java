@@ -8,10 +8,12 @@ class Simposium {
 
         boolean areFree() {
             return areFree;
+
         }
 
         void setFree(boolean free) {
             areFree = free;
+
         }
     }
 
@@ -23,6 +25,7 @@ class Simposium {
         long eatTime;
         long reflectSum;
         long eatSum;
+
         final static long INTERVALTIME = 500;
 
         void reflect() throws InterruptedException {
@@ -30,6 +33,7 @@ class Simposium {
             long timeNow = timeStart;
             long passed = 0;
             boolean isInterrupted = false;
+
             while (passed < reflectTime) {
                 System.out.println("размышлял " + name);
                 long needReflect = reflectTime - passed;
@@ -45,7 +49,6 @@ class Simposium {
             }
             reflectSum += passed;
             if (isInterrupted) throw new InterruptedException();
-
         }
 
         void eat() throws InterruptedException {
@@ -53,6 +56,7 @@ class Simposium {
             long timeNow = timeStart;
             long passed = 0;
             boolean isInterrupted = false;
+
             while (passed < eatTime) {
                 System.out.println("eл " + name);
                 long needReflect = eatTime - passed;
@@ -68,17 +72,16 @@ class Simposium {
             }
             eatSum += passed;
             if (isInterrupted) throw new InterruptedException();
-
         }
 
-        Philosopher(String name, Fork left, Fork right, long reflectTime, long eatTime) {
+        Philosopher(String name, Fork right, Fork left, long eatTime, long reflectTime) {
             eatSum = 0;
             reflectSum = 0;
             this.left = left;
             this.right = right;
-            this.name = name;
             this.reflectTime = reflectTime;
             this.eatTime = eatTime;
+            this.name = name;
         }
 
         Fork getFork(Direction side) {
@@ -94,16 +97,15 @@ class Simposium {
     Philosopher[] philosophers = new Philosopher[PHILSCOUNT];
     SplittableRandom random = new SplittableRandom();
 
-    Simposium(long reflectTime, long eatTime) {
+    Simposium(long eatTime, long reflectTime) {
         Fork[] forks = new Fork[PHILSCOUNT];
         for (int i = 0; i < PHILSCOUNT; i++) {
             forks[i] = new Fork();
         }
         for (int i = 0; i < PHILSCOUNT; i++) {
-            final Philosopher phil = new Philosopher("PH " + (i + 1), forks[i], forks[(i + 1) % PHILSCOUNT], eatTime, reflectTime);
+            final Philosopher phil = new Philosopher("PH" + (i + 1), forks[i], forks[(i + 1) % PHILSCOUNT], eatTime, reflectTime);
             philosophers[i] = phil;
             threads[i] = new Thread(new Algorithms(phil, random));
-
         }
     }
 
@@ -142,45 +144,45 @@ class Simposium {
                         continue;
                     }
                 }
-                    try {
-                        phil.eat();
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                    phil.right.setFree(true);
-                    phil.left.setFree(true);
+                try {
+                    phil.eat();
+                } catch (InterruptedException e) {
+                    break;
+                }
+                phil.right.setFree(true);
+                phil.left.setFree(true);
 
-                    try {
-                        phil.reflect();
-                    } catch (InterruptedException e) {
-                        break;
-                    }
+                try {
+                    phil.reflect();
+                } catch (InterruptedException e) {
+                    break;
                 }
             }
         }
+    }
 
-        void start() {
-            for (int i = 0; i < PHILSCOUNT; i++) {
-                threads[i].start();
-            }
+    void start() {
+        for (int i = 0; i < PHILSCOUNT; i++) {
+            threads[i].start();
         }
+    }
 
-        void stop() throws InterruptedException {
-            for (int i = 0; i < PHILSCOUNT; i++) {
-                threads[i].interrupt();
-            }
-            for (int i = 0; i < PHILSCOUNT; i++) {
-                threads[i].join();
-            }
+    void stop() throws InterruptedException {
+        for (int i = 0; i < PHILSCOUNT; i++) {
+            threads[i].interrupt();
         }
-
-        void print() {
-            for (Philosopher PH : philosophers) {
-                System.out.println("философ " + PH.name + ",ел " + PH.eatSum + ",размышлял " + PH.reflectSum);
-            }
+        for (int i = 0; i < PHILSCOUNT; i++) {
+            threads[i].join();
         }
+    }
 
-        // вилка
+    void print() {
+        for (Philosopher PH : philosophers) {
+            System.out.println("философ " + PH.name + ",ел " + PH.eatSum + ",размышлял " + PH.reflectSum);
+        }
+    }
+
+    // вилка
    /* static class Fork {
         boolean areFree = true;
 
@@ -286,7 +288,7 @@ class Simposium {
         }
     }*/
 
-        // основная логика действий философа
+    // основная логика действий философа
     /*static class Algorithms implements Runnable {
 
         Philosopher phil;
@@ -365,9 +367,9 @@ class Simposium {
         }
     }*/
 
-        //печатает результаты беседы в формате
-        //Философ name, ел ххх, размышлял xxx
-        //где ххх время в мс
+    //печатает результаты беседы в формате
+    //Философ name, ел ххх, размышлял xxx
+    //где ххх время в мс
    /* void print() {
         System.out.println("***********************************");
         for (Philosopher PH : philosophers) {
@@ -376,13 +378,13 @@ class Simposium {
         }
     }*/
 
-        // реализует тест для философской беседы. Проверить варианты, когда ресурсов (вилок) достаточно
-        // (философы долго размышляют и мало едят) и вариант когда не хватает (философы много едят и мало размышляют)
-        public static void main(String[] args) throws InterruptedException {
-            Simposium simposium = new Simposium(1000, 1000);
-            simposium.start();
-            Thread.sleep(5000);
-            simposium.stop();
-            simposium.print();
-        }
+    // реализует тест для философской беседы. Проверить варианты, когда ресурсов (вилок) достаточно
+    // (философы долго размышляют и мало едят) и вариант когда не хватает (философы много едят и мало размышляют)
+    public static void main(String[] args) throws InterruptedException {
+        Simposium simposium = new Simposium(1000, 1000);
+        simposium.start();
+        Thread.sleep(5000);
+        simposium.stop();
+        simposium.print();
     }
+}

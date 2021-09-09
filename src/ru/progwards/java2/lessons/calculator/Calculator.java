@@ -180,7 +180,7 @@ class Calculator1 {//со скобками
 }
 
 //*******************************************************************
-class Calculator3{
+class Calculator3 {
     String expression;
     int pos;
 
@@ -196,44 +196,49 @@ class Calculator3{
         System.out.println("**************************************" + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES + Emoji.GRINNING_FACE_WITH_SMILING_EYES);
     }
 
-    public static int calculate3(String expression){
+    public static int calculate3(String expression) {
         return new Calculator3(expression).addSubCalc();
     }
-    String getSymbol(){
-        if(pos>=expression.length())
+
+    String getSymbol() {
+        if (pos >= expression.length())
             try {
                 throw new IndexOutOfBoundsException();
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
-        return expression.substring(pos++,pos);
+        return expression.substring(pos++, pos);
     }
-    String checkSymbol(){
-        if (pos>=expression.length())
+
+    String checkSymbol() {
+        if (pos >= expression.length())
             return "";
-        return expression.substring(pos,pos+1);
+        return expression.substring(pos, pos + 1);
     }
-    int getNum(){
+
+    int getNum() {
         int num;
         try {
-            num=Integer.parseInt(getSymbol());
+            num = Integer.parseInt(getSymbol());
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Ошибка вычисления числа");
         }
         return num;
     }
-    boolean hasNext(){
-        return pos<expression.length();
+
+    boolean hasNext() {
+        return pos < expression.length();
     }
-    int bracketCalc(){
-        String symbol=checkSymbol();
-        if (symbol.equals("(")){
+
+    int bracketCalc() {
+        String symbol = checkSymbol();
+        if (symbol.equals("(")) {
             getSymbol();
-            int result=addSubCalc();
-            String symbolNext=getSymbol();
+            int result = addSubCalc();
+            String symbolNext = getSymbol();
             if (symbolNext.equals(")")) {
                 return result;
-            }else {
+            } else {
                 try {
                     throw new Exception("Ожидалось \"(\"");
                 } catch (Exception e) {
@@ -243,19 +248,20 @@ class Calculator3{
         }
         return getNum();
     }
-    int multDivCalc(){
-        int result=bracketCalc();
-        while (hasNext()){
-            String simbol=checkSymbol();
-            if ("*/".contains(simbol)){
+
+    int multDivCalc() {
+        int result = bracketCalc();
+        while (hasNext()) {
+            String simbol = checkSymbol();
+            if ("*/".contains(simbol)) {
                 getSymbol();
-                int num=bracketCalc();
-                switch (simbol){
+                int num = bracketCalc();
+                switch (simbol) {
                     case "*":
-                        result*=num;
+                        result *= num;
                         break;
                     case "/":
-                        result/=num;
+                        result /= num;
                         break;
                     default:
                         try {
@@ -264,36 +270,37 @@ class Calculator3{
                             e.printStackTrace();
                         }
                 }
-            }else return result;
+            } else return result;
         }
         return result;
     }
 
-    int addSubCalc(){
-    int result=multDivCalc();
-        while (hasNext()){
-        String simbol=checkSymbol();
-        if ("+-".contains(simbol)){
-            getSymbol();
-            int num=multDivCalc();
-            switch (simbol){
-                case "+":
-                    result+=num;
-                    break;
-                case "-":
-                    result-=num;
-                    break;
-                default:
-                    try {
-                        throw new Exception("Неведомая ошибочная операция");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-            }
-        }else return result;
-    }
+    int addSubCalc() {
+        int result = multDivCalc();
+        while (hasNext()) {
+            String simbol = checkSymbol();
+            if ("+-".contains(simbol)) {
+                getSymbol();
+                int num = multDivCalc();
+                switch (simbol) {
+                    case "+":
+                        result += num;
+                        break;
+                    case "-":
+                        result -= num;
+                        break;
+                    default:
+                        try {
+                            throw new Exception("Неведомая ошибочная операция");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                }
+            } else return result;
+        }
         return result;
-}
+    }
+
     enum Emoji {
 
         GRINNING_FACE_WITH_SMILING_EYES('\uD83D', '\uDE01'),
@@ -330,5 +337,39 @@ class Calculator3{
             return sb.toString();
         }
 
+    }
+//*******************************************************************************************
+    static class Calculator4 {
+
+        public Calculator4() {
+        }
+
+        public static int calculate0(String expression) { // оригинальный вариант, 17 минут
+            String str = expression;
+            int res = Integer.valueOf(str.substring(0, 1));
+            if (str.length() == 1) return res;
+            String op = str.substring(1, 2);
+            while (op.compareTo("*") == 0 || op.compareTo("/") == 0) {
+                if (op.compareTo("*") == 0)
+                    res *= Integer.valueOf(str.substring(2, 3));
+                else if (op.compareTo("/") == 0)
+                    res /= Integer.valueOf(str.substring(2, 3));
+                str = str.substring(2);
+                if (str.length() == 1) return res;
+                op = str.substring(1, 2);
+            }
+            if (op.compareTo("+") == 0)
+                res += calculate0(str.substring(2));
+            else if (op.compareTo("-") == 0)
+                res -= calculate0(str.substring(2));
+            return res;
+        }
+
+
+        public static void main(String[] args) {
+            System.out.println("\n**********************************");
+            System.out.println(calculate0("2+2-2*9"));
+            System.out.println("**********************************");
+        }
     }
 }
