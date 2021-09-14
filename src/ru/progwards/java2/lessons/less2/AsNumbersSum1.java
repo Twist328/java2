@@ -18,13 +18,13 @@ public class AsNumbersSum1{
      * @param number for prepare
      * @return prepares String
      */
-    public static String asNumbersSum1(int number) {
-        AsNumbersSum1 ans = new AsNumbersSum1();
+    public static String asNumbersSum(int number) {
+        AsNumbersSum1 asnumSum = new AsNumbersSum1();
         ArrayList<Integer> temp = new ArrayList<>();
         temp.add(number);
-        ans.fastAdd(temp);
-        ans.rebuild(number, new ArrayList<>());
-        return ans.fin(ans.list.stream().distinct().collect(Collectors.toList()));
+        asnumSum.fastAdd(temp);
+        asnumSum.rebuild(number, new ArrayList<>());
+        return asnumSum.find(asnumSum.list.stream().distinct().collect(Collectors.toList()));
     }
 
     /**
@@ -60,7 +60,7 @@ public class AsNumbersSum1{
      * @param list new variation
      * @return prepared String
      */
-    public String fin(List<ArrayList<Integer>> list) {
+    public String find(List<ArrayList<Integer>> list) {
         StringBuilder sb = new StringBuilder();
         for (ArrayList<Integer> integers : list) {
             for (Integer integer : integers) {
@@ -74,12 +74,9 @@ public class AsNumbersSum1{
     }
 
     public static void main(String[] args) {
-       // assert asNumbersSum1(5).equals("5 = 4 + 1 = 3 + 1 + 1 = 3 + 2 = 2 + 2 + 1 = 2 + 1 + 1 + 1 = 1 + 1 + 1 + 1 + 1");
-        System.out.println(asNumbersSum1(3));
+        System.out.println("\n***********************************************************");
+        System.out.println(asNumbersSum(9));
+        System.out.println("***********************************************************");
     }
 
-//    @Override
-//    public String toString() {
-//        return super.toString();
-//    }
 }

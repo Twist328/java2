@@ -1,6 +1,7 @@
 package ru.progwards.java2.lessons.calculator;
 
 
+import org.jetbrains.annotations.Contract;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -307,6 +308,7 @@ class Calculator3{
             this.secondChar = secondChar;
         }
 
+        @Contract(pure = true)
         Emoji() {
 
         }
