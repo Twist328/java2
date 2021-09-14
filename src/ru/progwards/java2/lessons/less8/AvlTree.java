@@ -6,6 +6,7 @@ import ru.progwards.java2.lessons.trees.TreeException;
 import java.util.function.Consumer;
 
 public class AvlTree<K extends Comparable<K>, V> {
+    
     public static final String KEY_NOT_EXIST = "Key not exist";
     public static final String KEY_NOT_FIT = "Key not fit";
 
