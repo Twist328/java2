@@ -14,6 +14,15 @@ public class AsNumbersSum1{
     private final ArrayList<ArrayList<Integer>> list = new ArrayList<>();
 
     /**
+     * Method for add new Summing variation
+     * @param value list with numbers for sum
+     */
+    private void fastAdd(ArrayList<Integer> value) {
+        Collections.sort(value);
+        Collections.reverse(value);
+        this.list.add(value);
+    }
+    /**
      * Main method to prepare the summing String
      * @param number for prepare
      * @return prepares String
@@ -25,16 +34,6 @@ public class AsNumbersSum1{
         asnumSum.fastAdd(temp);
         asnumSum.rebuild(number, new ArrayList<>());
         return asnumSum.find(asnumSum.list.stream().distinct().collect(Collectors.toList()));
-    }
-
-    /**
-     * Method for add new Summing variation
-     * @param value list with numbers for sum
-     */
-    private void fastAdd(ArrayList<Integer> value) {
-        Collections.sort(value);
-        Collections.reverse(value);
-        this.list.add(value);
     }
 
     /**
