@@ -1,0 +1,95 @@
+package ru.progwards.java2.lessons.less2;
+
+import java.util.*;
+//import java.util.Collections;
+//import java.util.List;
+import java.util.stream.*;
+
+
+
+/**
+ * Class to turn any number in all possible summing strings
+ */
+//public class AsNumbersSum1{
+//    private final ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+public class AsNumbersSum1 {
+private final ArrayList<ArrayList<Integer>>list=new ArrayList<>();
+    /**
+     * Method for add new Summing variation
+     * @param value list with numbers for sum
+     */
+//    private void fastAdd(ArrayList<Integer> value) {
+//        Collections.sort(value);
+//        Collections.reverse(value);
+//        this.list.add(value);
+//    }
+    private void fastAdd(ArrayList<Integer>value){
+        Collections.sort(value);
+        Collections.reverse(value);
+        this.list.add(value);
+    }
+    /**
+     * Main method to prepare the summing String
+     * @param number for prepare
+     * @return prepares String
+     */
+//    public static String asNumbersSum(int number) {
+//        AsNumbersSum1 asnumSum = new AsNumbersSum1();
+//        ArrayList<Integer> temp = new ArrayList<>();
+//        temp.add(number);
+//        asnumSum.fastAdd(temp);
+//        asnumSum.rebuild(number, new ArrayList<>());
+//        return asnumSum.find(asnumSum.list.stream().distinct().collect(Collectors.toList()));
+//    }
+public static String asNumbersSum(int number){
+    AsNumbersSum1 asNumSum=new AsNumbersSum1();
+    ArrayList<Integer>temp=new ArrayList<>();
+    temp.add(number);
+    asNumSum.fastAdd(temp);
+    asNumSum.rebuild(number,new ArrayList<>());
+    return asNumSum.find(asNumSum.list.stream().distinct().collect(Collectors.toList()));
+}
+    /**
+     * Method for break the summing String in different variations in recurse way
+     * @param number for break
+     * @param temp list for new break
+     */
+    private void rebuild(int number, ArrayList<Integer> temp) {
+        int first = number - 1;
+        int second = 1;
+        while (number - second != 0) {
+            ArrayList<Integer> generalTemp = (ArrayList<Integer>) temp.clone();
+            generalTemp.add(first--);
+            ArrayList<Integer> newTemp = (ArrayList<Integer>) generalTemp.clone();
+            rebuild(second, newTemp);
+            generalTemp.add(second++);
+            this.fastAdd(generalTemp);
+        }
+    }
+
+    /**
+     * Method for final prepare of String
+     * @param list new variation
+     * @return prepared String
+     */
+    public String find(List<ArrayList<Integer>> list) {
+        StringBuilder sb = new StringBuilder();
+        for (ArrayList<Integer> integers : list) {
+            for (Integer integer : integers) {
+               // sb.append(String.format("%S + ", integer));
+                sb.append(String.format("%S + ",integer));
+            }
+            sb.setLength(sb.length() - 3);
+            sb.append(" = ");
+        }
+        sb.setLength(sb.length() - 3);
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("\n***********************************************************");
+        System.out.println(asNumbersSum(5));
+        System.out.println("***********************************************************");
+    }
+
+}
