@@ -7,16 +7,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 class Calculator{
-    String expression;
+   // String expression;
 
-    public Calculator(String expression) {
-        this.expression = expression;
-    }
+   // public Calculator(String expression) {
+        //this.expression = expression;
+   // }
 
     public static void main(String[] args) {
         System.out.println("\n************************************");
-        System.out.println("результат вычислений:  " + calculate("8/2*8/2-5")); //11
-        System.out.println("результат вычислений:  " + calculate("2+3*9-8")); //21
+        System.out.println("результат вычислений:  " + calculate("1*2+2*9")); //-14
+        //System.out.println("результат вычислений:  " + calculate("2+3*9-8")); //21
         System.out.println("************************************");
     }
 
@@ -26,14 +26,18 @@ class Calculator{
          должен быть равен 8. По оригинальному условию задачи все числа содержат не более одной цифры, пробелов в строке нет.*/
 
    public static int calculate(String expression){
+
    int result=Integer.valueOf(expression.substring(0,1));
    if (expression.length()==1)return result;
    String symbol=expression.substring(1,2);
-   while (symbol.equals("*")||(symbol.equals("/"))){
+
+   while (symbol.equals("*")||symbol.equals("/")){
+
        if ("*".contains(symbol)) {
            result *= Integer.valueOf(expression.substring(2, 3));
        }else if ("/".contains(symbol))
            result/=Integer.valueOf(expression.substring(2,3));
+
        expression=expression.substring(2);
        if (expression.length()==1)return result;
        symbol=expression.substring(1,2);
@@ -341,20 +345,21 @@ class Calculator3 {
 //*******************************************************************************************
     static class Calculator4 {
 
-        public Calculator4() {
-        }
-
         public static int calculate0(String expression) {
             String str = expression;
+
             int res = Integer.valueOf(str.substring(0, 1));
             if (str.length()==1) return res;
             String symbol = str.substring(1, 2);
+
             while (symbol.equals("*") || symbol.equals("/")) {
+
                 if ("*".contains(symbol))
                     res *= Integer.valueOf(str.substring(2, 3));
                 else if ("/".contains(symbol))
                     res /= Integer.valueOf(str.substring(2, 3));
                 str = str.substring(2);
+
                 if (str.length() == 1) return res;
                 symbol = str.substring(1, 2);
             }

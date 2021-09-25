@@ -19,7 +19,7 @@ public class Calculator2 {
 
 
     public static void main(String[] args) {
-        String expression = "2+(2+3)*(6/3)-(2*5*3)";
+        String expression = "10+(10+10)*(10/10)-(10*10*10)";
         List<Symbol> symbols = symAnalyze(expression);
         SymbolBuffer symbolBuffer = new SymbolBuffer(symbols);
 
@@ -53,13 +53,13 @@ public class Calculator2 {
             this.value = value.toString();
         }
 
-        @Override
+       /* @Override
         public String toString() {
             return "Symbol{" +
                     "type=" + type +
                     ", value='" + value + '\'' +
                     '}';
-        }
+        }*/
     }
 
     public static class SymbolBuffer {

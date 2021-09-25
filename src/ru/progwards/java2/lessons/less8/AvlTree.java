@@ -9,39 +9,40 @@ public class AvlTree<K extends Comparable<K>, V> {
     public static final String KEY_NOT_EXIST = "Key not exist";
     public static final String KEY_NOT_FIT = "Key not fit";
 
-    class Node {
+    class Node{
         K key;
         V value;
         public int height;
-        private Node parent;
         private Node right;
         private Node left;
+        public Node parent;
 
         public Node(K key, V value) {
-            this.value = value;
             this.key = key;
+            this.value=value;
         }
 
-        public Node find(K key) {
-            int cmp = key.compareTo(this.key);
-            if (cmp > 0) {
-                if (right != null)
-                    return right.find(key);
-                else return this;
+        int getHeight(Node node){
+            return node==null?0:node.height;
+        }
+        public Node find(K key){
+            int cmp=key.compareTo(this.key);
+            if (cmp>0){
+            if (right!=null)
+                return right.find(key);
+            else return this;
             }
-            if (cmp < 0) {
-                if (left != null)
+            if (cmp<0){
+                if (left!=null)
                     return left.find(key);
             }
-            return this;
-        }
 
-        int getHeight(Node node) {
-            return node == null ? 0 : node.height;
+            return this;
         }
 
         void add(Node node) {
             int cmp = node.key.compareTo(this.key);
+            // если ключи совпадают, то меняем значение на новое
             if (cmp == 0) {
                 this.value = node.value;
                 return;
@@ -52,13 +53,13 @@ public class AvlTree<K extends Comparable<K>, V> {
                 left = node;
             }
             node.parent = this;
+            // пересчитать высоты узлов начиная с последнего добавленного элемента
             node.recountOfHeight();
             node.searchDisbalance();
-
         }
 
-        void delete() {
-            if (left != null || right != null) {
+        void delete(){
+            if (left!=null||right!=null) {
                 Node current;
                 if (getBalance() > 0)
                     current = left.maxElem();
@@ -70,7 +71,6 @@ public class AvlTree<K extends Comparable<K>, V> {
                     else
                         current = right.minElem();
                 }
-
                 current.left = left;
                 if (left != null)
                     left.parent = current;
@@ -104,9 +104,8 @@ public class AvlTree<K extends Comparable<K>, V> {
                     parent = null;
                 } else
                     root = null;
-                        }
-
-                    }
+            }
+        }
 
        /*void delete() {
            if (left != null || right != null) {
