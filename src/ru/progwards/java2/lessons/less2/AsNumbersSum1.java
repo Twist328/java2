@@ -1,54 +1,45 @@
 package ru.progwards.java2.lessons.less2;
 
-import java.util.*;
-//import java.util.Collections;
-//import java.util.List;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 
 /**
  * Class to turn any number in all possible summing strings
  */
-//public class AsNumbersSum1{
-//    private final ArrayList<ArrayList<Integer>> list = new ArrayList<>();
-public class AsNumbersSum1 {
-private final ArrayList<ArrayList<Integer>>list=new ArrayList<>();
-    /**
-     * Method for add new Summing variation
-     * @param value list with numbers for sum
-     */
-//    private void fastAdd(ArrayList<Integer> value) {
-//        Collections.sort(value);
-//        Collections.reverse(value);
-//        this.list.add(value);
-//    }
-    private void fastAdd(ArrayList<Integer>value){
-        Collections.sort(value);
-        Collections.reverse(value);
-        this.list.add(value);
+public class AsNumbersSum1{
+    private final ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+
+    public AsNumbersSum1() {
     }
+
     /**
      * Main method to prepare the summing String
      * @param number for prepare
      * @return prepares String
      */
-//    public static String asNumbersSum(int number) {
-//        AsNumbersSum1 asnumSum = new AsNumbersSum1();
-//        ArrayList<Integer> temp = new ArrayList<>();
-//        temp.add(number);
-//        asnumSum.fastAdd(temp);
-//        asnumSum.rebuild(number, new ArrayList<>());
-//        return asnumSum.find(asnumSum.list.stream().distinct().collect(Collectors.toList()));
-//    }
-public static String asNumbersSum(int number){
-    AsNumbersSum1 asNumSum=new AsNumbersSum1();
-    ArrayList<Integer>temp=new ArrayList<>();
-    temp.add(number);
-    asNumSum.fastAdd(temp);
-    asNumSum.rebuild(number,new ArrayList<>());
-    return asNumSum.find(asNumSum.list.stream().distinct().collect(Collectors.toList()));
-}
+    public static String asNumbersSum1(int number) {
+        AsNumbersSum1 ans = new AsNumbersSum1();
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.add(number);
+        ans.fastAdd(temp);
+        ans.rebuild(number,new ArrayList<>());
+        return ans.find(ans.list.stream().distinct().collect(Collectors.toList()));
+    }
+
+    /**
+     * Method for add new Summing variation
+     * @param value list with numbers for sum
+     */
+    private void fastAdd(ArrayList<Integer> value) {
+        Collections.sort(value);
+        Collections.reverse(value);
+        this.list.add(value);
+    }
+
     /**
      * Method for break the summing String in different variations in recurse way
      * @param number for break
@@ -76,8 +67,7 @@ public static String asNumbersSum(int number){
         StringBuilder sb = new StringBuilder();
         for (ArrayList<Integer> integers : list) {
             for (Integer integer : integers) {
-               // sb.append(String.format("%S + ", integer));
-                sb.append(String.format("%S + ",integer));
+                sb.append(String.format("%s + ", integer));
             }
             sb.setLength(sb.length() - 3);
             sb.append(" = ");
@@ -87,9 +77,7 @@ public static String asNumbersSum(int number){
     }
 
     public static void main(String[] args) {
-        System.out.println("\n***********************************************************");
-        System.out.println(asNumbersSum(5));
-        System.out.println("***********************************************************");
-    }
 
+        System.out.println(asNumbersSum1(5));
+    }
 }

@@ -386,7 +386,7 @@ public enum Profiler {
         /**
          * Реализация {@code lpad} для чисел
          *
-         * @see ru.progwards.java2.lessons.patterns.Section#lpad(String, int)
+        // * @see ru.progwards.java2.lessons.patterns.Section#lpad(String, int)
          */
         public String lpad(long number, int length) {
             return lpad(String.valueOf(number), length);
@@ -411,7 +411,7 @@ public enum Profiler {
         /**
          * Реализация {@code rpad} для чисел
          *
-         * @see ru.progwards.java2.lessons.patterns.Section#rpad(String, int)
+       //  * @see ru.progwards.java2.lessons.patterns.Section#rpad(String, int)
          */
         public String rpad(long number, int length) {
             return rpad(String.valueOf(number), length);

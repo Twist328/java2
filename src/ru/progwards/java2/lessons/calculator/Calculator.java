@@ -1,22 +1,22 @@
 package ru.progwards.java2.lessons.calculator;
 
 
-import org.checkerframework.checker.units.qual.C;
+//import org.jetbrains.annotations.Contract;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-class Calculator{
-   // String expression;
+class Calculator {
 
-   // public Calculator(String expression) {
-        //this.expression = expression;
-   // }
+//
+//    public Calculator(String exspression) {
+//        this.exspression = exspression;
+//    }
 
     public static void main(String[] args) {
         System.out.println("\n************************************");
-        System.out.println("результат вычислений:  " + calculate("1*2+2*9")); //-14
-        //System.out.println("результат вычислений:  " + calculate("2+3*9-8")); //21
+        System.out.println("результат вычислений:  " + calculate("8/2*8/2-5")); //11
+        System.out.println("результат вычислений:  " + calculate("2+3*9-8")); //21
         System.out.println("************************************");
     }
 
@@ -25,29 +25,25 @@ class Calculator{
          При вычислении должны учитываться приоритеты операций, например, результат вычисления выражения "2+3*2"
          должен быть равен 8. По оригинальному условию задачи все числа содержат не более одной цифры, пробелов в строке нет.*/
 
-   public static int calculate(String expression){
-
-   int result=Integer.valueOf(expression.substring(0,1));
-   if (expression.length()==1)return result;
-   String symbol=expression.substring(1,2);
-
-   while (symbol.equals("*")||symbol.equals("/")){
-
-       if ("*".contains(symbol)) {
-           result *= Integer.valueOf(expression.substring(2, 3));
-       }else if ("/".contains(symbol))
-           result/=Integer.valueOf(expression.substring(2,3));
-
-       expression=expression.substring(2);
-       if (expression.length()==1)return result;
-       symbol=expression.substring(1,2);
-       }
-   if ("+".contains(symbol)){
-       result+=calculate(expression.substring(2));
-   }else if ("-".contains(symbol))
-       result-=calculate(expression.substring(2));
-       return result;
-   }
+    public static int calculate(String exspression) {
+        String str=exspression;
+        int res = Integer.valueOf(str.substring(0, 1));
+        if (str.length() == 1) return res;
+        String symbol = str.substring(1, 2);
+        while (symbol.equals("*") || (symbol.equals("/"))) {
+            if ("*".contains(symbol)) {
+                res *= Integer.valueOf(str.substring(2, 3));
+            } else if ("/".contains(symbol))
+                res /= Integer.valueOf(str.substring(2, 3));
+            str = str.substring(2);
+            symbol = str.substring(1, 2);
+        }
+        if ("+".contains(symbol)) {
+            res += calculate(str.substring(2));
+        } else if ("-".contains(symbol))
+            res -= calculate(str.substring(2));
+        return res;
+    }
 }
 
 //*********************************************************************************************************************
@@ -185,11 +181,11 @@ class Calculator1 {//со скобками
 
 //*******************************************************************
 class Calculator3 {
-    String expression;
     int pos;
+    String exspression;
 
-    public Calculator3(String expression) {
-        this.expression = expression;
+    public Calculator3(String exspression) {
+        this.exspression = exspression;
     }
 
     public static void main(String[] args) {
@@ -200,38 +196,40 @@ class Calculator3 {
         System.out.println("**************************************" + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES + Emoji.GRINNING_FACE_WITH_SMILING_EYES);
     }
 
-    public static int calculate3(String expression) {
-        return new Calculator3(expression).addSubCalc();
+    public static int calculate3(String exspression) {
+        return new Calculator3(exspression).addSubCalc();
+
     }
 
     String getSymbol() {
-        if (pos >= expression.length())
+        if (pos >= exspression.length())
             try {
                 throw new IndexOutOfBoundsException();
             } catch (IndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
-        return expression.substring(pos++, pos);
+        return exspression.substring(pos++, pos);
     }
 
     String checkSymbol() {
-        if (pos >= expression.length())
+        if (pos >= exspression.length())
             return "";
-        return expression.substring(pos, pos + 1);
+        return exspression.substring(pos, pos + 1);
     }
 
     int getNum() {
         int num;
         try {
             num = Integer.parseInt(getSymbol());
+
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ошибка вычисления числа");
+            throw new NumberFormatException("Ошибка числа");
         }
         return num;
     }
 
     boolean hasNext() {
-        return pos < expression.length();
+        return pos < exspression.length();
     }
 
     int bracketCalc() {
@@ -242,6 +240,7 @@ class Calculator3 {
             String symbolNext = getSymbol();
             if (symbolNext.equals(")")) {
                 return result;
+
             } else {
                 try {
                     throw new Exception("Ожидалось \"(\"");
@@ -253,14 +252,14 @@ class Calculator3 {
         return getNum();
     }
 
-    int multDivCalc() {
+    int multDiv() {
         int result = bracketCalc();
         while (hasNext()) {
-            String simbol = checkSymbol();
-            if ("*/".contains(simbol)) {
+            String symbol = checkSymbol();
+            if ("*/".contains(symbol)) {
                 getSymbol();
                 int num = bracketCalc();
-                switch (simbol) {
+                switch (symbol) {
                     case "*":
                         result *= num;
                         break;
@@ -269,7 +268,7 @@ class Calculator3 {
                         break;
                     default:
                         try {
-                            throw new Exception("Неведомая ошибочная операция");
+                            throw new Exception("ошибка операции");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -279,31 +278,32 @@ class Calculator3 {
         return result;
     }
 
-    int addSubCalc() {
-        int result = multDivCalc();
-        while (hasNext()) {
-            String simbol = checkSymbol();
-            if ("+-".contains(simbol)) {
+    int addSubCalc(){
+        int result=multDiv();
+        while (hasNext()){
+            String symbol=checkSymbol();
+            if ("+-".contains(symbol)){
                 getSymbol();
-                int num = multDivCalc();
-                switch (simbol) {
+                int num=multDiv();
+                switch (symbol){
                     case "+":
-                        result += num;
+                        result+=num;
                         break;
                     case "-":
-                        result -= num;
+                        result-=num;
                         break;
                     default:
                         try {
-                            throw new Exception("Неведомая ошибочная операция");
+                            throw new Exception("ошибка операции");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-            } else return result;
+            }else return result;
         }
         return result;
     }
+
 
     enum Emoji {
 
@@ -323,6 +323,7 @@ class Calculator3 {
             this.secondChar = secondChar;
         }
 
+
         Emoji() {
 
         }
@@ -341,40 +342,5 @@ class Calculator3 {
             return sb.toString();
         }
 
-    }
-//*******************************************************************************************
-    static class Calculator4 {
-
-        public static int calculate0(String expression) {
-            String str = expression;
-
-            int res = Integer.valueOf(str.substring(0, 1));
-            if (str.length()==1) return res;
-            String symbol = str.substring(1, 2);
-
-            while (symbol.equals("*") || symbol.equals("/")) {
-
-                if ("*".contains(symbol))
-                    res *= Integer.valueOf(str.substring(2, 3));
-                else if ("/".contains(symbol))
-                    res /= Integer.valueOf(str.substring(2, 3));
-                str = str.substring(2);
-
-                if (str.length() == 1) return res;
-                symbol = str.substring(1, 2);
-            }
-            if ("+".contains(symbol))
-                res += calculate0(str.substring(2));
-            else if ("-".contains(symbol))
-                res -= calculate0(str.substring(2));
-            return res;
-        }
-
-
-        public static void main(String[] args) {
-            System.out.println("\n**********************************");
-            System.out.println(calculate0("2+2-2*9"));//-14
-            System.out.println("**********************************");
-        }
     }
 }

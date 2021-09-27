@@ -47,7 +47,8 @@ public class AsNumbersSum {
     }
 
     public static void main(String[] args) {
-        System.out.println(asNumbersSum(15));
+        System.out.println(asNumbersSum(3));
 
 //        rec(0, 5);
-    }}
+    }
+}
