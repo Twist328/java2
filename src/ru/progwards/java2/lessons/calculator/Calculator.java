@@ -5,6 +5,7 @@ package ru.progwards.java2.lessons.calculator;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 class Calculator {
 
@@ -26,25 +27,28 @@ class Calculator {
          должен быть равен 8. По оригинальному условию задачи все числа содержат не более одной цифры, пробелов в строке нет.*/
 
     public static int calculate(String exspression) {
-        String str=exspression;
-        int res = Integer.valueOf(str.substring(0, 1));
+        String str = exspression;
+        int res = Integer.parseInt(str.substring(0, 1));
         if (str.length() == 1) return res;
         String symbol = str.substring(1, 2);
-        while (symbol.equals("*") || (symbol.equals("/"))) {
-            if ("*".contains(symbol)) {
-                res *= Integer.valueOf(str.substring(2, 3));
-            } else if ("/".contains(symbol))
-                res /= Integer.valueOf(str.substring(2, 3));
-            str = str.substring(2);
-            symbol = str.substring(1, 2);
-        }
-        if ("+".contains(symbol)) {
+
+        while ("*".contains(symbol) || ("/".contains(symbol))){
+            if ("*".contains(symbol))
+                res *= Integer.parseInt(str.substring(2, 3));
+            else if ("/".contains(symbol))
+                res /= Integer.parseInt(str.substring(2, 3));
+        str = str.substring(2);
+        if (str.length() == 1) return res;
+        symbol = str.substring(1, 2);
+    }
+        if ("+".contains(symbol))
             res += calculate(str.substring(2));
-        } else if ("-".contains(symbol))
+        if ("-".contains(symbol))
             res -= calculate(str.substring(2));
         return res;
     }
 }
+
 
 //*********************************************************************************************************************
 class Calculator1 {//со скобками
