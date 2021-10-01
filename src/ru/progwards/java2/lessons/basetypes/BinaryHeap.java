@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BinaryHeap<T extends Comparable<T>> {
+    public void sort(Integer[] a) {
+    }
+
+    public void sort(String[] a) {
+    }
+
     public enum Type {MAX_HEAP, MIN_HEAP};
 
     private List<T> list;

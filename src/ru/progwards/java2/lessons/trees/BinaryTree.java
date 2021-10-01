@@ -2,19 +2,26 @@ package ru.progwards.java2.lessons.trees;
 
 import java.util.function.Consumer;
 
+import java.util.function.Consumer;
+
 public class BinaryTree<K extends Comparable<K>, V> {
     private static final String KEYEXIST = "Key already exist";
     private static final String KEYNOTEXIST = "Key not exist";
 
-    public TreeIterator<K,V> getIterator() {
-        return new TreeIterator(this);
-    }
-    class TreeLeaf<K extends Comparable<K>, V> {
+    public class TreeLeaf<K extends Comparable<K>, V> {
         K key;
         V value;
         TreeLeaf parent;
         TreeLeaf left;
         TreeLeaf right;
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
 
         public TreeLeaf(K key, V value) {
             this.key = key;
@@ -38,8 +45,8 @@ public class BinaryTree<K extends Comparable<K>, V> {
 
         void add(TreeLeaf<K, V> leaf) throws TreeException {
             int cmp = leaf.key.compareTo(key);
-            if (cmp == 0)
-                throw new TreeException(KEYEXIST);
+            /*if (cmp == 0)
+                throw new TreeException(KEYEXIST);*/
             if (cmp > 0) {
                 right = leaf;
                 leaf.parent = this;
@@ -77,7 +84,7 @@ public class BinaryTree<K extends Comparable<K>, V> {
                 right.process(consumer);
         }
     }
-    public TreeLeaf<K, V> root;
+    protected TreeLeaf<K, V> root;
 
     public V find(K key) {
         if (root == null)
@@ -133,5 +140,8 @@ public class BinaryTree<K extends Comparable<K>, V> {
         if (root != null)
             root.process(consumer);
     }
-}
 
+    public TreeIterator<K,V> getIterator() {
+        return new TreeIterator(this);
+    }
+}
