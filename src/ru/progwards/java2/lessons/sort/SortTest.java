@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SortTest {
-    public static final int COUNT = 10000;
+    public static final int COUNT = 100_000;
 
     public static void fill(Integer[] a) {
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -122,9 +122,9 @@ public class SortTest {
 
         a = copy(org);
         start = System.currentTimeMillis();
-        InsertionSort.sort2(a);
+        InsertionSort.sort1(a);
         sort = System.currentTimeMillis()-start;
-        System.out.println("insertion sort2: "+sort);
+        System.out.println("insertion sort1: "+sort);
     }
 
     static void quick(Integer[] org) {
@@ -169,7 +169,7 @@ public class SortTest {
     public static void main(String[] args) throws TreeException {
         Integer[] org = new Integer[COUNT];
         fill(org);
-
+        System.out.println("\n*********************");
         selection(org);
         heap(org);
         tree(org);
@@ -178,8 +178,9 @@ public class SortTest {
         comb(org);
         insertion(org);
         quick(org);
-       shell(org);
+        shell(org);
         arrays(org);
         megre(org);
+        System.out.println("*********************");
     }
 }

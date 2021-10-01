@@ -22,42 +22,7 @@ public class ExternalSort<T extends Comparable> {
     final int MAX_BLOCK_SIZE = 10_000; // количество элементов, сортируемое за один раз
     final int MAX_FILES_COUNT = 200; // количество файлов, открываемых одновременно для слияния
 
-    // VALUES_COUNT = 20_000_000
-    //oneBlockSorter = a -> QuickSort.sortHoare(a, 0, a.length - 1);
-    //mergeSorter = a -> Arrays.sort(a);
-    // BlockSize, FileCount -> sec
-    // 10_000, 2000 -> 310 s
-    // 10_000, 200 -> 45 s
-    // 10_000, 150 -> 38 s
-    // 10_000, 100 -> 36 s
-    // 10_000, 50 -> 35 s
-    // 10_000, 30 -> 32 s
-    // 10_000, 20 -> 30 s
-    // 10_000, 10 -> 26 s
-    // 10_000, 5 -> 28 s
-    // 10_000, 2 -> 43 s
-    //mergeSorter = a -> QuickSort.sortHoare(a, 0, a.length - 1);
-    // 10_000, 200 -> 154 s
-    //mergeSorter = a -> ShellSort.sort(a);
-    // 10_000, 200 -> 212 s
-    //mergeSorter = a -> InsertionSort.sort(a);
-    // 10_000, 2000 -> 488 s
-    // 10_000, 200 -> 49 s
-    //mergeSorter = a -> InsertionSort.sortZeroQuick(a);
-    // 10_000, 2000 -> 18 s
-    // 10_000, 200 -> 16 s
 
-    // VALUES_COUNT = 200_000_000
-    //oneBlockSorter = a -> QuickSort.sortHoare(a, 0, a.length - 1);
-    //mergeSorter = a -> InsertionSort.sortZeroQuick(a);
-    // BlockSize, FileCount -> sec
-    // 10_000,20000 -> 633 s
-    // 10_000, 2000 -> 219 s
-    // 10_000,  500 -> 184 s
-    // 10_000,  200 -> 178 s
-    // 10_000,  150 -> 199 s
-    // 10_000,  100 -> 252 s
-    // 10_000,   30 -> 240 s
     // при этом одно ядро из четырех загружено полностью, а диск лишь на 30МБ/с из 1ТБ/с - перспективно для многопоточности.
     // К сожалению, не знаю, как ещё снизить нагрузку на процессор
     // Файлов много лучше не открывать, особенно для носителей с последовательным доступом, чтобы жесткий диск не молотил головками. Число файлов надо подбирать экспериментально.
