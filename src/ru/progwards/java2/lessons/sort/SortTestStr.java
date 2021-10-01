@@ -167,9 +167,9 @@ public class SortTestStr {
         System.out.println("\n******************************");
         System.out.println("size=" + org.length);
 
-        selection(org);
-        bubble(org);
-        shaker(org);
+       // selection(org);
+        //bubble(org);
+       // shaker(org);
         comb(org);
         insertion(org);
         heap(org);
