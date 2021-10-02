@@ -1,12 +1,14 @@
 package ru.progwards.java2.lessons.sort;
 
+import java.util.Arrays;
+
 /**
  * Сортировка вставками
- *
+ * <p>
  * Перебираем все элементы подряд и если элемент меньше, чем тот который слева - двигаем
  * тот на наше место и сравниваем со следующим левым. Когда нашли элемент меньше нас,
  * останавливаемся и сохраняем в освободившееся место себя.
- *
+ * <p>
  * Замеры скоростей:
  * sort1: 11517
  * sort2: 5
@@ -40,8 +42,8 @@ public class InsertionSort {
                 //a[i + 1] = a[i];
                 i--;
             }
-            if (i + 2 < a.length && j - i - 2 > 0) {
-                System.arraycopy(a, i + 1, a, i + 2, j - i - 2); // нельзя использовать, затирает всё одним значением
+            if (i + 2 < a.length && j - i - 2 >= 0) {
+                System.arraycopy(a, i + 1, a, i + 2, j-i-2); // нельзя использовать, затирает всё одним значением
             }
             a[i + 1] = cur;
         }
@@ -50,40 +52,33 @@ public class InsertionSort {
     // Перевернули порядок обхода массива - теперь идем сконца
     // и используем системную функцию копирование справа на лево
 
-    public static <T extends Comparable<T>> void sort3(T[] a) {
-
-        for (int j = a.length - 1; j >= 0; j--) {
-            T cur = a[j];
-            int i = j + 1;
-            while (i < a.length && a[i].compareTo(cur) < 0) {
-                //a[i + 1] = a[i];
-                i++;
-            }
-            if (i - j - 1 > 0) {
-                System.arraycopy(a, j+1, a, j, i - j - 1);
-                a[i - 1] = cur;
-            }
-        }
-    }
-
-    // Добавили переменную длинны массива на основе sort3
 
     public static <T extends Comparable<T>> void sort(T[] a) {
-
-        final int l = a.length;
-
-        for (int j = l - 1; j >= 0; j--) {
+        for (int j = 1; j < a.length; j++) {
             T cur = a[j];
-            int i = j + 1;
-            while (i < l && a[i].compareTo(cur) < 0) {
-                i++;
+            int i = j - 1;
+            while (i >= 0 && a[i].compareTo(cur) > 0) {
+                a[i + 1] = a[i];
+                i--;
             }
-            if (i - j - 1 > 0) {
-                System.arraycopy(a, j+1, a, j, i - j - 1);
-                a[i - 1] = cur;
-            }
+            a[i + 1] = cur;
         }
     }
+
+    public static <T extends Comparable<T>> void sort4(T[] a) {
+        final int l = a.length;
+        for (int j = l - 1; j > 0; j--) {
+            T cur = a[j];
+            int i = j + 1;
+            while (i < l && a[i].compareTo(cur) < 0)
+                i++;
+            if (i + 3 < l && i - j - 2 > 0) {
+                System.arraycopy(a, j + 1, a, j, i - j - 2);
+            }
+            a[i - 1] = cur;
+        }
+    }
+
 
     // Находим позицию для нулевого элемента в отсортированном массиве
 
@@ -92,9 +87,9 @@ public class InsertionSort {
         int low = 2;
         int high = a.length - 1;
         T el = a[0];
-        if(high==0 || a[0].compareTo(a[1]) < 0) return;
+        if (high == 0 || a[0].compareTo(a[1]) < 0) return;
 
-        while(low<high) {
+        while (low < high) {
             int mid = (low + high) / 2;
             int cmp = el.compareTo(a[mid]);
             if (cmp > 0) {
@@ -107,10 +102,10 @@ public class InsertionSort {
                 break;
             }
         }
-        if(low<=high) {
+        if (low <= high) {
             int cmp = el.compareTo(a[low]);
             if (cmp <= 0) low--;
-        } else if(low>high) {
+        } else if (low > high) {
             low = high;
         }
         System.arraycopy(a, 1, a, 0, low);
@@ -122,7 +117,7 @@ public class InsertionSort {
 
     public static <T extends Comparable<T>> void sortInLimits(T[] a, int from, int to) {
 
-        final int l = to+1;
+        final int l = to + 1;
 
         for (int j = to; j >= from; j--) {
             T cur = a[j];
@@ -131,7 +126,7 @@ public class InsertionSort {
                 i++;
             }
             if (i - j - 1 > 0) {
-                System.arraycopy(a, j+1, a, j, i - j - 1);
+                System.arraycopy(a, j + 1, a, j, i - j - 1);
                 a[i - 1] = cur;
             }
         }

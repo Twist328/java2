@@ -3,12 +3,12 @@ package ru.progwards.java2.lessons.sort;
 import ru.progwards.java2.lessons.basetypes.BinaryHeap;
 import ru.progwards.java2.lessons.trees.BinaryTree;
 import ru.progwards.java2.lessons.trees.TreeException;
-import ru.progwards.java2.lessons.trees.TreeIterator;
+
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SortTest {
-    public static final int COUNT = 100_000;
+    public static final int COUNT = 10000;
 
     public static void fill(Integer[] a) {
         HashMap<Integer, Integer> map = new HashMap<>();

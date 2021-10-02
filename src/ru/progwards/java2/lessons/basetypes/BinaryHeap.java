@@ -1,21 +1,34 @@
 package ru.progwards.java2.lessons.basetypes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BinaryHeap<T extends Comparable<T>> {
+
     public void sort(Integer[] a) {
+        Integer[] array = new Integer[100];
+        for (int i = 0; i < 100; i++) {
+            array[i] = i;
+        }
+        BinaryHeap.sort(BinaryHeap.Type.MIN_HEAP, array);
+        //System.out.println(Arrays.toString(array));
     }
 
     public void sort(String[] a) {
+       // String ar=new String();
+        for (int i = 0; i < 100; i++) {
+            a[i] = String.valueOf(i);
+        }
+        BinaryHeap.sort(BinaryHeap.Type.MIN_HEAP, a);
     }
 
-    public enum Type {MAX_HEAP, MIN_HEAP};
+    public enum Type {MAX_HEAP, MIN_HEAP}
 
     private List<T> list;
     private Type type;
 
-    BinaryHeap() {
+    public BinaryHeap() {
         list = new ArrayList<>();
         type = Type.MAX_HEAP;
     }
@@ -99,7 +112,7 @@ public class BinaryHeap<T extends Comparable<T>> {
 
     public List<T> sort() {
         List<T> sorted = new ArrayList<>();
-        for (int i=0; size() > 0; i++) {
+        for (int i = 0; size() > 0; i++) {
             sorted.add(poll());
         }
         return sorted;
@@ -107,7 +120,7 @@ public class BinaryHeap<T extends Comparable<T>> {
 
     public static <T extends Comparable<T>> BinaryHeap<T> from(Type type, List<T> list) {
         BinaryHeap<T> heap = new BinaryHeap<>(type);
-        for(T item: list) {
+        for (T item : list) {
             heap.add(item);
         }
         return heap;
@@ -115,21 +128,43 @@ public class BinaryHeap<T extends Comparable<T>> {
 
     public static <T extends Comparable<T>> BinaryHeap<T> from(Type type, T[] array) {
         BinaryHeap<T> heap = new BinaryHeap<>(type);
-        for(T item: array) {
+        for (T item : array) {
             heap.add(item);
         }
         return heap;
     }
 
-    public static <T extends Comparable<T>> BinaryHeap<T> of(Type type, T...array) {
+    public static <T extends Comparable<T>> BinaryHeap<T> of(Type type, T... array) {
         return from(type, array);
     }
 
     public static <T extends Comparable<T>> void sort(Type type, T[] array) {
         BinaryHeap<T> heap = from(type, array);
-        for (int i=0; heap.size() > 0; i++) {
+        for (int i = 0; heap.size() > 0; i++) {
             array[i] = heap.poll();
         }
     }
-
+    public static class TestHeap {
+        public  void test1() {
+            BinaryHeap<Integer> heap = new BinaryHeap<>();
+            for(int i=0; i<100; i++) {
+                heap.add(i);
+                System.out.println(heap);
+            }
+            while (heap.size() > 0) {
+                System.out.println(heap.poll());
+            }
+        }
+        public  void test2() {
+            Integer[] array = new Integer[100];
+            for (int i = 0; i < 100; i++) {
+                array[i] = i;
+            }
+            BinaryHeap.sort(BinaryHeap.Type.MIN_HEAP, array);
+            System.out.println(Arrays.toString(array));
+        }
+        public static void main(String[] args) {
+            new TestHeap().test2();
+        }
+    }
 }

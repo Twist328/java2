@@ -1,5 +1,6 @@
 package ru.progwards.java2.lessons.sort;
 
+
 import ru.progwards.java2.lessons.basetypes.BinaryHeap;
 import ru.progwards.java2.lessons.trees.BinaryTree;
 import ru.progwards.java2.lessons.trees.TreeException;
@@ -17,7 +18,7 @@ public class SortTestStr {
         try {
             BufferedReader bufferreader = new BufferedReader(new FileReader("C:\\Template\\wiki\\wiki.train.tokens"));
             while ((line = bufferreader.readLine()) != null) {
-                String s[] = line.split("[ :\".,!<>{}=]");
+                String s[] = line.split("[ :\".,!<>{}=; _ @]");
                 for (String str : s) {
                     str = str.trim();
                     if (str.length() > 0) {
@@ -74,6 +75,7 @@ public class SortTestStr {
         heap.sort(a);
         long sort = System.currentTimeMillis() - start;
         System.out.println("heap sort: " + sort);
+        //System.out.println(Arrays.toString(a));
     }
 
     static void tree(String[] org) throws TreeException {
@@ -87,6 +89,7 @@ public class SortTestStr {
         tree.process(sorted::add);
         long sort = System.currentTimeMillis() - start;
         System.out.println("tree sort: " + sort);
+       // System.out.println(Arrays.toString(org));
     }
 
     static void bubble(String[] org) {
@@ -125,8 +128,9 @@ public class SortTestStr {
 
         long start = System.currentTimeMillis();
         InsertionSort.sort2(a);
-        long sort2 = System.currentTimeMillis() - start;
+        long sort2= System.currentTimeMillis() - start;
         System.out.println("insertion sort2: " + sort2);
+       // System.out.println(Arrays.toString(a));
     }
 
     static void quick(String[] org) {
@@ -149,7 +153,7 @@ public class SortTestStr {
         ShellSort.sort(a);
         long sort = System.currentTimeMillis() - start;
         System.out.println("shell sort: " + sort);
-        System.out.println(Arrays.toString(a));
+        //System.out.println(Arrays.toString(a));
     }
 
     static void arrays(String[] org) {
@@ -160,6 +164,7 @@ public class SortTestStr {
         long sort = System.currentTimeMillis() - start;
 
         System.out.println("arrays sort: " + sort);
+        //System.out.println(Arrays.toString(a));
     }
 
     public static void main(String[] args) throws TreeException {
@@ -167,17 +172,17 @@ public class SortTestStr {
         System.out.println("\n******************************");
         System.out.println("size=" + org.length);
 
-       // selection(org);
+       //selection(org);
         //bubble(org);
-       // shaker(org);
+        //shaker(org);
         comb(org);
         insertion(org);
         heap(org);
         tree(org);
-
         quick(org);
-        // shell(org);
+         shell(org);
         arrays(org);
         System.out.println("******************************");
+
     }
 }

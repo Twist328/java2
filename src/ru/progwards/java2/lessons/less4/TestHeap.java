@@ -1,5 +1,7 @@
 package ru.progwards.java2.lessons.less4;
 
+import ru.progwards.java2.lessons.basetypes.BinaryHeap;
+
 import java.util.Arrays;
 
 public class TestHeap {
