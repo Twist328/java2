@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.util.*;
 
 public class SortTestStr {
-    static final int COUNT = 1000;
+    static final int COUNT = 10_000;
 
     static String[] fill() {
         String line;
@@ -186,3 +186,11 @@ public class SortTestStr {
 
     }
 }
+//          size=1806497
+//        comb sort: 4375
+//        insertion sort2: 108
+//        heap sort: 2364
+//        tree sort: 199
+//        quick sort2: 872
+//        shell sort: 2648
+//        arrays sort: 830
