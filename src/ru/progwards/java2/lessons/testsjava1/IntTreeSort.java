@@ -7,9 +7,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.SplittableRandom;
 import java.util.stream.Stream;
-//import ru.progwards.java2.lessons.testsjava1.DemoTreeSort;
-
-
+import ru.progwards.java2.lessons.testsjava1.DemoTreeSort;
 
 /**
         * This class implements a funky tree sort algorithm for sorting integers.
@@ -342,7 +340,7 @@ public class IntTreeSort {
     }
 
     public static void main(String[] args) {
-        System.out.println(title("Tree sorting in string and integers"));
+        System.out.println(title("Сортировка через бинарное дерево в строке и целых чисел"));
         String[] arr = new String[]{"Z", "Y", "X", "A", "C", "B"};
         Arrays.sort(arr);
         System.out.println(Arrays.toString(arr));

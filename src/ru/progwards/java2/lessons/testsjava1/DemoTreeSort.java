@@ -2,7 +2,6 @@ package ru.progwards.java2.lessons.testsjava1;
 
 import java.util.Arrays;
 import java.util.Random;
-import ru.progwards.java2.lessons.testsjava1.DemoTreeSort;
 public class DemoTreeSort {
 
 

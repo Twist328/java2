@@ -3,6 +3,17 @@ package ru.progwards.java2.lessons.testsjava1;
 import java.util.Arrays;
 
 public class Sorting {
+    public static void insertionSort(String array[]) {
+        for (int j = 1; j < array.length; j++) {
+            String current = array[j];
+            int i = j-1;
+            while ((i > -1) && (array[i].compareTo(current)>0)) {
+                array[i+1] = array[i];
+                i--;
+            }
+            array[i+1] = current;
+        }
+    }
     public static void insertionSort(int array[]) {
         for (int j = 1; j < array.length; j++) {
             int current = array[j];
@@ -30,7 +41,7 @@ public class Sorting {
 }
 
     public static void main(String[] args) {
-        int[] array = new int[]{1, 7, 5, 6, 9, 4, 2, 3};
+        String[] array = new String[]{"Z", "W", "Y", "X","D", "C", "B", "A"};
         insertionSort(array);
         System.out.println(Arrays.toString(array));
         int[] array1 = new int[]{88,- 79, 54, 65, 9, 4, 2,0,-99,292,77, 3};
