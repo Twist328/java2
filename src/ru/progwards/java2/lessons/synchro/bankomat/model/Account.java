@@ -2,7 +2,7 @@ package ru.progwards.java2.lessons.synchro.bankomat.model;
 
 import java.util.Date;
 
-public class Account {
+public class Account  {
 
 private String id;
 private String holder;
