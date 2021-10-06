@@ -1,9 +1,9 @@
-package ru.progwards.java2.lessons.http.bankomat.service;
+package ru.progwards.java2.lessons.http.bankomat.service.impl;
 
 import com.google.gson.Gson;
 import ru.progwards.java2.lessons.http.bankomat.Store;
 import ru.progwards.java2.lessons.http.bankomat.model.Account;
-
+import ru.progwards.java2.lessons.http.bankomat.service.StoreService;
 
 import java.io.*;
 import java.util.*;
@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class FileStoreService implements StoreService {
 
-    final String fileName = "C:\\Projects\\java2\\src\\ru\\progwards\\java2\\lessons\\http\\bankomat\\servise\\FileStoreService.json";
+    final String fileName = "C:\\Projects\\java2\\src\\ru\\progwards\\java2\\lessons\\http\\bankomat\\service\\FileStoreService.json";
     final String fileNameTmp = fileName + ".tmp";
     final Gson gson = new Gson();
     ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
@@ -88,11 +88,11 @@ public class FileStoreService implements StoreService {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("IOException: " + e.getMessage());
+            throw new RuntimeException("IOException: "+e.getMessage());
         } finally {
             lock.writeLock().unlock();
         }
-        if (!inputFile.delete())
+        if (inputFile.delete())
             throw new RuntimeException("Cannot update source file.");
         if (!tempFile.renameTo(inputFile))
             throw new RuntimeException("Cannot update file.");
@@ -144,7 +144,7 @@ public class FileStoreService implements StoreService {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("IOException: " + e.getMessage());
+            throw new RuntimeException("IOException: "+e.getMessage());
         } finally {
             lock.writeLock().unlock();
         }
@@ -177,8 +177,8 @@ public class FileStoreService implements StoreService {
         final int count = accs.size();
 
         Callable<?> randomGet = () -> {
-            System.out.println("randomGet " + Thread.currentThread().getName() + " started");
-            for (int i = 1; i < count; i++) {
+            System.out.println("randomGet " + Thread.currentThread().getName()+" started");
+            for(int i=1; i<count; i++) {
                 int idx = random.nextInt(count);
                 Account a = accs.get(idx);
                 String id;
@@ -187,16 +187,16 @@ public class FileStoreService implements StoreService {
                     if (id == null) continue;
                     a.setId(null); //чтобы никто не начал изменять этот объект
                 }
-                if (id != null)
+                if (id!=null)
                     a = ss.get(id);
                 a.setId(id);
             }
-            System.out.println("randomGet " + Thread.currentThread().getName() + " finished");
+            System.out.println("randomGet " + Thread.currentThread().getName()+" finished");
             return true;
         };
         Callable<?> randomDeleteInsert = () -> {
-            System.out.println("randomDeleteInsert " + Thread.currentThread().getName() + " started");
-            for (int i = 1; i < count / 10; i++) {
+            System.out.println("randomDeleteInsert " + Thread.currentThread().getName()+" started");
+            for(int i=1; i<count/10; i++) {
                 int idx = random.nextInt(count);
                 Account a = accs.get(idx);
                 String id;
@@ -215,26 +215,26 @@ public class FileStoreService implements StoreService {
                 ss.insert(acc);
                 a.setId(id);
             }
-            System.out.println("randomDeleteInsert " + Thread.currentThread().getName() + " finished");
+            System.out.println("randomDeleteInsert " + Thread.currentThread().getName()+" finished");
             return true;
         };
         Callable<?> randomUpdate = () -> {
-            System.out.println("randomUpdate " + Thread.currentThread().getName() + " started");
-            for (int i = 1; i < count / 10; i++) {
+            System.out.println("randomUpdate " + Thread.currentThread().getName()+" started");
+            for(int i=1; i<count/10; i++) {
                 int idx = random.nextInt(count);
                 Account a = accs.get(idx);
                 synchronized (a) {
                     String id = a.getId();
                     if (id == null) continue;
                 }
-                a.setAmount(a.getAmount() + 123);
+                a.setAmount(a.getAmount()+123);
                 ss.update(a);
             }
-            System.out.println("randomUpdate " + Thread.currentThread().getName() + " finished");
+            System.out.println("randomUpdate " + Thread.currentThread().getName()+" finished");
             return true;
         };
 
-        System.out.println("Preparation done. Storage Count = " + count);
+        System.out.println("Preparation done. Storage Count = "+count);
         long tm = System.currentTimeMillis();
         ArrayList<Future<?>> futures = new ArrayList<>();
         futures.add(es.submit(randomGet));
@@ -244,11 +244,31 @@ public class FileStoreService implements StoreService {
         futures.add(es.submit(randomGet));
         futures.add(es.submit(randomGet));
         futures.add(es.submit(randomGet));
-        for (Future f : futures)
+        for (Future f: futures)
             f.get();
-        System.out.println("All tasks done in " + (System.currentTimeMillis() - tm) + " ms");
+        System.out.println("All tasks done in "+(System.currentTimeMillis()-tm)+" ms");
         // не понял только, почему программа не завершает своё выполнение,
         // только после шатдауна ExecutorService:
         es.shutdown();
+
+        /*
+Preparation done. Storage Count = 10000
+randomUpdate pool-1-thread-1 started
+randomDeleteInsert pool-1-thread-3 started
+randomGet pool-1-thread-2 started
+randomGet pool-1-thread-4 started
+randomUpdate pool-1-thread-1 finished
+randomGet pool-1-thread-1 started
+randomDeleteInsert pool-1-thread-3 finished
+randomGet pool-1-thread-3 started
+randomGet pool-1-thread-4 finished
+randomGet pool-1-thread-4 started
+randomGet pool-1-thread-2 finished
+randomGet pool-1-thread-1 finished
+randomGet pool-1-thread-3 finished
+randomGet pool-1-thread-4 finished
+All tasks done in 324823 ms
+        */
     }
+
 }
