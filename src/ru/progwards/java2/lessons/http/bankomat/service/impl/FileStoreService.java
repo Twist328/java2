@@ -196,7 +196,7 @@ public class FileStoreService implements StoreService {
         };
         Callable<?> randomDeleteInsert = () -> {
             System.out.println("randomDeleteInsert " + Thread.currentThread().getName()+" started");
-            for(int i=1; i<count/10; i++) {
+            for(int i=1; i<count/1000; i++) {
                 int idx = random.nextInt(count);
                 Account a = accs.get(idx);
                 String id;
@@ -220,7 +220,7 @@ public class FileStoreService implements StoreService {
         };
         Callable<?> randomUpdate = () -> {
             System.out.println("randomUpdate " + Thread.currentThread().getName()+" started");
-            for(int i=1; i<count/10; i++) {
+            for(int i=1; i<count/1000; i++) {
                 int idx = random.nextInt(count);
                 Account a = accs.get(idx);
                 synchronized (a) {
@@ -247,27 +247,26 @@ public class FileStoreService implements StoreService {
         for (Future f: futures)
             f.get();
         System.out.println("All tasks done in "+(System.currentTimeMillis()-tm)+" ms");
-        // не понял только, почему программа не завершает своё выполнение,
-        // только после шатдауна ExecutorService:
         es.shutdown();
 
         /*
-Preparation done. Storage Count = 10000
-randomUpdate pool-1-thread-1 started
-randomDeleteInsert pool-1-thread-3 started
+Preparation done. Storage Count = 380
+randomGet pool-1-thread-4 started
+randomGet pool-1-thread-8 started
 randomGet pool-1-thread-2 started
-randomGet pool-1-thread-4 started
-randomUpdate pool-1-thread-1 finished
-randomGet pool-1-thread-1 started
+randomGet pool-1-thread-6 started
+randomGet pool-1-thread-7 started
+randomDeleteInsert pool-1-thread-3 started
 randomDeleteInsert pool-1-thread-3 finished
-randomGet pool-1-thread-3 started
-randomGet pool-1-thread-4 finished
-randomGet pool-1-thread-4 started
+randomUpdate pool-1-thread-5 started
+randomUpdate pool-1-thread-5 finished
 randomGet pool-1-thread-2 finished
-randomGet pool-1-thread-1 finished
-randomGet pool-1-thread-3 finished
+randomGet pool-1-thread-6 finished
+randomGet pool-1-thread-8 finished
+randomGet pool-1-thread-7 finished
 randomGet pool-1-thread-4 finished
-All tasks done in 324823 ms
+All tasks done in 896 ms
+
         */
     }
 }
