@@ -131,8 +131,8 @@ public class AtmClient implements AccountService {
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        String id = "ef2b96ea-77a3-4778-8f83-4bcd2f06d74f";
-        String id2 = "dd0b0402-3324-4a47-9f4a-e870c9e8276f";
+        String id = "c8526538-5ee3-4043-9087-5f76a69faa1e";
+        String id2 = "853340e1-a165-4c40-b52d-af1c38fb156d";
 //         was:
 //        {"id":"60f1a5cc-97f8-436c-891d-048b76a7c920","holder":"Account_8","date":"May 3, 2020, 3:24:50 PM","amount":221751.524022907,"pin":1008} +10_000-30_000-50_000 = -70_000
 //        {"id":"46a87cf4-439a-48fc-a012-dbfbd8d1aa9b","holder":"Account_1","date":"May 3, 2020, 3:24:50 PM","amount":323595.0683072427,"pin":1001} +50_000
