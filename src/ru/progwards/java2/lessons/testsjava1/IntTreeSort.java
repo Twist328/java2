@@ -1,13 +1,7 @@
 package ru.progwards.java2.lessons.testsjava1;
 
-import com.sun.jdi.IntegerValue;
-
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.SplittableRandom;
-import java.util.stream.Stream;
-import ru.progwards.java2.lessons.testsjava1.DemoTreeSort;
 
 /**
         * This class implements a funky tree sort algorithm for sorting integers.
