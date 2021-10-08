@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class FileStoreService implements StoreService {
 
-    final String fileName = "C:\\Projects\\java2\\src\\ru\\progwards\\java2\\lessons\\http\\bankomat\\service\\FileStoreService.json";
+    final String fileName = "src\\ru\\progwards\\java2\\lessons\\http\\bankomat\\service\\FileStoreService.json";
     final String fileNameTmp = fileName + ".tmp";
     final Gson gson = new Gson();
     ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
