@@ -158,7 +158,7 @@ public class FileStoreService implements StoreService {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        ExecutorService es = Executors.newFixedThreadPool(10);
+        ExecutorService es = Executors.newFixedThreadPool(7);
         StoreService ss = new FileStoreService();
         SplittableRandom random = new SplittableRandom();
 
@@ -248,6 +248,7 @@ public class FileStoreService implements StoreService {
             f.get();
         System.out.println("All tasks done in "+(System.currentTimeMillis()-tm)+" ms");
         es.shutdown();
+        System.out.println(es.isShutdown());
 
         /*
 Preparation done. Storage Count = 380

@@ -13,7 +13,7 @@ public class IntTreeSort {
 
     private static final int CONSOLE_WIDTH = 80;
     private static final int LENGTH = 10;
-    private static final int DISTINCT_INTS = 500;
+    private static final int DISTINCT_INTS = 5000;
 
     public static void sort(int[] array) {
         sort(array, 0, array.length);
@@ -53,18 +53,6 @@ public class IntTreeSort {
         }
 
         return ret;
-    }
-
-    @Override
-    public String toString() {
-        return "IntTreeSort{" +
-                "array=" + Arrays.toString(array) +
-                ", fromIndex=" + fromIndex +
-                ", toIndex=" + toIndex +
-                ", table=" + Arrays.toString(table) +
-                ", mask=" + mask +
-                ", root=" + root +
-                '}';
     }
 
     private static final class TreeNode {
@@ -341,9 +329,9 @@ public class IntTreeSort {
 
         int[] array1 = new int[LENGTH];
         long seed = System.nanoTime();
-        Random random = new Random(seed);//int i=0;
+        Random random = new Random(seed);
         for (int i = 0; i < array1.length; ++i) {
-            array1[i] = 3 * random.nextInt(DISTINCT_INTS);
+            array1[i] = random.nextInt();
             Arrays.sort(array1);
             System.out.println("\nОтсортированный массив : " + Arrays.toString(array1));
         }

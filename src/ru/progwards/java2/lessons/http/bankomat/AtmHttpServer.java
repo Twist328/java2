@@ -14,8 +14,7 @@ import java.net.Socket;
 import java.util.Hashtable;
 import java.util.Scanner;
 
-//http://localhost/balance?id=3d4989c7-bf05-4450-89a9-3aaa1c43d74c
-//http://localhost/deposit?id=3d4989c7-bf05-4450-89a9-3aaa1c43d74c&amount=1000
+
 
 public class AtmHttpServer {
     final static int SERVER_PORT = 80;
