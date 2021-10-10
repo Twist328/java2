@@ -5,6 +5,9 @@ import ru.progwards.java2.lessons.http.bankomat.service.AccountService;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.concurrent.*;
 
 public class AtmClient implements AccountService {
@@ -133,12 +136,7 @@ public class AtmClient implements AccountService {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         String id = "cc4842cc-60e5-47ca-9915-dce3499c3445";
         String id2 = "d434ae74-445a-46b8-8ea5-5e37964d80e2";
-//         was:
-//        {"id":"60f1a5cc-97f8-436c-891d-048b76a7c920","holder":"Account_8","date":"May 3, 2020, 3:24:50 PM","amount":221751.524022907,"pin":1008} +10_000-30_000-50_000 = -70_000
-//        {"id":"46a87cf4-439a-48fc-a012-dbfbd8d1aa9b","holder":"Account_1","date":"May 3, 2020, 3:24:50 PM","amount":323595.0683072427,"pin":1001} +50_000
-//         result:
-//        {"id":"60f1a5cc-97f8-436c-891d-048b76a7c920","holder":"Account_8","date":"May 3, 2020, 3:24:50 PM","amount":151751.524022907,"pin":1008}
-//        {"id":"46a87cf4-439a-48fc-a012-dbfbd8d1aa9b","holder":"Account_1","date":"May 3, 2020, 3:24:50 PM","amount":373595.0683072427,"pin":1001}
+
         Account acc = new Account();
         acc.setId(id);
         Account acc2 = new Account();
@@ -147,10 +145,16 @@ public class AtmClient implements AccountService {
 
         Thread.sleep(1000);
         AccountService as = new AtmClient("localhost", 80);
+        System.out.println("\n*************************************************************");
 
-        System.out.println(as.balance(acc));
+        System.out.println("\nbalance operations acc1 : "+as.balance(acc)+(LocalDateTime.now().format(DateTimeFormatter.ofPattern
+                ("  dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm \n"))))+requestTransfer+requestWithdraw+requestDeposit+requestBalance);
         as.deposit(acc, amount);
-        as.withdraw(acc, amount * 3);
-        as.transfer(acc, acc2, amount * 5);
+        as.withdraw(acc, amount -80000);
+        as.transfer(acc, acc2, amount / 5);
+        System.out.println("*************************************************************");
+        System.out.println("\nbalance operations acc2 : "+as.balance(acc2)+(LocalDateTime.now().format(DateTimeFormatter.ofPattern
+                ("  dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm \n"))))+requestTransfer+requestWithdraw+requestDeposit+requestBalance);
+       System.out.println("*************************************************************");
     }
 }
