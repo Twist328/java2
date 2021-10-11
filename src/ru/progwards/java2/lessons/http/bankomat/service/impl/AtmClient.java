@@ -27,6 +27,10 @@ public class AtmClient implements AccountService {
         this.port = port;
     }
 
+//    public AtmClient() {
+//
+//    }
+
     @Override
     public double balance(Account account) {
         if (account == null)
@@ -113,7 +117,7 @@ public class AtmClient implements AccountService {
     }
 
     @Override
-    public void transfer(Account from, Account to, double amount) {
+    public  void transfer(Account from, Account to, double amount) {
         if (from == null)
             throw new NullPointerException("'from' must be set");
         String fromId = from.getId();
@@ -148,13 +152,26 @@ public class AtmClient implements AccountService {
         System.out.println("\n*************************************************************");
 
         System.out.println("\nbalance operations acc1 : "+as.balance(acc)+(LocalDateTime.now().format(DateTimeFormatter.ofPattern
-                ("  dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm \n"))))+requestTransfer+requestWithdraw+requestDeposit+requestBalance);
+                ("  dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm \n"))))+httpPrefix+
+                requestString+requestTransfer+requestWithdraw+requestDeposit+requestBalance);
         as.deposit(acc, amount);
+        as.deposit(acc2, amount);
         as.withdraw(acc, amount -80000);
+        as.withdraw(acc2, amount -80000);
         as.transfer(acc, acc2, amount / 5);
         System.out.println("*************************************************************");
         System.out.println("\nbalance operations acc2 : "+as.balance(acc2)+(LocalDateTime.now().format(DateTimeFormatter.ofPattern
-                ("  dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm \n"))))+requestTransfer+requestWithdraw+requestDeposit+requestBalance);
-       System.out.println("*************************************************************");
+                ("  dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm \n"))))+
+                httpPrefix+requestString+requestTransfer+requestWithdraw+requestDeposit+requestBalance);
+        System.out.println("*************************************************************");
+        System.out.println(new AtmClient(acc.getId(),80)+httpPrefix+requestString+requestTransfer+requestWithdraw+requestDeposit+requestBalance);
+    }
+
+    @Override
+    public String toString() {
+        return "AtmClient{" +
+                "host='" + host + '\'' +
+                ", port=" + port +
+                '}';
     }
 }

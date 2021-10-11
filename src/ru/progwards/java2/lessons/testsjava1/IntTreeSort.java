@@ -323,7 +323,7 @@ public class IntTreeSort {
 
     public static void main(String[] args) {
         System.out.println(title("Сортировка через бинарное дерево в строке и целых чисел"));
-        String[] arr = new String[]{"Z", "Y", "X", "A", "C", "B"};
+        String[] arr = new String[]{"Y", "W","Y", "X", "A", "T", "C", "I","B"};
         Arrays.sort(arr);
         System.out.println(Arrays.toString(arr));
 

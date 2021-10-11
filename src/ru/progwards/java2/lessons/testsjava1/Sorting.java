@@ -43,7 +43,7 @@ public class Sorting {
             for (int j = 1; j < a.length; j++) {
                 double cur = a[j];
                 int i = j - 1;
-                while (i >=0 && (a[i]>cur) ) {
+                while (i >-1 && (a[i]>cur) ) {
                     //a[i + 1] = a[i];
                     i--;
                 }
@@ -56,14 +56,16 @@ public class Sorting {
 
 
     public static void main(String[] args) {
+        System.out.println("\n**********************************************");
         String[] array = new String[]{"Z", "W", "Y", "X","D", "C", "B", "A"};
         insertionSort(array);
         System.out.println(Arrays.toString(array));
         int[] array1 = new int[]{88,- 79, 54, 65, 9, 4, 2,0,-99,292,77, 3};
         insertionSort1(array1);
         System.out.println(Arrays.toString(array1));
-        double[] array2 = new double[]{88.0,- 79.1, 54.8, 65.3, 9.5, 4.8, 2.0,0.5,-99.0,292.8,77.7, 3.0};
+        double[] array2 = new double[]{88.0,- 79.1, 54.8, -8401.09,65.3, 9.5, 4.8, 2.0,0.5,-99.0,292.8,77.7, 3.0};
         insertionSort2(array2);
         System.out.println(Arrays.toString(array2));
+        System.out.println("**********************************************");
     }
 }
