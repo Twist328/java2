@@ -1,6 +1,5 @@
 package ru.progwards.java2.lessons.less14;
 
-import java.io.InterruptedIOException;
 import java.util.SplittableRandom;
 
 public class Simposium {
@@ -13,93 +12,60 @@ public class Simposium {
             areFree=free;
         }
     }
-    static class Philosopher{
+    static  class  Philosopher{
         String name;
         Fork right;
         Fork left;
-       long reflectTime;
-       long eatTime;
-       long reflectSum;
-       long eatSum;
-       final static long INTERVALTIME =500;
-
-
+        long reflectTime;
+        long eatTime;
+        long reflectSum;
+        long eatSum;
+        final static long INTERVALTIME=500;
 
         void reflect() throws InterruptedException {
-           long timeStart=System.currentTimeMillis();
-           long timeNow=timeStart;
-           long passed=0;
-           boolean isInterrupted=false;
-           while (passed<reflectTime) {
-               System.out.println("размышлял " + name);
-               long needReflect = reflectTime - passed;
-               try {
-                   Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
-               } catch (InterruptedException e) {
-                   isInterrupted = true;
-                   break;
-               } finally {
-                   timeNow = System.currentTimeMillis();
-                   passed = timeNow - timeStart;
-               }
-           }
-       reflectSum+=passed;
-           if (isInterrupted)throw new InterruptedException();
-    }
-        void eat() throws InterruptedException {
-            long timeStart = System.currentTimeMillis();
-            long timeNow = timeStart;
-            long passed = 0;
-            boolean isInterrupted = false;
-            while (passed < eatTime) {
-                System.out.println("обедал " + name);
-                long needReflect = eatTime - passed;
+            long startTime=System.currentTimeMillis();
+            long timeNow=startTime;
+            long pussed=0;
+            boolean isInterrupted=false;
+            while (pussed<reflectTime){
+                System.out.println("философствовал "+name);
+                long needReflect=timeNow-pussed;
                 try {
-                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
+                    Thread.sleep(needReflect>INTERVALTIME?INTERVALTIME:needReflect);
+
                 } catch (InterruptedException e) {
-                    isInterrupted = true;
+                    isInterrupted=true;
                     break;
-                } finally {
-                    timeNow = System.currentTimeMillis();
-                    passed = timeNow - timeStart;
+                }finally {
+                    timeNow=System.currentTimeMillis();
+                    pussed=timeNow-startTime;
                 }
             }
-            eatSum += passed;
-            if (isInterrupted) throw new InterruptedException();
+            reflectSum+=pussed;
+            if (isInterrupted)throw new InterruptedException();
         }
-        Philosopher(String name,Fork right,Fork left,long reflectTime,long eatTime) {
-            reflectSum = 0;
-            eatSum = 0;
-            this.eatTime = eatTime;
-            this.reflectTime = reflectTime;
-            this.name = name;
-            this.right = right;
-            this.left = left;
-        }
-        Fork getFork(Direction side){
-           return side.equals(Direction.LEFT)?left:right;
-       }
-    }
-    enum Direction {RIGHT,LEFT}
-    ;
-    final static int PHILSCOUNT=5;
-    Thread[]threads=new Thread[PHILSCOUNT];
-    Philosopher[]philosophers=new Philosopher[PHILSCOUNT];
-    SplittableRandom random=new SplittableRandom();
+        void eat() throws InterruptedException {
+            long startTime=System.currentTimeMillis();
+            long timeNow=startTime;
+            long pussed=0;
+            boolean isInterrupted=false;
+            while (pussed<eatTime){
+                System.out.println("обедал "+name);
+                long needReflect=timeNow-pussed;
+                try {
+                    Thread.sleep(needReflect>INTERVALTIME?INTERVALTIME:needReflect);
 
-    Simposium(long reflectTime, long eatTime){
-        Fork[]forks=new Fork[PHILSCOUNT];
-        for (int i = 0; i < PHILSCOUNT; i++) {
-            forks[i]=new Fork();
+                } catch (InterruptedException e) {
+                    isInterrupted=true;
+                    break;
+                }finally {
+                    timeNow=System.currentTimeMillis();
+                    pussed=timeNow-startTime;
+                }
+            }
+            eatSum+=pussed;
+            if (isInterrupted)throw new InterruptedException();
         }
-        for (int i = 0; i < PHILSCOUNT; i++) {
-           final Philosopher phil=new Philosopher("PH"+(i+1),forks[i],forks[(i+1)%PHILSCOUNT],reflectTime,eatTime);
-           philosophers[i]=phil;
-           threads[i]=new Thread(new Algorithms(phil,random));
-        }
-    }
-
-
 
 
 //    static class Fork {
@@ -171,44 +137,44 @@ public class Simposium {
 //        }
 //
 //
-//        Philosopher(String name, Fork left, Fork right, long reflectTime, long eatTime) {
-//            this.reflectTime = reflectTime;
-//            this.eatTime = eatTime;
-//            reflectSum = 0;
-//            eatSum = 0;
-//            this.left = left;
-//            this.right = right;
-//            this.name = name;
-//        }
-//
-//        Fork getFork(Direction side) {
-//
-//            return side.equals(Direction.LEFT) ? left : right;
-//        }
-//    }
-//    enum Direction {LEFT, RIGHT}
-//
-//    ;
-//    final static int PHILSCOUNT = 5; // количество философов
-//    Thread[] threads = new Thread[PHILSCOUNT]; // поток на каждого философа
-//    Philosopher[] philosophers = new Philosopher[PHILSCOUNT]; // философы
-//    SplittableRandom random = new SplittableRandom(); //ГСЧ
-//
-//    //который инициализирует необходимое количество философов и вилок. Каждый философ выполняется в отдельном потоке.
-//    // reflectTime задает время в мс, через которое философ проголодается, eatTime задает время в мс,
-//    // через которое получив 2 вилки философ наестся и положит вилки на место
-//    Simposium(long reflectTime, long eatTime) {
-//        Fork[] forks = new Fork[PHILSCOUNT];
-//        for (int i = 0; i < PHILSCOUNT; i++) {
-//            forks[i] = new Fork();
-//        }
-//        for (int i = 0; i < PHILSCOUNT; i++) {
-//            final Philosopher phil = new Philosopher("PH" + (i + 1), forks[i], forks[(i + 1) % PHILSCOUNT],
-//                    reflectTime, eatTime);
-//            philosophers[i] = phil;
-//            threads[i] = new Thread(new Algorithms(phil, random));
-//        }
-//    }
+        Philosopher(String name, Fork left, Fork right, long reflectTime, long eatTime) {
+            this.reflectTime = reflectTime;
+            this.eatTime = eatTime;
+            reflectSum = 0;
+            eatSum = 0;
+            this.left = left;
+            this.right = right;
+            this.name = name;
+        }
+
+        Fork getFork(Direction side) {
+
+            return side.equals(Direction.LEFT) ? left : right;
+        }
+    }
+    enum Direction {LEFT, RIGHT}
+
+    ;
+    final static int PHILSCOUNT = 5; // количество философов
+    Thread[] threads = new Thread[PHILSCOUNT]; // поток на каждого философа
+    Philosopher[] philosophers = new Philosopher[PHILSCOUNT]; // философы
+    SplittableRandom random = new SplittableRandom(); //ГСЧ
+
+    //который инициализирует необходимое количество философов и вилок. Каждый философ "действует" в отдельном потоке.
+    // reflectTime задает время в мс, через которое философ проголодается, eatTime задает время в мс,
+    // через которое получив 2 вилки философ некоторое время обедает и закончив, кладет вилки на место
+    Simposium(long reflectTime, long eatTime) {
+        Fork[] forks = new Fork[PHILSCOUNT];
+        for (int i = 0; i < PHILSCOUNT; i++) {
+            forks[i] = new Fork();
+        }
+        for (int i = 0; i < PHILSCOUNT; i++) {
+            final Philosopher phil = new Philosopher("PH" + (i + 1), forks[i], forks[(i + 1) % PHILSCOUNT],
+                    reflectTime, eatTime);
+            philosophers[i] = phil;
+            threads[i] = new Thread(new Algorithms(phil, random));
+        }
+    }
 
     // основная логика действий философа
     static class Algorithms implements Runnable {
