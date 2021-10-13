@@ -3,16 +3,21 @@ package ru.progwards.java2.lessons.less14;
 import java.util.SplittableRandom;
 
 public class Simposium {
-    static class Fork{
-        boolean areFree=true;
-        boolean areFree(){
+
+                static class Fork {
+        boolean areFree = true;
+
+        boolean areFree() {
             return areFree;
         }
-        void setFree(boolean free){
-            areFree=free;
+
+        void setFree(boolean free) {
+            areFree = free;
         }
     }
-    static  class  Philosopher{
+
+    static class Philosopher {
+
         String name;
         Fork right;
         Fork left;
@@ -20,123 +25,54 @@ public class Simposium {
         long eatTime;
         long reflectSum;
         long eatSum;
-        final static long INTERVALTIME=500;
+        final static long INTERVALTIME = 500;
+
 
         void reflect() throws InterruptedException {
-            long startTime=System.currentTimeMillis();
-            long timeNow=startTime;
-            long pussed=0;
-            boolean isInterrupted=false;
-            while (pussed<reflectTime){
-                System.out.println("философствовал "+name);
-                long needReflect=timeNow-pussed;
+            long timeStart = System.currentTimeMillis();
+            long timeNow = timeStart;
+            long passed = 0;
+            boolean isInterrupted = false;
+            while (passed < reflectTime) {
+                System.out.println("размышлял " + name);
+                long needReflect = timeNow - passed;
                 try {
-                    Thread.sleep(needReflect>INTERVALTIME?INTERVALTIME:needReflect);
-
+                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
                 } catch (InterruptedException e) {
-                    isInterrupted=true;
+                    isInterrupted = true;
                     break;
-                }finally {
-                    timeNow=System.currentTimeMillis();
-                    pussed=timeNow-startTime;
+                } finally {
+                    timeNow = System.currentTimeMillis();
+                    passed = timeNow - timeStart;
                 }
             }
-            reflectSum+=pussed;
-            if (isInterrupted)throw new InterruptedException();
+            reflectSum += passed;
+            if (isInterrupted) throw new InterruptedException();
         }
+
         void eat() throws InterruptedException {
-            long startTime=System.currentTimeMillis();
-            long timeNow=startTime;
-            long pussed=0;
-            boolean isInterrupted=false;
-            while (pussed<eatTime){
-                System.out.println("обедал "+name);
-                long needReflect=timeNow-pussed;
+            long timeStart = System.currentTimeMillis();
+            long timeNow = timeStart;
+            long passed = 0;
+            boolean isInterrupted = false;
+            while (passed < eatTime) {
+                System.out.println("ел " + name);
+                long needReflect = timeNow - passed;
                 try {
-                    Thread.sleep(needReflect>INTERVALTIME?INTERVALTIME:needReflect);
-
+                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
                 } catch (InterruptedException e) {
-                    isInterrupted=true;
+                    isInterrupted = true;
                     break;
-                }finally {
-                    timeNow=System.currentTimeMillis();
-                    pussed=timeNow-startTime;
+                } finally {
+                    timeNow = System.currentTimeMillis();
+                    passed = timeNow - timeStart;
                 }
             }
-            eatSum+=pussed;
-            if (isInterrupted)throw new InterruptedException();
+            eatSum += passed;
+            if (isInterrupted) throw new InterruptedException();
         }
 
 
-//    static class Fork {
-//        boolean areFree = true;
-//
-//        boolean areFree() {
-//            return areFree;
-//        }
-//
-//        void setFree(boolean free) {
-//            areFree = free;
-//        }
-//    }
-//
-//    static class Philosopher {
-//
-//        String name;
-//        Fork right;
-//        Fork left;
-//        long reflectTime;
-//        long eatTime;
-//        long reflectSum;
-//        long eatSum;
-//        final static long INTERVALTIME = 500;
-//
-//
-//        void reflect() throws InterruptedException {
-//            long timeStart = System.currentTimeMillis();
-//            long timeNow = timeStart;
-//            long passed = 0;
-//            boolean isInterrupted = false;
-//            while (passed < reflectTime) {
-//                System.out.println("размышлял " + name);
-//                long needReflect = timeNow - passed;
-//                try {
-//                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
-//                } catch (InterruptedException e) {
-//                    isInterrupted = true;
-//                    break;
-//                } finally {
-//                    timeNow = System.currentTimeMillis();
-//                    passed = timeNow - timeStart;
-//                }
-//            }
-//            reflectSum += passed;
-//            if (isInterrupted) throw new InterruptedException();
-//        }
-//
-//        void eat() throws InterruptedException {
-//            long timeStart = System.currentTimeMillis();
-//            long timeNow = timeStart;
-//            long passed = 0;
-//            boolean isInterrupted = false;
-//            while (passed < eatTime) {
-//                System.out.println("ел " + name);
-//                long needReflect = timeNow - passed;
-//                try {
-//                    Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);
-//                } catch (InterruptedException e) {
-//                    isInterrupted = true;
-//                    break;
-//                } finally {
-//                    timeNow = System.currentTimeMillis();
-//                    passed = timeNow - timeStart;
-//                }
-//            }
-//            eatSum += passed;
-//            if (isInterrupted) throw new InterruptedException();
-//        }
-//
-//
         Philosopher(String name, Fork left, Fork right, long reflectTime, long eatTime) {
             this.reflectTime = reflectTime;
             this.eatTime = eatTime;
@@ -211,38 +147,51 @@ public class Simposium {
                         dirRight.setFree(false); // 2. Увидел вилку на столе то ПОПРОБУЙ ее взять. Если попытка неудачна то прекрати попытку и поменяв сторону вернись в п.1
                     else continue;
                 }
-                // Ситуация: В одной руке есть вилка.
+            // Ситуация: В одной руке есть вилка.
+
 
                 side = side.equals(Direction.LEFT) ? Direction.RIGHT : Direction.LEFT;
 
 
-                Fork dirLeft = phil.getFork(side);
-                synchronized (dirLeft) {
-                    // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
-                    if (dirLeft.areFree())
-                        dirLeft.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
-                    else {
-                        dirRight.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
-                        continue;
-                    }
-                }
-                // Ситуация: В обеих руках по вилке.
-                // 6. Приступай к еде
-                try {
-                    phil.eat();
-                } catch (InterruptedException e) {
-                    break;
-                }
-                phil.right.setFree(true);
-                phil.left.setFree(true);
-                // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
-                try {
-                    phil.reflect();
-                } catch (InterruptedException e) {
-                    break;
-                }
+        Fork dirLeft = phil.getFork(side);
+        synchronized (dirLeft)
+
+        {
+            // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
+            if (dirLeft.areFree())
+                dirLeft.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
+            else {
+                dirRight.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
+                continue;
             }
         }
+        // Ситуация: В обеих руках по вилке.
+        // 6. Приступай к еде
+                try
+
+        {
+            phil.eat();
+        } catch(
+        InterruptedException e)
+
+        {
+            break;
+        }
+                phil.right.setFree(true);
+                phil.left.setFree(true);
+        // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
+                try
+
+        {
+            phil.reflect();
+        } catch(
+        InterruptedException e)
+
+        {
+            break;
+        }
+    }
+}
     }
 
 
@@ -275,7 +224,7 @@ public class Simposium {
     }
 
     // реализует тест для философской беседы. Проверить варианты, когда ресурсов (вилок) достаточно
-    // (философы долго размышляют и мало едят) и вариант когда не хватает (философы много едят и мало размышляют)
+// (философы долго размышляют и мало едят) и вариант когда не хватает (философы много едят и мало размышляют)
     public static void main(String[] args) throws InterruptedException {
         Simposium simposium = new Simposium(1000, 1000);
         simposium.start();
