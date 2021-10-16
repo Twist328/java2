@@ -102,9 +102,7 @@ public class IntTreeSort {
     private void sort() {
         int initialKey = array[fromIndex];
         root = new TreeNode(initialKey);
-        table[index(initialKey)] = new HashTableEntry(initialKey,
-                root,
-                null);
+        table[index(initialKey)] = new HashTableEntry(initialKey, root, null);
 
         for (int i = fromIndex + 1; i < toIndex; ++i) {
             int currentElement = array[i];
@@ -323,18 +321,12 @@ public class IntTreeSort {
 
     public static void main(String[] args) {
         System.out.println(title("Сортировка через бинарное дерево в строке и целых чисел"));
-        String[] arr = new String[]{"Y", "W","Y", "X", "A", "T", "C", "I","B"};
-        Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr));
-
-        int[] array1 = new int[LENGTH];
-        long seed = System.nanoTime();
-        Random random = new Random(seed);
-        for (int i = 0; i < array1.length; ++i) {
-            array1[i] = random.nextInt();
-            Arrays.sort(array1);
-            System.out.println("\nОтсортированный массив : " + Arrays.toString(array1));
-        }
+        long start=System.nanoTime();
+        int[]a=new int[]{1000,999,888,777,897,678,99,55,44,88,99,33,33,66,44,11,-33,-77,-66,777,333,111,222,-222,-999,-10000,-555,-444};
+       // long start=System.nanoTime();
+        sort(a);
+        long sorted=System.nanoTime()-start;
+        System.out.println(Arrays.toString(a)+"Execution time: " + sorted);
     }
 }
 

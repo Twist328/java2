@@ -1,6 +1,7 @@
 package ru.progwards.java2.lessons.sort;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Сортировка выбором
@@ -16,7 +17,7 @@ import java.util.Arrays;
  */
 
 public class SelectionSort {
-
+    private static final int LENGTH = 10;
     // Базовая версия, как нашли меньше, сразу меняем местами
 
     public static <T extends Comparable<T>> void sort0(T[] a) {
@@ -81,4 +82,14 @@ public class SelectionSort {
         }
     }
 
-}
+    public static void main(String[] args) {
+        int[]a=new int[]{1000,999,888,777,897,678,99,55,44,88,99,33,33,66,44,11,-33,-77,-66,777,333,111,222,-222,-999,-10000,-555,-444};
+        long start=System.nanoTime();
+        Arrays.sort(a);
+        long sorted=System.nanoTime()-start;
+            System.out.println(Arrays.toString(a)+"Execution time: " + sorted);
+        }
+
+
+    }
+

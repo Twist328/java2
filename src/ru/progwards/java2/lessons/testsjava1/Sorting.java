@@ -1,5 +1,7 @@
 package ru.progwards.java2.lessons.testsjava1;
 
+import ru.progwards.java2.lessons.sort.InsertionSort;
+
 import java.util.Arrays;
 
 public class Sorting {
@@ -25,7 +27,7 @@ public class Sorting {
             array[i+1] = current;
         }
     }
-    public static void insertionSort1(int a[]) {
+    public static void insertionSort0(int a[]) {
         for (int j = 1; j < a.length; j++) {
             int cur = a[j];
             int i = j - 1;
@@ -57,15 +59,11 @@ public class Sorting {
 
     public static void main(String[] args) {
         System.out.println("\n**********************************************");
-        String[] array = new String[]{"Z", "W", "Y", "X","D", "C", "B", "A"};
-        insertionSort(array);
-        System.out.println(Arrays.toString(array));
-        int[] array1 = new int[]{88,- 79, 54, 65, 9, 4, 2,0,-99,292,77, 3};
-        insertionSort1(array1);
-        System.out.println(Arrays.toString(array1));
-        double[] array2 = new double[]{88.0,- 79.1, 54.8, -8401.09,65.3, 9.5, 4.8, 2.0,0.5,-99.0,292.8,77.7, 3.0};
-        insertionSort2(array2);
-        System.out.println(Arrays.toString(array2));
+        int[]a=new int[]{1000,999,888,777,897,678,99,55,44,88,99,33,33,66,44,11,-33,-77,-66,777,333,111,222,-222,-999,-10000,-555,-444};
+        long start=System.nanoTime();
+        insertionSort(a);
+        long sorted=System.nanoTime()-start;
+        System.out.println(Arrays.toString(a)+"Execution time: " + sorted);
         System.out.println("**********************************************");
     }
 }

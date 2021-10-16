@@ -1,7 +1,5 @@
 package ru.progwards.java2.lessons.sort;
 
-import java.util.Arrays;
-
 /**
  * Сортировка вставками
  * <p>

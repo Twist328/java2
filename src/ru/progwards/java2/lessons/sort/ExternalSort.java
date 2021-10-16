@@ -4,8 +4,9 @@ import ru.progwards.java2.lessons.sort.InsertionSort;
 import ru.progwards.java2.lessons.sort.QuickSort;
 
 import java.io.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.Arrays;
+import java.util.function.*;
+//import java.util.function.Function;
 
 /*
 Задача 1. Класс ExternalSort
@@ -56,7 +57,7 @@ public class ExternalSort<T extends Comparable> {
         sortFilesCount = 0;
         fileAddPrefix = "";
         mergesCount = 0;
-        try(
+        try (
                 FileReader fr = new FileReader(inFile);
                 BufferedReader br = new BufferedReader(fr);
         ) {
@@ -64,12 +65,12 @@ public class ExternalSort<T extends Comparable> {
             int i = 0;
             while ((line = br.readLine()) != null) {
                 data[i++] = lineToValue.apply(line);
-                if(i==MAX_BLOCK_SIZE) {
+                if (i == MAX_BLOCK_SIZE) {
                     sortAndSave(data);
                     i = 0;
                 }
             }
-            if(i>0) {
+            if (i > 0) {
                 sortAndSave(data);
             }
         } catch (IOException e) {
@@ -84,13 +85,13 @@ public class ExternalSort<T extends Comparable> {
      */
     private void sortAndSave(Comparable[] data) {
         oneBlockSorter.accept(data);
-        String fileName = SORT_FILES_PREFIX+fileAddPrefix+sortFilesCount+SORT_FILES_POSTFIX;
-        try(
+        String fileName = SORT_FILES_PREFIX + fileAddPrefix + sortFilesCount + SORT_FILES_POSTFIX;
+        try (
                 FileWriter fw = new FileWriter(fileName);
                 BufferedWriter bw = new BufferedWriter(fw)
         ) {
-            for(Object e:data)
-                bw.write(valueToLine.apply((T)e)+"\n");
+            for (Object e : data)
+                bw.write(valueToLine.apply((T) e) + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,8 +105,8 @@ public class ExternalSort<T extends Comparable> {
      */
     private void checkMerge() throws IOException {
         while (sortFilesCount > MAX_FILES_COUNT) {
-            int step = Math.min(MAX_FILES_COUNT, (sortFilesCount+MAX_FILES_COUNT-1) / MAX_FILES_COUNT);
-            System.out.println("checkMerge(), sortFilesCount=" + sortFilesCount+", step="+step);
+            int step = Math.min(MAX_FILES_COUNT, (sortFilesCount + MAX_FILES_COUNT - 1) / MAX_FILES_COUNT);
+            System.out.println("checkMerge(), sortFilesCount=" + sortFilesCount + ", step=" + step);
             int i = 0;
             int newFilesCount = 0;
             String newAddPrefix = mergesCount + "-";
@@ -150,7 +151,7 @@ public class ExternalSort<T extends Comparable> {
 
         public T get() throws IOException {
             T result = nextValue;
-            if(hasNext) {
+            if (hasNext) {
                 cnt++;
                 String line;
                 hasNext = (line = br.readLine()) != null;
@@ -167,7 +168,7 @@ public class ExternalSort<T extends Comparable> {
 
         @Override
         public int compareTo(Object o) {
-            return nextValue.compareTo(((mergeSource)o).nextValue);
+            return nextValue.compareTo(((mergeSource) o).nextValue);
         }
     }
 
@@ -202,11 +203,11 @@ public class ExternalSort<T extends Comparable> {
         // Основной цикл
 
         mergeSorter.accept(sources);
-        while (sources.length>0) {
-            mergeSource topSource = (mergeSource)sources[0];
+        while (sources.length > 0) {
+            mergeSource topSource = (mergeSource) sources[0];
             T minValue = topSource.get();
-            resultBWriter.write(valueToLine.apply(minValue)+"\n");
-            if(topSource.hasNext) {
+            resultBWriter.write(valueToLine.apply(minValue) + "\n");
+            if (topSource.hasNext) {
                 mergeSorter.accept(sources);
             } else {
                 topSource.close();
@@ -228,10 +229,10 @@ public class ExternalSort<T extends Comparable> {
      * @throws IOException
      */
     private void merge() throws IOException {
-        System.out.println("merge(), sortFilesCount="+sortFilesCount);
+        System.out.println("merge(), sortFilesCount=" + sortFilesCount);
         String[] sourceFiles = new String[sortFilesCount];
-        for(int k = 0; k<sortFilesCount; k++)
-            sourceFiles[k] = SORT_FILES_PREFIX+fileAddPrefix+k+SORT_FILES_POSTFIX;
+        for (int k = 0; k < sortFilesCount; k++)
+            sourceFiles[k] = SORT_FILES_PREFIX + fileAddPrefix + k + SORT_FILES_POSTFIX;
         mergeFiles(sourceFiles, outFileName);
     }
 
@@ -250,7 +251,8 @@ public class ExternalSort<T extends Comparable> {
         //Consumer<Comparable[]> mergeSorter = a -> QuickSort.sortHoare(a, 0, a.length - 1);
         //Consumer<Comparable[]> mergeSorter = a -> ShellSort.sort(a);
         //Consumer<Comparable[]> mergeSorter = a -> InsertionSort.sort(a);
-        Consumer<Comparable[]> mergeSorter = a -> InsertionSort.sortZeroQuick(a);
+        //Consumer<Comparable[]> mergeSorter = a -> InsertionSort.sortZeroQuick(a);
+        Consumer<Comparable[]> mergeSorter = a -> ShakerSort.sort(a);
 
         ExternalSort<Integer> s = new ExternalSort(inFileName, outFileName, lineToValue, valueToLine, oneBlockSorter, mergeSorter);
         s.splitAndSort();
@@ -261,6 +263,6 @@ public class ExternalSort<T extends Comparable> {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         sort("C:\\Template\\sort\\data.txt", "C:\\Template\\sort\\sorted.txt");
-        System.out.println("Execution time: "+(System.currentTimeMillis()-start)/1000+" s");
+        System.out.println("Execution time: " + (System.currentTimeMillis() - start) / 1000 + " s");
     }
 }
