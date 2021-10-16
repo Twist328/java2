@@ -39,6 +39,7 @@ public class SieveEratosthenes {// программа вычисляет про�
             nums[i] = true;
         }
     }
+
     public List<Long> sieveToList() {
         List<Long> sieveList = new ArrayList();
         for (int i = 0; i < nums.length; i++) {
@@ -51,13 +52,10 @@ public class SieveEratosthenes {// программа вычисляет про�
 
     public static void main(String[] args) {
         System.out.println("\n*****************************************************************************************");
-        int n = 20000;
-        SieveEratosthenes s = new SieveEratosthenes(n);
-       // for (int i = 0; i < s.nums.length; i++) {
+        //int n = 150;
+        SieveEratosthenes s = new SieveEratosthenes(100);
 
-       // }
-
-        System.out.println("Простые натуральные числа Эратосфена: "+s.sieveToList());
+        System.out.println("Простые натуральные числа Эратосфена: " + s.sieveToList());
         System.out.println("*****************************************************************************************");
     }
 }

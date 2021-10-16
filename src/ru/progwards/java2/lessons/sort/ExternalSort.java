@@ -247,12 +247,12 @@ public class ExternalSort<T extends Comparable> {
         Function<String, Integer> lineToValue = str -> Integer.valueOf(str);
         Function<Integer, String> valueToLine = val -> val.toString();
         Consumer<Comparable[]> oneBlockSorter = a -> QuickSort.sortHoare(a, 0, a.length - 1);
-        //Consumer<Comparable[]> mergeSorter = a -> Arrays.sort(a);
+        Consumer<Comparable[]> mergeSorter = a -> Arrays.sort(a);
         //Consumer<Comparable[]> mergeSorter = a -> QuickSort.sortHoare(a, 0, a.length - 1);
         //Consumer<Comparable[]> mergeSorter = a -> ShellSort.sort(a);
         //Consumer<Comparable[]> mergeSorter = a -> InsertionSort.sort(a);
         //Consumer<Comparable[]> mergeSorter = a -> InsertionSort.sortZeroQuick(a);
-        Consumer<Comparable[]> mergeSorter = a -> ShakerSort.sort(a);
+        //Consumer<Comparable[]> mergeSorter = a -> ShakerSort.sort(a);
 
         ExternalSort<Integer> s = new ExternalSort(inFileName, outFileName, lineToValue, valueToLine, oneBlockSorter, mergeSorter);
         s.splitAndSort();

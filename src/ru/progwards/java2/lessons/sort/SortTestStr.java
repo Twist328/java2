@@ -1,6 +1,5 @@
 package ru.progwards.java2.lessons.sort;
 
-
 import ru.progwards.java2.lessons.basetypes.BinaryHeap;
 import ru.progwards.java2.lessons.trees.BinaryTree;
 import ru.progwards.java2.lessons.trees.TreeException;
