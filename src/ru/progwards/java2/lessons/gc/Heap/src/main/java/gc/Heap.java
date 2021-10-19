@@ -4,7 +4,7 @@ import com.google.common.collect.*;
 import java.util.*;
 
 public class Heap {
-    private byte[] bytes;
+    private byte[]bytes;//куча
 
     // словарь со свободными блоками: ключ - длина блока, значение - коллекция указателей
     private TreeMultimap<Integer, Integer> looseBlocks;
@@ -124,6 +124,7 @@ public class Heap {
             defrag();
         }
     }
+
     // метод создает из TreeMultimap обычный TreeMap
     private TreeMap<Integer, Integer> getMap(TreeMultimap<Integer, Integer> map) {
         TreeMap<Integer, Integer> resultMap = new TreeMap<>();
@@ -136,6 +137,7 @@ public class Heap {
     }
 
     public static void main(String[] args) {
+        System.out.println("\n*********************************************");
         Heap heap = new Heap(110);
 
         heap.looseBlocks.forEach((k, v) -> System.out.println("cвободный блок:Key = " + k + ", Value = " + v));
@@ -147,50 +149,11 @@ public class Heap {
         heap.malloc(50);
 
         heap.looseBlocks.forEach((k, v) -> System.out.println("свободный блок: Key = " + k + ", Value = " + v));
-        System.out.println("----");
+        System.out.println("*********************************************");
         heap.free(21);
+       // heap.free(0);
         heap.occupiedBlocks.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
-
-    }
-
-    public byte[] getBytes() {
-        return bytes;
-    }
-
-    public void setBytes(byte[] bytes) {
-        this.bytes = bytes;
-    }
-
-    public TreeMultimap<Integer, Integer> getLooseBlocks() {
-        return looseBlocks;
-    }
-
-    public void setLooseBlocks(TreeMultimap<Integer, Integer> looseBlocks) {
-        this.looseBlocks = looseBlocks;
-    }
-
-    public TreeMap<Integer, Integer> getOccupiedBlocks() {
-        return occupiedBlocks;
-    }
-
-    public void setOccupiedBlocks(TreeMap<Integer, Integer> occupiedBlocks) {
-        this.occupiedBlocks = occupiedBlocks;
-    }
-
-    public Map.Entry<Integer, Integer> getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Map.Entry<Integer, Integer> current) {
-        this.current = current;
-    }
-
-    public int getQuantityCompact() {
-        return quantityCompact;
-    }
-
-    public void setQuantityCompact(int quantityCompact) {
-        this.quantityCompact = quantityCompact;
+        System.out.println("*********************************************");
     }
 }
 

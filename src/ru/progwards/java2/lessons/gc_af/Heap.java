@@ -130,9 +130,7 @@ public class Heap {
             heap.free(11);
             heap.used.forEach((k, v) -> System.out.println("Key = " + k + ", Value = " + v));
         }
-        catch (OutOfMemoryException e) {
-            System.out.println(e.getMessage());
-        } catch (InvalidPointerException e) {
+        catch (OutOfMemoryException | InvalidPointerException e) {
             System.out.println(e.getMessage());
         }
     }

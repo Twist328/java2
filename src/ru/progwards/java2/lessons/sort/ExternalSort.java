@@ -6,8 +6,8 @@ import ru.progwards.java2.lessons.sort.QuickSort;
 import java.io.*;
 import java.util.Arrays;
 import java.util.function.*;
-//import java.util.function.Function;
 
+//import java.util.function.Function;
 /*
 Задача 1. Класс ExternalSort
 Класс должен реализовывать алгоритм внешней сортировки.
@@ -28,7 +28,7 @@ public class ExternalSort<T extends Comparable> {
 
     File inFile;
     String outFileName;
-    Function<String, T> lineToValue;
+    Function<String,T> lineToValue;
     Function<T, String> valueToLine;
     Consumer<Comparable[]> oneBlockSorter;
     Consumer<Comparable[]> mergeSorter;
@@ -46,8 +46,6 @@ public class ExternalSort<T extends Comparable> {
         this.oneBlockSorter = oneBlockSorter;
         this.mergeSorter = mergeSorter;
     }
-
-
     /**
      * Разбиение файла на много отсортированных файлов
      */
@@ -77,7 +75,6 @@ public class ExternalSort<T extends Comparable> {
             e.printStackTrace();
         }
     }
-
     /**
      * Отсортировать даные и сохранить в файл
      *
@@ -97,7 +94,6 @@ public class ExternalSort<T extends Comparable> {
         }
         sortFilesCount++;
     }
-
     /**
      * Проверка, можем ли мы делать окончательное слияние. Если нет - будем объединять пока не сможем
      *
@@ -171,11 +167,9 @@ public class ExternalSort<T extends Comparable> {
             return nextValue.compareTo(((mergeSource) o).nextValue);
         }
     }
-
     /**
      * Сбалансированное многопутевое слияение файлов
      * Открываем каждый файл и через буфер считываем построчно
-     *
      * @param sourceFiles
      * @param resultName
      */
@@ -247,9 +241,9 @@ public class ExternalSort<T extends Comparable> {
         Function<String, Integer> lineToValue = str -> Integer.valueOf(str);
         Function<Integer, String> valueToLine = val -> val.toString();
         Consumer<Comparable[]> oneBlockSorter = a -> QuickSort.sortHoare(a, 0, a.length - 1);
-        Consumer<Comparable[]> mergeSorter = a -> Arrays.sort(a);
+       // Consumer<Comparable[]> mergeSorter = a -> Arrays.sort(a);
         //Consumer<Comparable[]> mergeSorter = a -> QuickSort.sortHoare(a, 0, a.length - 1);
-        //Consumer<Comparable[]> mergeSorter = a -> ShellSort.sort(a);
+        Consumer<Comparable[]> mergeSorter = a -> ShellSort.sort(a);
         //Consumer<Comparable[]> mergeSorter = a -> InsertionSort.sort(a);
         //Consumer<Comparable[]> mergeSorter = a -> InsertionSort.sortZeroQuick(a);
         //Consumer<Comparable[]> mergeSorter = a -> ShakerSort.sort(a);
@@ -261,6 +255,7 @@ public class ExternalSort<T extends Comparable> {
     }
 
     public static void main(String[] args) throws IOException {
+
         long start = System.currentTimeMillis();
         sort("C:\\Template\\sort\\data.txt", "C:\\Template\\sort\\sorted.txt");
         System.out.println("Execution time: " + (System.currentTimeMillis() - start) / 1000 + " s");
