@@ -22,7 +22,7 @@ public class SieveEratosthenes {// программа вычисляет про�
         nums = new boolean[max + 1];
         initFlags();
         for (int i = 2; i * i < max; i++) {
-            for (int j = i * i; j <= max; j += i) {//cross off non-primes
+            for (int j = i * i; j <= max; j += i) {//вычеркнуть непростые числа
                 nums[j] = false;
             }
         }
@@ -37,7 +37,7 @@ public class SieveEratosthenes {// программа вычисляет про�
         }
         for (int i = 3; i < nums.length; i++) {
             nums[i] = true;
-        }
+       }
     }
 
     public List<Long> sieveToList() {
@@ -51,11 +51,11 @@ public class SieveEratosthenes {// программа вычисляет про�
     }
 
     public static void main(String[] args) {
-        System.out.println("\n*****************************************************************************************");
+        System.out.println("\n*******************************************************************************************");
         //int n = 150;
-        SieveEratosthenes s = new SieveEratosthenes(100);
+        SieveEratosthenes s = new SieveEratosthenes(50);
 
         System.out.println("Простые натуральные числа Эратосфена: " + s.sieveToList());
-        System.out.println("*****************************************************************************************");
+        System.out.println("*******************************************************************************************");
     }
 }
