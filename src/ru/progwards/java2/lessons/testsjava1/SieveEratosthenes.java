@@ -9,6 +9,8 @@ import java.util.stream.Stream;
 public class SieveEratosthenes {// программа вычисляет простые натуральные числа Эратосфена (Сито Эратосфена)
     //делящиеся на 1 и на само себя без остатка, остальные числа(не простые )могут делиться и на другие числа : 2,3,5 ...
 
+
+
     private boolean[] nums;
 
     /**
@@ -16,13 +18,14 @@ public class SieveEratosthenes {// программа вычисляет про�
      */
     public SieveEratosthenes(int max) {
         sieve(max);
+        return;
     }
 
     private boolean[] sieve(int max) {
         nums = new boolean[max + 1];
         initFlags();
         for (int i = 2; i * i < max; i++) {
-            for (int j = i * i; j <= max; j += i) {//вычеркнуть непростые числа
+            for (int j = i * i; j <= max; j += i) {//фильтровать и удалять непростые числа
                 nums[j] = false;
             }
         }
@@ -52,9 +55,7 @@ public class SieveEratosthenes {// программа вычисляет про�
 
     public static void main(String[] args) {
         System.out.println("\n*******************************************************************************************");
-        //int n = 150;
-        SieveEratosthenes s = new SieveEratosthenes(50);
-
+        SieveEratosthenes s = new SieveEratosthenes(53);
         System.out.println("Простые натуральные числа Эратосфена: " + s.sieveToList());
         System.out.println("*******************************************************************************************");
     }

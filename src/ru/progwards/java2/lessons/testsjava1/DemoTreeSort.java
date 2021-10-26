@@ -9,7 +9,7 @@ public class DemoTreeSort {
         private static final int DISTINCT_INTS = 500;
         private static final int LENGTH = 10_000_000;
 
-        public static void main(String[] args) {
+        public static void main(String[] args) throws InterruptedException {
             System.out.println(title("Small number of distinct integers"));
             int[] array = new int[LENGTH];
             long seed = System.nanoTime();
@@ -24,7 +24,7 @@ public class DemoTreeSort {
             profile(array);
         }
 
-        private static void profile(int[] array) {
+        private static void profile(int[] array) throws InterruptedException {
             int[] array2 = array.clone();
 
             long startTime = System.nanoTime();

@@ -4,18 +4,19 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
-        * This class implements a funky tree sort algorithm for sorting integers.
-        *
-        * @author Rodion "rodde" Efremov
-        * @version 1.6 (Feb 21, 2016)
-        */
+ * This class implements a funky tree sort algorithm for sorting integers.
+ *
+ * @author Rodion "rodde" Efremov
+ * @version 1.6 (Feb 21, 2016)
+ */
 public class IntTreeSort {
 
     private static final int CONSOLE_WIDTH = 80;
     private static final int LENGTH = 10;
     private static final int DISTINCT_INTS = 5000;
 
-    public static void sort(int[] array) {
+    public static void sort(int[] array) throws InterruptedException {
+        Thread.sleep(500);
         sort(array, 0, array.length);
     }
 
@@ -319,14 +320,14 @@ public class IntTreeSort {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println(title("Сортировка через бинарное дерево в строке и целых чисел"));
-        long start=System.nanoTime();
-        int[]a=new int[]{1000,999,888,777,897,678,99,55,44,88,99,33,33,66,44,11,-33,-77,-66,777,333,111,222,-222,-999,-10000,-555,-444};
-       // long start=System.nanoTime();
+
+        int[] a = new int[]{1000, 999, 888, 777, 897, 678, 99, 55, 44, 88, 99, 33, 33, 66, 44, 11, -33, -77, -66, 777, 333, 111, 222, -222, -999, -10000, -555, -444};
+        long start = System.currentTimeMillis();
         sort(a);
-        long sorted=System.nanoTime()-start;
-        System.out.println(Arrays.toString(a)+"Execution time: " + sorted);
+        long sorted = System.currentTimeMillis() - start;
+        System.out.println(Arrays.toString(a) + " Execution time: " + sorted);
     }
 }
 
