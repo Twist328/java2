@@ -45,7 +45,7 @@ public class Sorting {
         }
     }
         public static void insertionSort2(double a[]) throws InterruptedException {
-           // Thread.sleep(500);
+            Thread.sleep(1);
             for (int j = 1; j < a.length; j++) {
                 double cur = a[j];
                 int i = j - 1;

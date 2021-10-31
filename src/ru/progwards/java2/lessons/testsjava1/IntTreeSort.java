@@ -16,7 +16,7 @@ public class IntTreeSort {
     private static final int DISTINCT_INTS = 5000;
 
     public static void sort(int[] array) throws InterruptedException {
-        Thread.sleep(500);
+        Thread.sleep(50);
         sort(array, 0, array.length);
     }
 
