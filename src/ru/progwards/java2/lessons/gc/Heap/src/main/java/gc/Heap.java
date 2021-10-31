@@ -141,19 +141,27 @@ public class Heap {
         System.out.println("\n*********************************************");
         Heap heap = new Heap(110);
 
-        heap.FREEBLOCKS.forEach((k, v) -> System.out.println("cвободный блок: Key = " + k + ", Value = " + v));
-        heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
+        //heap.FREEBLOCKS.forEach((k, v) -> System.out.println("cвободный блок: Key = " + k + ", Value = " + v));
+       // heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
 
         heap.malloc(21);
         heap.malloc(20);
         heap.malloc(13);
-        heap.malloc(50);
+        heap.malloc(25);
+        heap.malloc(3);
+        heap.malloc(2);
+        heap.malloc(10);
+        heap.malloc(16);
 
-        heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок: Key = " + k + ", Value = " + v));
-        System.out.println("*********************************************");
+        //heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок: Key = " + k + ", Value = " + v));
+        //System.out.println("*********************************************");
         heap.free(21);
         heap.free(41);
+        heap.free(0);
+        heap.free(94);
+
         heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
+        heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок: Key = " + k + ", Value = " + v));
         System.out.println("*********************************************");
     }
 }
