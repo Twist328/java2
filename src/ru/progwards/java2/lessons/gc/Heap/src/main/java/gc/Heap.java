@@ -3,7 +3,7 @@ package gc;
 import com.google.common.collect.*;
 import java.util.*;
 
-public class Heap {
+public class Heap {  //создать модуль диспетчер памяти
     private static byte[] BYTES;//куча
 
     // словарь со свободными блоками: ключ - длина блока, значение - коллекция указателей
@@ -86,7 +86,7 @@ public class Heap {
                  * то значит блоки смежные и их можно объединить
                  *  */
                 if (CASH.getKey() + CASH.getValue() == block.getKey()) {
-                    // указатель объединеноого блока
+                    // указатель объединеного блока
                     int bigPtr = CASH.getKey();
                     // длина объединеноого блока
                     int bigSize = CASH.getValue() + block.getValue();
