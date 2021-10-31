@@ -12,7 +12,7 @@ public class Heap {
     private static TreeMap<Integer, Integer> FULLBLOCKS;
 
     // кэш для хранения данных при проходе по словарю
-    private Map.Entry<Integer, Integer> NOW;
+    private Map.Entry<Integer, Integer> CASH;
 
     private static int TOCOMPACT;
 
@@ -80,27 +80,27 @@ public class Heap {
         FREEBLOCKS.clear();
 
         for (var block : freeBlocksMap.entrySet()) {
-            if (NOW != null) {
+            if (CASH != null) {
                 /*
                  * если сумма ключа(указателя) + значения(длины) равна указателю следующего элемента,
                  * то значит блоки смежные и их можно объединить
                  *  */
-                if (NOW.getKey() + NOW.getValue() == block.getKey()) {
+                if (CASH.getKey() + CASH.getValue() == block.getKey()) {
                     // указатель объединеноого блока
-                    int bigPtr = NOW.getKey();
+                    int bigPtr = CASH.getKey();
                     // длина объединеноого блока
-                    int bigSize = NOW.getValue() + block.getValue();
+                    int bigSize = CASH.getValue() + block.getValue();
                     // удаляем из TreeMultimap блоки current и block
-                    FREEBLOCKS.remove(NOW.getValue(), NOW.getKey());
+                    FREEBLOCKS.remove(CASH.getValue(), CASH.getKey());
                     FREEBLOCKS.remove(block.getValue(), block.getKey());
                     // добавляем объединенный блок
                     FREEBLOCKS.put(bigSize, bigPtr);
                     // меняем значение у current
-                    NOW.setValue(bigSize);
+                    CASH.setValue(bigSize);
                     continue;
                 }
             }
-            NOW = block;
+            CASH = block;
         }
     }
 
