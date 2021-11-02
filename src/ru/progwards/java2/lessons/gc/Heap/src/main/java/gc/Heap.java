@@ -24,9 +24,6 @@ public class Heap {  //создать модуль диспетчер памят
         TOCOMPACT = 0;
     }
 
-    public Heap() {
-
-    }
 
     public int malloc(int size) {//Malloc (от англ. memory allocation, выделение памяти)
         // — это функция выделения динамической памяти, входящая в стандартную библиотеку языка Си
@@ -167,6 +164,7 @@ public class Heap {  //создать модуль диспетчер памят
         System.out.println("*********************************************");
         heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок после compact() : Key = " + k + ", Value = " + v));
         System.out.println("*********************************************");
+        heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
     }
 }
 
