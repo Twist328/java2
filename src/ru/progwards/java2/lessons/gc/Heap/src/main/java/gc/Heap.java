@@ -104,7 +104,7 @@ public class Heap {  //создать модуль диспетчер памят
     public void compact() {
         int startIndex = 0;
         TreeMap<Integer, Integer> newBusyBlocks = new TreeMap<>(FULLBLOCKS);
-        FULLBLOCKS.clear();
+        //FULLBLOCKS.clear();
         //  смещаем занятые блоки в начало
         for (var block : newBusyBlocks.entrySet()) {
             FULLBLOCKS.put(startIndex, block.getValue());
@@ -163,8 +163,16 @@ public class Heap {  //создать модуль диспетчер памят
         heap.compact();
         System.out.println("*********************************************");
         heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок после compact() : Key = " + k + ", Value = " + v));
+
+        heap.CASH.getKey();// выводит все занятые блоки со значением после  всех манипуляций
+
         System.out.println("*********************************************");
-        //heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
+        heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
+        System.out.println("*********************************************");
+
+        heap.getMap(FREEBLOCKS).keySet();//вывод аналогично как heap.compact();
+        heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок после compact() : Key = " + k + ", Value = " + v));
+        System.out.println("*********************************************");
     }
 }
 
