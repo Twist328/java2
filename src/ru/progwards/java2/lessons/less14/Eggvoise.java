@@ -9,7 +9,6 @@ class EggVoice extends Thread {
             try{
                 sleep(1000);		//Приостанавливает поток на 1 секунду
             }catch(InterruptedException e){}
-
             System.out.println("яйцо!");
             System.out.println("*******************");
         }
@@ -32,7 +31,6 @@ class ChickenVoice{	//Класс с методом main()
             try{
                 Thread.sleep(1000);		//Приостанавливает поток на 1 секунду
             }catch(InterruptedException e){}
-
             System.out.println("курица!");
         }
 
