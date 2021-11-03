@@ -11,6 +11,7 @@ class EggVoice extends Thread {
             }catch(InterruptedException e){}
 
             System.out.println("яйцо!");
+            System.out.println("*******************");
         }
         //Слово «яйцо» сказано 5 раз
     }
@@ -21,7 +22,9 @@ class ChickenVoice{	//Класс с методом main()
 
     public static void main(String[] args) {
         mAnotherOpinion = new EggVoice();	//Создание потока
+        System.out.println("\n*******************");
         System.out.println("Спор начат...");
+        System.out.println("*******************");
         mAnotherOpinion.start(); 			//Запуск потока
 
         for(int i = 0; i < 5; i++)
@@ -38,15 +41,18 @@ class ChickenVoice{	//Класс с методом main()
         if(mAnotherOpinion.isAlive())	//Если оппонент еще не сказал последнее слово
         {
             try{
-                mAnotherOpinion.join();	//Подождать пока оппонент закончит высказываться.
+                mAnotherOpinion.join();	//остановить поток, подождав пока оппонент закончит высказываться.
             }catch(InterruptedException e){}
 
             System.out.println("Первым появилось яйцо!");
+
         }
         else	//если оппонент уже закончил высказываться
         {
             System.out.println("Первой появилась курица!");
         }
+        System.out.println("*******************");
         System.out.println("Спор закончен!");
+        System.out.println("*******************");
     }
 }

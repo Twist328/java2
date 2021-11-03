@@ -9,10 +9,6 @@ import java.util.Locale;
 
 class Calculator {
 
-//
-//    public Calculator(String exspression) {
-//        this.exspression = exspression;
-//    }
 
     public static void main(String[] args) {
         System.out.println("\n************************************");
@@ -21,31 +17,30 @@ class Calculator {
         System.out.println("************************************");
     }
 
-        /*Реализуйте метод public static int calculate(String expression), который вычисляет арифметическое выражение,
-         заданное в виде символьной строки. Выражение содержит только целые цифры и знаки арифметических операций +-
-         При вычислении должны учитываться приоритеты операций, например, результат вычисления выражения "2+3*2"
-         должен быть равен 8. По оригинальному условию задачи все числа содержат не более одной цифры, пробелов в строке нет.*/
-
+    /*Реализуйте метод public static int calculate(String expression), который вычисляет арифметическое выражение,
+     заданное в виде символьной строки. Выражение содержит только целые цифры и знаки арифметических операций +-
+     При вычислении должны учитываться приоритеты операций, например, результат вычисления выражения "2+3*2"
+     должен быть равен 8. По оригинальному условию задачи все числа содержат не более одной цифры, пробелов в строке нет.*/
     public static int calculate(String exspression) {
-        String str = exspression;
-        int res = Integer.parseInt(str.substring(0, 1));
-        if (str.length() == 1) return res;
-        String symbol = str.substring(1, 2);
+    String str=exspression;
+    int res=Integer.parseInt(str.substring(0,1));
+    if(str.length()==1)return res;
+    String symbol=str.substring(1,2);
 
-        while ("*".contains(symbol) || ("/".contains(symbol))){
-            if ("*".contains(symbol))
-                res *= Integer.parseInt(str.substring(2, 3));
-            else if ("/".contains(symbol))
-                res /= Integer.parseInt(str.substring(2, 3));
-        str = str.substring(2);
-        if (str.length() == 1) return res;
-        symbol = str.substring(1, 2);
+    while ("*".contains(symbol)||"/".contains(symbol)){
+        if ("*".contains(symbol))
+            res*=Integer.parseInt(str.substring(2,3));
+        else if ("/".contains(symbol))
+            res/=Integer.parseInt(str.substring(2,3));
+        str=str.substring(2);
+        if (str.length()==1)return res;
+        symbol=str.substring(1,2);
     }
-        if ("+".contains(symbol))
-            res += calculate(str.substring(2));
-        if ("-".contains(symbol))
-            res -= calculate(str.substring(2));
-        return res;
+    if ("+".contains(symbol))
+        res+=calculate(str.substring(2));
+    else if ("-".contains(symbol))
+        res-=calculate(str.substring(2));
+    return res;
     }
 }
 
@@ -66,7 +61,7 @@ class Calculator1 {//со скобками
 
     public Calculator1(String expression) {
         this.expression = expression;
-        //pos = 0;
+
     }
 
     public static int calculate1(String expression) {
@@ -195,8 +190,11 @@ class Calculator3 {
     public static void main(String[] args) {
 
         System.out.println("\n**************************************" + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES + Emoji.GRINNING_FACE_WITH_SMILING_EYES);
-        System.out.println("результат = " + calculate3("8/2*(2+2)*9") + (LocalDateTime.now().format(DateTimeFormatter.ofPattern
+        System.out.println(" результат 1 = " + calculate3("8/2*(2+2)*8/2-3") + (LocalDateTime.now().format(DateTimeFormatter.ofPattern
                 (" СЕГОДНЯ " + "dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm ")))) + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT);//144
+
+        System.out.println(" результат 2 = " + calculate3("6/3*(3+4)*8/2-3") + (LocalDateTime.now().format(DateTimeFormatter.ofPattern
+                (" СЕГОДНЯ " + "dd-MM-YYYY ")) + (LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm ")))) + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT);
         System.out.println("**************************************" + Emoji.SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES + Emoji.GRINNING_FACE_WITH_SMILING_EYES);
     }
 
@@ -217,6 +215,7 @@ class Calculator3 {
 
     String checkSymbol() {
         if (pos >= exspression.length())
+
             return "";
         return exspression.substring(pos, pos + 1);
     }
@@ -225,9 +224,8 @@ class Calculator3 {
         int num;
         try {
             num = Integer.parseInt(getSymbol());
-
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Ошибка числа");
+            throw new NumberFormatException("Неверное число");
         }
         return num;
     }
@@ -240,14 +238,13 @@ class Calculator3 {
         String symbol = checkSymbol();
         if (symbol.equals("(")) {
             getSymbol();
-            int result = addSubCalc();
+            int res = addSubCalc();
             String symbolNext = getSymbol();
             if (symbolNext.equals(")")) {
-                return result;
-
+                return res;
             } else {
                 try {
-                    throw new Exception("Ожидалось \"(\"");
+                    throw new Exception("Ожидался символ \")\"");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -256,8 +253,8 @@ class Calculator3 {
         return getNum();
     }
 
-    int multDiv() {
-        int result = bracketCalc();
+    int multDivCalc() {
+        int res = bracketCalc();
         while (hasNext()) {
             String symbol = checkSymbol();
             if ("*/".contains(symbol)) {
@@ -265,86 +262,87 @@ class Calculator3 {
                 int num = bracketCalc();
                 switch (symbol) {
                     case "*":
-                        result *= num;
+                        res *= num;
                         break;
                     case "/":
-                        result /= num;
+                        res /= num;
                         break;
                     default:
                         try {
-                            throw new Exception("ошибка операции");
+                            throw new Exception("Ошибка вычисления");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-            } else return result;
+            } else return res;
+
         }
-        return result;
+        return res;
     }
 
-    int addSubCalc(){
-        int result=multDiv();
-        while (hasNext()){
-            String symbol=checkSymbol();
-            if ("+-".contains(symbol)){
+    int addSubCalc() {
+        int res = multDivCalc();
+        while (hasNext()) {
+            String symbol = checkSymbol();
+            if ("+-".contains(symbol)) {
                 getSymbol();
-                int num=multDiv();
-                switch (symbol){
+                int num = multDivCalc();
+                switch (symbol) {
                     case "+":
-                        result+=num;
+                        res += num;
                         break;
                     case "-":
-                        result-=num;
+                        res -= num;
                         break;
                     default:
                         try {
-                            throw new Exception("ошибка операции");
+                            throw new Exception("Ошибка вычисления");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                 }
-            }else return result;
+            } else return res;
+
         }
-        return result;
+        return res;
+    }
+}
+
+enum Emoji {
+
+    GRINNING_FACE_WITH_SMILING_EYES('\uD83D', '\uDE01'),
+    FACE_WITH_TEARS_OF_JOY('\uD83D', '\uDE02'),
+    SMILING_FACE_WITH_OPEN_MOUTH('\uD83D', '\uDE03'),
+    SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES('\uD83D', '\uDE04'),
+    SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT('\uD83D', '\uDE05'),
+    SMILING_FACE_WITH_OPEN_MOUTH_AND_TIGHTLY_CLOSED_EYES('\uD83D', '\uDE06'),
+    WINKING_FACE('\uD83D', '\uDE09');
+
+    Character firstChar;
+    Character secondChar;
+
+    Emoji(Character firstChar, Character secondChar) {
+        this.firstChar = firstChar;
+        this.secondChar = secondChar;
     }
 
 
-    enum Emoji {
-
-        GRINNING_FACE_WITH_SMILING_EYES('\uD83D', '\uDE01'),
-        FACE_WITH_TEARS_OF_JOY('\uD83D', '\uDE02'),
-        SMILING_FACE_WITH_OPEN_MOUTH('\uD83D', '\uDE03'),
-        SMILING_FACE_WITH_OPEN_MOUTH_AND_SMILING_EYES('\uD83D', '\uDE04'),
-        SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT('\uD83D', '\uDE05'),
-        SMILING_FACE_WITH_OPEN_MOUTH_AND_TIGHTLY_CLOSED_EYES('\uD83D', '\uDE06'),
-        WINKING_FACE('\uD83D', '\uDE09');
-
-        Character firstChar;
-        Character secondChar;
-
-        Emoji(Character firstChar, Character secondChar) {
-            this.firstChar = firstChar;
-            this.secondChar = secondChar;
-        }
-
-
-        Emoji() {
-
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-
-            if (this.firstChar != null) {
-                sb.append(this.firstChar);
-            }
-            if (this.secondChar != null) {
-                sb.append(this.secondChar);
-            }
-
-            return sb.toString();
-        }
+    Emoji() {
 
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        if (this.firstChar != null) {
+            sb.append(this.firstChar);
+        }
+        if (this.secondChar != null) {
+            sb.append(this.secondChar);
+        }
+
+        return sb.toString();
+    }
+
 }
