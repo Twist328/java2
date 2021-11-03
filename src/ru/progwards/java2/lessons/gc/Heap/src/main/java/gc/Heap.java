@@ -159,12 +159,12 @@ public class Heap {  //создать модуль диспетчер памят
         heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
         System.out.println("*********************************************");
         heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок: Key = " + k + ", Value = " + v));
-       // heap.defrag();
+
         heap.compact();
         System.out.println("*********************************************");
         heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок после compact() : Key = " + k + ", Value = " + v));
         System.out.println("*********************************************");
-        heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
+        //heap.FULLBLOCKS.forEach((k, v) -> System.out.println("занятый блок: Key = " + k + ", Value = " + v));
     }
 }
 
