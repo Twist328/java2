@@ -4,7 +4,7 @@ public class TestSubstring {
     public class MiddleStrTest {
     }
     public static void main(String args[]){
-        String testString = "КАКЖЕТЫЗАДОЛБАЛ";
+        String testString = "КАК ЖЕ ТЫ ЗАДОЛБАЛ";
         System.out.println(testString.substring(0,5));
         System.out.println(testString.substring(0,1));
         System.out.println(testString.substring(1,2));

@@ -56,7 +56,7 @@ public class Simposium {
             long passed = 0;
             boolean isInterrupted = false;
             while (passed < eatTime) {
-                System.out.println("ел " + name);
+                System.out.println("обедал " + name);
                 long needReflect = timeNow - passed;
                 try {
                     Thread.sleep(needReflect > INTERVALTIME ? INTERVALTIME : needReflect);

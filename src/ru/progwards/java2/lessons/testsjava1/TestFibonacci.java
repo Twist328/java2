@@ -10,12 +10,12 @@ public class TestFibonacci {
         BigInteger count = BigInteger.ONE;
         BigInteger next = BigInteger.ZERO;
         int i;
-        for (i = 0; i < 10; i++) {
+        for (i = 1; i < 14; i++) {
             prev = count;
             count = next;
             next = prev.add(count);
 
-            System.out.println("\nЧисло фибо:" + next);
+            System.out.println("\nЧисло фибо:"+ i +" = "+ next);
 
 
         }
