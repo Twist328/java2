@@ -171,7 +171,7 @@ public class Heap {  //создать модуль диспетчер памят
         System.out.println("*********************************************");
 
         heap.getMap(FREEBLOCKS).keySet();//вывод аналогично как heap.compact();
-        heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок после compact() : Key = " + k + ", Value = " + v));
+        heap.FREEBLOCKS.forEach((k, v) -> System.out.println("свободный блок после keySet() : Key = " + k + ", Value = " + v));
         System.out.println("*********************************************");
     }
 }
