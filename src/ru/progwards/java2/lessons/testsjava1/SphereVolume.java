@@ -3,10 +3,10 @@ package ru.progwards.java2.lessons.testsjava1;
 public class SphereVolume {// объем шара// площадь шара
     public SphereVolume() {
     }
-    public double SvolumeErth(double diameter) { //площадь планеты
+    public double svolumeErth(double diameter) { //площадь планеты
         return ( Math.PI * Math.pow(diameter, 2));
     }
-    public double VvolumeErth(double diameter) { // объем  планеты
+    public double vvolumeErth(double diameter) { // объем  планеты
         return (4*Math.PI * Math.pow(diameter/2, 3))/3;
     }
     public double volume(double radius) {
@@ -29,9 +29,9 @@ public class SphereVolume {// объем шара// площадь шара
         System.out.println("*********************************");
         System.out.println("Объем шара = " + new SphereVolume().volume1(79));
         System.out.println("*********************************");
-        System.out.println("Площадь земли = " + new SphereVolume().SvolumeErth(12742));
+        System.out.println("Площадь земли = " + new SphereVolume().svolumeErth(12742));
         System.out.println("*********************************");
-        System.out.println("Объем земли = " + new SphereVolume().VvolumeErth(12742));
+        System.out.println("Объем земли = " + new SphereVolume().vvolumeErth(12742));
         System.out.println("*********************************");
     }
 }

@@ -4,7 +4,7 @@ import java.util.SplittableRandom;
 
 public class Simposium {
 
-                static class Fork {
+    static class Fork {
         boolean areFree = true;
 
         boolean areFree() {
@@ -88,6 +88,7 @@ public class Simposium {
             return side.equals(Direction.LEFT) ? left : right;
         }
     }
+
     enum Direction {LEFT, RIGHT}
 
     ;
@@ -147,51 +148,41 @@ public class Simposium {
                         dirRight.setFree(false); // 2. Увидел вилку на столе то ПОПРОБУЙ ее взять. Если попытка неудачна то прекрати попытку и поменяв сторону вернись в п.1
                     else continue;
                 }
-            // Ситуация: В одной руке есть вилка.
+                // Ситуация: В одной руке есть вилка.
 
 
                 side = side.equals(Direction.LEFT) ? Direction.RIGHT : Direction.LEFT;
 
 
-        Fork dirLeft = phil.getFork(side);
-        synchronized (dirLeft)
-
-        {
-            // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
-            if (dirLeft.areFree())
-                dirLeft.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
-            else {
-                dirRight.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
-                continue;
-            }
-        }
-        // Ситуация: В обеих руках по вилке.
-        // 6. Приступай к еде
-                try
-
-        {
-            phil.eat();
-        } catch(
-        InterruptedException e)
-
-        {
-            break;
-        }
+                Fork dirLeft = phil.getFork(side);
+                synchronized (dirLeft) {
+                    // 3. УДАЧНО - есть одна вилка в руке! ПОСМОТРИ в ДРУГУЮ СТОРОНУ. Если нет вилки , тогда положи свою вилку назад.! И поменяв сторону вернись в п.1
+                    if (dirLeft.areFree())
+                        dirLeft.setFree(false); // 5. УДАЧНО - есть вторая вилка в руке!
+                    else {
+                        dirRight.setFree(true); // 4. ПОПРОБУЙ ВЗЯТЬ ВИЛКУ если неудачно, то ОТПУСТИ (освободи) эту вилку и ПОЛОЖИ ВИЛКУ КОТОРАЯ НАХОДИТСЯ В ДРУГОЙ РУКЕ. Поменяй сторону вернись в п.1
+                        continue;
+                    }
+                }
+                // Ситуация: В обеих руках по вилке.
+                // 6. Приступай к еде
+                try {
+                    phil.eat();
+                } catch (
+                        InterruptedException e) {
+                    break;
+                }
                 phil.right.setFree(true);
                 phil.left.setFree(true);
-        // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
-                try
-
-        {
-            phil.reflect();
-        } catch(
-        InterruptedException e)
-
-        {
-            break;
+                // 7. Наелся положи обе вилки, сначала правую, затем левую на стол. Думай до тех пока не проголодаешься.
+                try {
+                    phil.reflect();
+                } catch (
+                        InterruptedException e) {
+                    break;
+                }
+            }
         }
-    }
-}
     }
 
 
@@ -213,7 +204,7 @@ public class Simposium {
     }
 
     //печатает результаты беседы в формате
-    //Философ name, ел ххх, размышлял xxx
+    //Философ name, обедал ххх, размышлял xxx
     //где ххх время в мс
     void print() {
         System.out.println("***********************************");
@@ -228,7 +219,7 @@ public class Simposium {
     public static void main(String[] args) throws InterruptedException {
         Simposium simposium = new Simposium(1000, 1000);
         simposium.start();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         simposium.stop();
         simposium.print();
     }

@@ -37,7 +37,7 @@ public class Heap {  //создать модуль диспетчер памят
             SortedSet<Integer> set = (SortedSet<Integer>) entry.getValue();
             // startIndex - первый элемент коллекции
             startIndex = set.first();
-            // добавили занятый блок в словарь occupiedBlocks
+            // добавили занятый блок в словарь FULLBLOCKS
             FULLBLOCKS.put(startIndex, size);
             // удаляем элемент из свободных блоков
             FREEBLOCKS.remove(entry.getKey(), startIndex);
