@@ -12,7 +12,7 @@ public class RunnableSummator implements Runnable {
         this.start = start;
         this.finish = finish;
         this.list = list;
-        //System.out.println(list);
+
     }
     // метод суммирует числа от start до finish
     public BigInteger sumBlock(BigInteger start, BigInteger finish) {
@@ -21,7 +21,7 @@ public class RunnableSummator implements Runnable {
         for (BigInteger i = start; i.compareTo(finish) <= 0; i = i.add(BigInteger.ONE)) {
             sum = sum.add(i);
         }
-        // System.out.println(sum);
+
         return sum;
     }
     @Override

@@ -25,6 +25,7 @@ public class PrintScan {
 
     static void scan(String name, int pages) {
         lock2.lock();
+        System.out.println("************************");
         try {
             for (int i = 1; i <= pages; i++) {
                 System.out.println("scan " + name + " page " + i);
@@ -32,16 +33,19 @@ public class PrintScan {
                     Thread.sleep(70);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+
                 }
             }
         } finally {
             lock2.unlock();
+
         }
     }
 
 
 
     public static void main(String[] args) {
+        System.out.println("\n************************");
         Thread t1 = new Thread(new RunnablePrint("doc1", 20));
         Thread t2 = new Thread(new RunnablePrint("doc2", 15));
         Thread t3 = new Thread(new RunnablePrint("doc3", 10));
