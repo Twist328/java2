@@ -38,7 +38,7 @@ public class PrintScan {
             }
         } finally {
             lock2.unlock();
-
+            System.out.println("************************");
         }
     }
 
