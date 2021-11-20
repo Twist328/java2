@@ -55,7 +55,7 @@ public class SieveEratosthenes {// программа вычисляет про�
 
     public static void main(String[] args) {
         System.out.println("\n*******************************************************************************************");
-        SieveEratosthenes s = new SieveEratosthenes(53);
+        SieveEratosthenes s = new SieveEratosthenes(153);
         System.out.println("Простые натуральные числа Эратосфена: " + s.sieveToList());
         System.out.println("*******************************************************************************************");
     }

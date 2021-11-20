@@ -59,14 +59,27 @@ public class Summator {
         //System.out.println(result);
         return result;
     }
+        public static void main(String[] args) {
+            int num = 1356543;
+            long l = 0;
+            for (int i = 0; i <= num; i++) {
+                l = l + i;
+            }
+            System.out.println("long   = " + l);
 
+            long time = System.currentTimeMillis();
+            int tr = 100_000;
+            Summator test = new Summator(tr);
+            System.out.println("result = " + test.sum(BigInteger.valueOf(num)) + "   потоков - " + tr);
+            System.out.println("Время работы: " + (System.currentTimeMillis() - time) + " мс.");
 
-    public static void main(String[] args) {
+            time = System.currentTimeMillis();
+            tr = 2;
+            test = new Summator(tr);
+            System.out.println("result = " + test.sum(BigInteger.valueOf(num)) + "   потоков - " + tr);
+            System.out.println("Время работы: " + (System.currentTimeMillis() - time) + " мс.");
 
-        Summator s = new Summator(10);
+        }
 
-        System.out.println("\n**********************************");
-        System.out.println(s.sum(new BigInteger("5")));
-        System.out.println("**********************************");
     }
-}
+
