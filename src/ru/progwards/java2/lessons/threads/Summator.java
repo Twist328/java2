@@ -38,7 +38,7 @@ public class Summator {
             finish = finish.add(sizeBlock);
         }
         //System.out.println(list);
-        return resultSum(list);
+        return sumRes(list);
     }
 
     // метод позволяет потоку main дождаться выполнения потока thread
@@ -50,7 +50,7 @@ public class Summator {
         }
     }
     // метод складывает значения элементов списка
-    private BigInteger resultSum(List<BigInteger> list) {
+    private BigInteger sumRes(List<BigInteger> list) {
         BigInteger result = BigInteger.ZERO;
 
         for (int i = 0; i < list.size(); i++) {
@@ -60,7 +60,7 @@ public class Summator {
         return result;
     }
         public static void main(String[] args) {
-            int num = 1356543;
+            int num = 5555555;
             long l = 0;
             for (int i = 0; i <= num; i++) {
                 l = l + i;
