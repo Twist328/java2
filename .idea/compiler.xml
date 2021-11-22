@@ -7,15 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="impl" />
-        <module name="SystemPrfiler" />
-        <module name="profiler" />
-        <module name="Heap" />
         <module name="GsonListSerialization" />
         <module name="Calculator" />
+        <module name="SystemPrfiler" />
+        <module name="profiler" />
+        <module name="consult1" />
+        <module name="Heap" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Calculator" target="14" />
+      <module name="consult1" target="8" />
       <module name="GsonListSerialization" target="14" />
       <module name="Heap" target="14" />
       <module name="impl" target="14" />
