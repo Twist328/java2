@@ -17,6 +17,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Calculator" target="14" />
+      <module name="consalt1" target="1.8" />
       <module name="consult1" target="8" />
       <module name="GsonListSerialization" target="14" />
       <module name="Heap" target="14" />
