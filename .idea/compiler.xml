@@ -11,6 +11,7 @@
         <module name="Calculator" />
         <module name="SystemPrfiler" />
         <module name="profiler" />
+        <module name="consult1" />
         <module name="Heap" />
       </profile>
     </annotationProcessing>
