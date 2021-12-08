@@ -13,12 +13,14 @@
         <module name="profiler" />
         <module name="consult1" />
         <module name="Heap" />
+        <module name="consult3" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Calculator" target="14" />
       <module name="consalt1" target="1.8" />
       <module name="consult1" target="8" />
+      <module name="consult3" target="8" />
       <module name="GsonListSerialization" target="14" />
       <module name="Heap" target="14" />
       <module name="impl" target="14" />
