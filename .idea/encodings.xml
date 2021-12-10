@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/ru/progwards/java2/lessons/builders/Calculator/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/ru/progwards/java2/lessons/less10/serial/GsonListSerialization/src/main/resources/users.dat" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/src/servlets/consult1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ru/progwards/java2/lessons/lib/dbFiles/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ru/progwards/java2/lessons/lib/dbFiles/src/main/resources" charset="UTF-8" />
   </component>
 </project>
